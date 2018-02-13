@@ -16,6 +16,7 @@
 Out of the box, Botkit bots include:
 
 * Conversation tracking and control
+* Event system
 * Platform connectors for popular messaging apps
 * Easy to extend plugin system
 * Integration with top NLP tools
