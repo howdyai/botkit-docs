@@ -19,9 +19,9 @@ Out of the box, Botkit bots include:
 * Platform connectors for popular messaging apps
 * Easy to extend plugin system
 * Integration with top NLP tools
-* Content management
+* Content management tools for dialog
 * Analytics
-* A self-contained webserver
+* Self-contained Express webserver
 
 # Install Botkit
 
