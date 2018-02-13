@@ -15,7 +15,7 @@
 
 Out of the box, Botkit bots include:
 
-* Conversation management system
+* Conversation tracking and control
 * Platform connectors for popular messaging apps
 * Easy to extend plugin system
 * Integration with top NLP tools
@@ -41,7 +41,7 @@ The toolkit is designed to provide meaningful building blocks for creating conve
 Most bots do their thing by listening for keywords, phrases or patterns in messages from users. Botkit has a special event handler called `hears()` that makes it easy to configure your bot to listen for this type of trigger.
 
 ```javascript
-controller.hears(['string','pattern .*',new RegExp('.*','i')],'message_received,other_event',function(bot, message) {
+controller.hears('help','message_received',function(bot, message) {
 
   // do something!
   bot.reply(message, 'I heard a message.')
