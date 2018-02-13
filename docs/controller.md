@@ -4,25 +4,30 @@
 
 ## Methods
 
-hears(keywords, events, middleware_or_cb, cb)
-on(event, cb, is_hearing)
-trigger(event, data)
 
-hears_regexp(tests, message)
-changeEars(new_test)
-excludeFromConversations(event)
+### hears(keywords, events, middleware_or_cb, cb)
 
-ingest(bot, payload, source)
-spawn(config, cb)
-defineBot(unit)
-setTickDelay(delay)
-startTicking()
-shutdown()
+### on(event, cb, is_hearing)
 
-setupWebserver(port, cb)
+### trigger(event, data)
 
-userAgent()
-version()
+### hears_regexp(tests, message)
+
+### changeEars(new_test)
+
+### excludeFromConversations(event)
+
+### ingest(bot, payload, source)
+### spawn(config, cb)
+### defineBot(unit)
+### setTickDelay(delay)
+### startTicking()
+
+### setupWebserver(port, cb)
+
+### userAgent()
+### version()
+### shutdown()
 
 
 
