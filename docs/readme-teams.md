@@ -60,7 +60,7 @@ An example of this can be seen [in the starter kit](https://github.com/howdyai/b
 
 The full code for a simple Microsoft Teams bot is below:
 
-~~~ javascript
+``` javascript
 var Botkit = require('botkit');
 
 var controller = Botkit.teamsbot({
@@ -85,7 +85,7 @@ controller.on('direct_mention', function(bot, message) {
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
 });
-~~~
+```
 
 
 #### App Package / Manifest File
@@ -116,14 +116,14 @@ Here is a [COMPLETE SAMPLE](../examples/teams/manifest.json)
 
 This function creates a Teams-ready Botkit controller. The values for clientId and clientSecret must be acquired from [Bot Framework](http://dev.botframework.com).
 
-~~~ javascript
+``` javascript
 var controller = Botkit.teamsbot({
     debug: true,
     log: true,
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret
 });
-~~~
+```
 
 #### controller.spawn()
 | Argument | Description

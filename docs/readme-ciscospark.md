@@ -47,7 +47,7 @@ This will configure your bot to respond only to messages from members of the spe
 
 The full code for a simple Cisco Spark bot is below:
 
-~~~ javascript
+``` javascript
 var Botkit = require('./lib/Botkit.js');
 
 var controller = Botkit.sparkbot({
@@ -79,7 +79,7 @@ controller.on('direct_mention', function(bot, message) {
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
 });
-~~~
+```
 
 ## Controller Options
 
@@ -95,7 +95,7 @@ When creating the Botkit controller, there are several platform-specific options
 | `limit_to_org` | _optional_ organization id in which the bot should exist. If user from outside org sends message, it is ignored
 | `limit_to_domain` | _optional_ email domain (@howdy.ai) or array of domains [@howdy.ai, @botkit.ai] from which messages can be received
 
-~~~ javascript
+``` javascript
 var controller = Botkit.sparkbot({
     debug: true,
     log: true,
@@ -106,7 +106,7 @@ var controller = Botkit.sparkbot({
     limit_to_org: 'my_spark_org_id',
     limit_to_domain: ['@howdy.ai','@cisco.com'],
 });
-~~~
+```
 
 ## Spark Specific Events
 
@@ -131,9 +131,9 @@ Cisco Spark supports both a `text` field and a `markdown` field for outbound mes
 
 To specify a markdown version, add it to your message object:
 
-~~~ javascript
+``` javascript
 bot.reply(message,{text: 'Hello', markdown: '*Hello!*'});
-~~~
+```
 
 ## Attaching Files
 
@@ -143,18 +143,18 @@ Files can be attached to outgoing messages in one of two ways.
 
 If the file you wish to attach is already available online, simply specify the URL in the `files` field of the outgoing message:
 
-~~~ javascript
+``` javascript
 bot.reply(message,{text:'Here is your file!', files:['http://myserver.com/file.pdf']});
-~~~
+```
 
 *Send Local File*
 
 If the file you wish to attach is present only on the local server, attach it to the message as a readable stream:
 
-~~~ javascript
+``` javascript
 var fs = require('fs');
 bot.reply(message,{text: 'I made this file for you.', files:[fs.createReadStream('./newfile.txt')]});
-~~~
+```
 
 ## Receiving files
 
@@ -170,7 +170,7 @@ Botkit provides 2 methods for retrieving information about the file.
 
 The callback function will receive an object with fields like `filename`, `content-type`, and `content-length`.
 
-~~~ javascript
+``` javascript
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
     if (message.original_message.files) {
@@ -179,7 +179,7 @@ controller.on('direct_message', function(bot, message) {
         });
     }
 });
-~~~
+```
 
 ### bot.retrieveFile(url, cb)
 | Parameter | Description
@@ -189,7 +189,7 @@ controller.on('direct_message', function(bot, message) {
 
 The callback function will receive the full content of the file.
 
-~~~ javascript
+``` javascript
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
     if (message.original_message.files) {
@@ -202,7 +202,7 @@ controller.on('direct_message', function(bot, message) {
         });
     }
 });
-~~~
+```
 
 ## Starting Direct Messages
 
@@ -227,9 +227,9 @@ and will create a direct message thread with the sender of the incoming_message.
 Use this function to send a direct message to a user by their personId, which
 can be found in message and event payloads at the following location:
 
-~~~ javascript
+``` javascript
 var personId = message.original_message.actorId;
-~~~
+```
 
 ### bot.startPrivateConversationWithActor())
 | Parameter | Description
@@ -237,10 +237,10 @@ var personId = message.original_message.actorId;
 | incoming_message | a message or event that has an actorId defined in message.original_message.actorId
 | cb | callback function in the form function(err, file_content)
 
-~~~ javascript
+``` javascript
 controller.on('bot_space_join', function(bot, message) {
   bot.startPrivateConversationWithActor(message, function(err, convo) {
     convo.say('The bot you invited has joined the channel.');
   });
 });
-~~~
+```

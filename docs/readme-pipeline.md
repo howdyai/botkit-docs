@@ -121,6 +121,7 @@ Functions added to the ingest middleware endpoint need to receive 4 parameters, 
 | response channel | the http response object
 | next | function to call to proceed with pipeline
 
+
 ```
 controller.middleware.ingest.use(function(bot, message, res, next) {
 
