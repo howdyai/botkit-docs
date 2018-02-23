@@ -17,11 +17,11 @@ Table of Contents
 
 1. [Install Botkit on your computer](/getstarted.html)
 
-2. Create a Botkit powered Node app.
+2. Create a Botkit powered Node app:
 
-* [Use Botkit Studio to deploy a pre-configured app](https://studio.botkit.ai)
-* Or: [Remix our starter kit on Glitch](https://glitch.com/~botkit-slack)
-* Or: Use the command line tool
+* [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+* Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-slack)
+* Or: Use the command line tool:
 
 ```
 botkit new --platform slack
