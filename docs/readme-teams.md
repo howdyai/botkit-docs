@@ -23,7 +23,7 @@ Getting these elements in place is a multi-step process, but only takes a few mi
 The fastest way to get up and running with Botkit for Microsoft Teams is to use [Botkit Studio](https://studio.botkit.ai/signup?code=teams).
 Botkit Studio will guide you through the process of setting up the [Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams), walk you through the process of configuring the Microsoft Teams and Bot Framework APIs, and deploy your bot to a stable hosting environment so that you can start building right away.
 
-**[![Sign up for Botkit Studio](docs/studio.png)](https://studio.botkit.ai/signup?code=readme)**
+**[![Sign up for Botkit Studio](studio.png)](https://studio.botkit.ai/signup?code=readme)**
 
 ### Manual Setup: Get the Starter Kit
 
