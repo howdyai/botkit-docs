@@ -21,7 +21,11 @@ Table of Contents
 
 * [Use Botkit Studio to deploy a pre-configured app](https://studio.botkit.ai)
 * Or: [Remix our starter kit on Glitch](https://glitch.com/~botkit-slack)
-* Or: Use the command line tool: `botkit new --platform slack`
+* Or: Use the command line tool
+
+```
+botkit new --platform slack
+```
 
 3. [Follow this guide to configuring the Slack API](/docs/provisioning/slack-events-api.md)
 
@@ -33,9 +37,6 @@ Type: `/invite @<my bot>` to invite your bot into another channel.
 
 
 ### Botkit.slackbot(config)
-| Argument | Description
-|--- |---
-| config | Configuration object
 
 Creates a new Botkit SlackBot controller.
 
@@ -47,13 +48,13 @@ var controller = Botkit.slackbot({
 });
 ```
 
-`config` object accepts these properties:
+`config` parameter is an object with these properties:
 
-| Name | Value | Description
+| Name | Type | Description
 |--- |--- |---
-| clientId | ... | client Id value from a Slack app
-| clientSecret | ... | client secret value from a Slack app
-| scopes | ... | list of scopes to request during oauth
+| clientId | string | client Id value from a Slack app
+| clientSecret | string | client secret value from a Slack app
+| scopes | array | list of scopes to request during oauth
 | debug | Boolean | Enable debug logging
 | stale_connection_timeout  | Positive integer | Number of milliseconds to wait for a connection keep-alive "pong" response before declaring the connection stale. Default is `12000`
 | send_via_rtm  | Boolean   | Send outgoing messages via the RTM instead of using Slack's RESTful API which supports more features
