@@ -1,16 +1,10 @@
 # Botkit and Twilio Programmable SMS
 
-Botkit is designed to ease the process of designing and running useful, creative bots that live inside [Slack](http://slack.com), [Facebook Messenger](http://facebook.com), [Twilio IP Messaging](https://www.twilio.com/docs/api/ip-messaging), and other messaging platforms like [Twilio's Programmable SMS](https://www.twilio.com/sms/).
-
-Botkit features a comprehensive set of tools to deal with [Twilio's Programmable SMS API](http://www.twilio.com/sms/), and allows developers to build interactive bots and applications that send and receive messages just like real humans. Twilio SMS bots receive and send messages through a regular phone number.
-
-This document covers the Twilio Programmable SMS API implementation details only. [Start here](core.md) if you want to learn about how to develop with Botkit.
-
 # Getting Started
 
 1) Install Botkit [more info here](core.md#installation)
 
-2) [Register a developer account with Twilio](https://github.com/howdyai/botkit/blob/master/docs/provisioning/twilio-sms.md). Once you've got it, head to the [Get Started with SMS](https://www.twilio.com/console/sms/getting-started/basics) page in your Twilio Console.
+2) [Register a developer account with Twilio](/docs/provisioning/twilio-sms.md). Once you've got it, head to the [Get Started with SMS](https://www.twilio.com/console/sms/getting-started/basics) page in your Twilio Console.
 
     After completing the tutorial above you should have all three values to get your bot running: A **Twilio Account SID**, a **Twilio Auth Token**, and a **Twilio Number**.
 

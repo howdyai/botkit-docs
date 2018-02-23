@@ -1,12 +1,5 @@
 # Botkit and Twilio IP Messaging
 
-Botkit is designed to ease the process of designing and running useful, creative bots that live inside [Slack](http://slack.com), [Facebook Messenger](http://facebook.com), [Twilio IP Messaging](https://www.twilio.com/docs/api/ip-messaging), and other messaging platforms.
-
-Built in to [Botkit](https://howdy.ai/botkit/) are a comprehensive set of features and tools to deal with [Twilio IP Messaging platform](https://www.twilio.com/docs/api/ip-messaging), allowing
-developers to build interactive bots and applications that send and receive messages just like real humans.
-
-This document covers the Twilio-IPM implementation details only. [Start here](core.md) if you want to learn about to develop with Botkit.
-
 Table of Contents
 
 * [Getting Started](#getting-started)

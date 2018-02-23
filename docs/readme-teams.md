@@ -1,11 +1,5 @@
 # Botkit for Microsoft Teams
 
-Botkit is designed to ease the process of designing and running useful, creative bots that live inside [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software). For a full list of supported platforms, [check out the main Botkit readme](/docs/#botkit---building-blocks-for-building-bots)
-
-Botkit features a comprehensive set of tools to deal with [Microsoft Teams's integration platform](https://msdn.microsoft.com/en-us/microsoft-teams/), and allows developers to build both custom integrations for their team, as well as public "Microsoft Teams" applications that can be run from a central location, and be used by many teams at the same time.
-
-This document covers the Microsoft Teams-specific implementation details only. [Start here](/docs/readme.md#developing-with-botkit) if you want to learn about how to develop with Botkit.
-
 Table of Contents
 
 * [Getting Started](#getting-started)
