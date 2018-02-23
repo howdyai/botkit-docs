@@ -1,5 +1,3 @@
-# [Botkit](http://howdy.ai/botkit) - Building Blocks for Building Bots
-
 ## Core Concepts
 
 Bots built with Botkit have a few key capabilities, which can be used to create clever, conversational applications. These capabilities map to the way real human people talk to each other.
@@ -9,28 +7,6 @@ Bots can [hear things](#receiving-messages), [say things and reply](#sending-mes
 With these two building blocks, almost any type of conversation can be created.
 
 To organize the things a bot says and does into useful units, Botkit bots have a subsystem available for managing [multi-message conversations](#multi-message-conversations). Conversations add features like the ability to ask a question, queue several messages at once, and track when an interaction has ended.  Handy!
-
-After a bot has been told what to listen for and how to respond,
-it is ready to be connected to a stream of incoming messages. Currently, Botkit supports receiving messages from a variety of sources:
-
-* [Web and Apps](readme-web.md)
-* [Slack Real Time Messaging (RTM)](http://api.slack.com/rtm)
-* [Slack Incoming Webhooks](http://api.slack.com/incoming-webhooks)
-* [Slack Slash Commands](http://api.slack.com/slash-commands)
-* [Cisco Spark Webhooks](https://developer.ciscospark.com/webhooks-explained.html)
-* [Microsoft Teams](https://msdn.microsoft.com/en-us/microsoft-teams/bots)
-* [Facebook Messenger Webhooks](https://developers.facebook.com/docs/messenger-platform/implementation)
-* [Twilio SMS](https://www.twilio.com/console/sms/dashboard)
-* [Twilio IP Messaging](https://www.twilio.com/console/chat/dashboard)
-* [Microsoft Bot Framework](http://botframework.com/)
-
-Read more about
-[connecting your bot to Slack](readme-slack.md#connecting-your-bot-to-slack),
-[connecting your bot to Cisco Spark](readme-ciscospark.md#getting-started),
-[connecting your bot to Microsoft Teams](readme-teams.md#getting-started),
-[connecting your bot to Facebook](readme-facebook.md#getting-started),
-[connecting your bot to Twilio](readme-twilioipm.md#getting-started),
-or [connecting your bot to Microsoft Bot Framework](readme-botframework.md#getting-started)
 
 ## Basic Usage
 
