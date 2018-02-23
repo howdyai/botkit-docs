@@ -7,22 +7,16 @@
 
 ---
 
-"Bot" is a word we use to describe software that sends and receives messages to present a user interface, rather than (or frequently, alongside) a traditional graphical UI. Many bots exist alongside real human users in chatrooms, and can take input in informal or "natural" language, which sometimes allows them to take the form of robotic coworkers or agents.
+**Botkit is the leading developer tool for building chat bots, apps and custom integrations for major messaging platforms.**
 
- Under their robotic skin, bots are actually connected web applications, and share many of the same components as websites or apps built for other platforms. Requests come in from users. The request is routed by software to the right content or function. A response is returned to the user.
+Botkit offers everything you need to design, build and operate an app:
 
- The goal of Botkit is to provide the core set of features and tools necessary to operate a bot on any messaging system. Bots are built by applying these features to specific tasks through a semantic, clearly documented programming library.
+* Easy-to-extend starter kits
+* Fully-featured SDK with support for all major platforms
+* Content management and design tools
+* Analytics and CRM tools
+* Tons of plugins and middlewares
 
-Out of the box, Botkit bots include:
-
-* Conversation tracking and control
-* Event system
-* Platform connectors for popular messaging apps
-* Easy to extend plugin system
-* Integration with top NLP tools
-* Content management tools for dialog
-* Analytics
-* Self-contained Express webserver
 
 # Install Botkit
 
