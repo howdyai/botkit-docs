@@ -1,15 +1,7 @@
 # Botkit and Microsoft Bot Framework
 
-Botkit is designed to ease the process of designing and running useful, creative bots that live inside [Slack](http://slack.com), [Facebook Messenger](http://facebook.com), [Twilio IP Messaging](https://www.twilio.com/docs/api/ip-messaging), [Microsoft Bot Framework](https://botframework.com),
-and other messaging platforms.
-
 The [Microsoft Bot Framework](https://botframework.com) makes it easy to create a single bot that can run across a variety of messaging channels including [Skype](https://skype.com), [Group.me](https://groupme.com), [Facebook Messenger](https://messenger.com), [Slack](https://slack.com),
 [Telegram](https://telegram.org/), [Kik](https://www.kik.com/), [SMS](https://www.twilio.com/), and [email](https://microsoft.office.com).
-
-Built in to [Botkit](https://howdy.ai/botkit/) are a comprehensive set of features and tools to deal with any of the platforms supported by the [Microsoft Bot Framework](https://botframework.com), allowing developers to build interactive bots and applications that send and receive messages
-just like real humans.
-
-This document covers the Bot Framework implementation details only. [Start here](core.md) if you want to learn about to develop with Botkit.
 
 Table of Contents
 
