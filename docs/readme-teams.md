@@ -5,9 +5,6 @@ Table of Contents
 * [Getting Started](#getting-started)
 * [Developing with Botkit for Microsoft Teams](#developing-with-botkit-for-microsoft-teams)
 * [Working with Microsoft Teams](#working-with-microsoft-teams)
-* [Developer and Support Community](#developer--support-community)
-* [About Botkit](#about-botkit)
-* [Botkit Documentation Index](#botkit-documentation-index)
 
 ## Getting Started
 
