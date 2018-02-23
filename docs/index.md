@@ -50,7 +50,7 @@ controller.hears('help','message_received',function(bot, message) {
 });
 ```
 
-[Read more about hearing things &rsaquo;](docs/readme.md#matching-patterns-and-keywords-with-hears)
+[Read more about hearing things &rsaquo;](core.md#matching-patterns-and-keywords-with-hears)
 
 ### Responding to Events
 
@@ -64,13 +64,13 @@ controller.on('channel_join', function(bot, message) {
 });
 ```
 
-[See a full list of events and more information about handling them &rsaquo;](docs/readme.md#responding-to-events)
+[See a full list of events and more information about handling them &rsaquo;](core.md#responding-to-events)
 
 ### Middleware
 
 In addition to taking direct action in response to a certain message or type of event, Botkit can also take passive action on messages as they move through the application using middlewares. Middleware functions work by changing messages, adding new fields, firing alternate events, and modifying or overriding the behavior of Botkit's core features.
 
-Middleware can be used to adjust how Botkit receives, processes, and sends messages. [Here is a list of available middleware endpoints](docs/readme-pipeline.md).
+Middleware can be used to adjust how Botkit receives, processes, and sends messages. [Here is a list of available middleware endpoints](readme-pipeline.md).
 
 ```javascript
 // Log every message recieved
