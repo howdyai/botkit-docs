@@ -6,7 +6,7 @@ Setting up a bot for Twilio SMS is one of the easiest experiences for bot develo
 
 The easiest path to creating a new bot for Twilio SMS is through Botkit Studio. [Sign up for an account here](https://studio.botkit.ai/signup/). This method will provide a guided path to hosting, along with other useful tools for creating and managing your bot.
 
-For advanced users looking to run their own code, you will need to [install Botkit](../readme-twilio-sms.md#getting-started) and run it before your bot can be configured with Twilio SMS.
+For advanced users looking to run their own code, you will need to [install Botkit](../readme-twiliosms.md#getting-started) and run it before your bot can be configured with Twilio SMS.
 
 ### 2. Create a new bot in the Twilio Developer Console
 
@@ -25,7 +25,7 @@ Next, visit [your console Dashboard](https://www.twilio.com/console) and copy yo
 
 ### 4. Run your bot with variables set
 
- [Follow these instructions](../readme-TwilioSMS.md#getting-started) to run your bot locally, or by using a third-party service such as [Glitch](https://glitch.com) or [Heroku](https://heroku.com).
+ [Follow these instructions](../readme-twiliosms.md#getting-started) to run your bot locally, or by using a third-party service such as [Glitch](https://glitch.com) or [Heroku](https://heroku.com).
 
  You will need the following environment variables when running your bot:
 

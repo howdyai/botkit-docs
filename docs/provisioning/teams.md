@@ -26,7 +26,7 @@ Log into the [Bot Framework Developer Portal](https://dev.botframework.com/bots/
 ### Register a new bot
 Once you are logged in, [click this link to create a new bot](https://dev.botframework.com/bots/new) and then you can skip the next two steps!
 
-* Click on `My Bots` and then Register. Choose `Create a bot with the Bot Builder SDK`, and click `Create`. 
+* Click on `My Bots` and then Register. Choose `Create a bot with the Bot Builder SDK`, and click `Create`.
 
 * Select `Register an existing bot built using Bot Builder SDK` from the next menu and then click `OK`.
 
@@ -41,13 +41,13 @@ These are the important fields when creating your bot:
 ### Generate your keys
 Register your bot with Microsoft by clicking: `Create Microsoft App ID and password`
 
-This action will take you to a new website (and require you to log in again) and then ask you for an `App name`. 
+This action will take you to a new website (and require you to log in again) and then ask you for an `App name`.
 
 Once added, it will provide an `App ID` which you need to copy somewhere safe to use in the next step.
 
 Next, click `Generate password`. *This will only be shown to you once, if you lose it, you will need to invalidate the old one and set this up again!*
 
-Click Register. 
+Click Register.
 
 ### Add the Microsoft Teams channel
 
@@ -58,10 +58,10 @@ You will want to leave this window open as you finish setting up Botkit, as you 
 ## Step 4 - Deploy your bot and install to a team
 
 ### Turn on your Botkit app
-Now that everything is setup on Microsoft's side, you can [run Botkit](https://github.com/howdyai/botkit/blob/master/docs/readme-teams.md#getting-started) using the method you've chosen and with the information created in the Bot framework in the previous step. 
+Now that everything is setup on Microsoft's side, you can [run Botkit](/docs/readme-teams.md#getting-started) using the method you've chosen and with the information created in the Bot framework in the previous step.
 
 ### Update your Messaging Endpoint in Bot Framework
-Once a Botkit instance is running, you may have a new URL that you will have to update in the bot's settings [in Microsoft Bot Framework](https://dev.botframework.com/bots/). 
+Once a Botkit instance is running, you may have a new URL that you will have to update in the bot's settings [in Microsoft Bot Framework](https://dev.botframework.com/bots/).
 
 Once logged in to that page:
 
@@ -74,18 +74,18 @@ Once logged in to that page:
 To add a development bot on a team, you will need to prepare an [App Package](https://msdn.microsoft.com/en-us/microsoft-teams/createpackage). Botkit Studio provides [easy tools to create your App Package](https://botkit.groovehq.com/knowledge_base/topics/create-an-app-package-for-microsoft-teams), but you can also build this manifest manually if you've chosen to not use Studio.
 
 ### Sideload your Bot to Microsoft Teams
-After creating your app package, you can [load it easily into your development team](https://msdn.microsoft.com/en-us/microsoft-teams/sideload#load-your-package-into-a-team). 
+After creating your app package, you can [load it easily into your development team](https://msdn.microsoft.com/en-us/microsoft-teams/sideload#load-your-package-into-a-team).
 
 Say hello to your real live bot!
 
 ## Step 5 - Add dialogue and features
-Once you have a bot up and running, you can start the fun part of [making your bot functional](https://github.com/howdyai/botkit/blob/master/docs/readme.md#basic-usage). 
+Once you have a bot up and running, you can start the fun part of [making your bot functional](/docs/core.md#basic-usage).
 
-You can extend your bot's functionality using various [Botkit Middleware](https://github.com/howdyai/botkit/blob/master/docs/middleware.md), or check our [example library](https://github.com/howdyai/botkit/tree/master/examples) for a good starting point.
+You can extend your bot's functionality using various [Botkit Middleware](/docs/middleware.md), or check our [example library](https://github.com/howdyai/botkit/tree/master/examples) for a good starting point.
 
-If you have questions or suggestions, please take a look at our [community support resources](https://github.com/howdyai/botkit/blob/master/readme.md#developer--support-community). You can chat with contributors and enthusiasts in [our Slack community](https://community.botkit.ai/).
+If you have questions or suggestions, please take a look at our [community support resources](core.md#developer--support-community). You can chat with contributors and enthusiasts in [our Slack community](https://community.botkit.ai/).
 
 ## Additional resources
-* [Botkit Microsoft Teams readme](https://github.com/howdyai/botkit/blob/master/docs/readme-teams.md)
+* [Botkit Microsoft Teams readme](/docs/readme-teams.md)
 * [Microsoft's Bot Framework](https://dev.botframework.com/)
 * [Sign up for Botkit Studio](https://studio.botkit.ai/signup)
