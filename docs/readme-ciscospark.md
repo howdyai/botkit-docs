@@ -79,6 +79,7 @@ controller.on('direct_mention', function(bot, message) {
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
 });
+
 ```
 
 ## Controller Options
