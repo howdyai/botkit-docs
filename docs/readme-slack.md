@@ -63,25 +63,6 @@ var controller = Botkit.slackbot({
 | disable_startup_messages | Boolean | Disable start up messages, like: `"Initializing Botkit vXXX"`
 | clientVerificationToken | String | Value of verification token from Slack used to confirm source of incoming messages
 
-#### controller.spawn()
-| Argument | Description
-|--- |---
-| config | Incoming message object
-
-Spawn an instance of your bot and connect it to Slack.
-This function takes a configuration object which should contain
-at least one method of talking to the Slack API.
-
-To use the real time / bot user API, pass in a token.
-
-Controllers can also spawn bots that use [incoming webhooks](#incoming-webhooks).
-
-Spawn `config` object accepts these properties:
-
-| Name | Value | Description
-|--- |--- |---
-| token | String | Slack bot token
-
 
 ### Slack-Specific Events
 
@@ -148,60 +129,6 @@ a [few additional events](#use-the-slack-button).
 | rtm_open | a connection has been made to the RTM api
 | rtm_close | a connection to the RTM api has closed
 | rtm_reconnect_failed | if retry enabled, retry attempts have been exhausted
-
-
-## Working with Slack Integrations
-
-There are a dizzying number of ways to integrate your application into Slack.
-Up to this point, this document has mainly dealt with the real time / bot user
-integration.  In addition to this type of integration, Botkit also supports:
-
-* Incoming Webhooks - a way to send (but not receive) messages to Slack
-* Outgoing Webhooks - a way to receive messages from Slack based on a keyword or phrase
-* Slash Command - a way to add /slash commands to Slack
-* Slack Web API - a full set of RESTful API tools to deal with Slack
-* The Slack Button - a way to build Slack applications that can be used by multiple teams
-* Events API - receive messages and other events via a RESTful web API
-
-
-```javascript
-var Botkit = require('botkit');
-var controller = Botkit.slackbot({})
-
-var bot = controller.spawn({
-  token: my_slack_bot_token
-});
-
-// use RTM
-bot.startRTM(function(err,bot,payload) {
-  // handle errors...
-});
-
-// send webhooks
-bot.configureIncomingWebhook({url: webhook_url});
-bot.sendWebhook({
-  text: 'Hey!',
-  channel: '#testing',
-},function(err,res) {
-  // handle error
-});
-
-// receive outgoing or slash commands
-// if you are already using Express, you can use your own server instance...
-// see "Use BotKit with an Express web server"
-controller.setupWebserver(process.env.port,function(err,webserver) {
-
-  controller.createWebhookEndpoints(controller.webserver);
-
-});
-
-controller.on('slash_command',function(bot,message) {
-
-  // reply to slash command
-  bot.replyPublic(message,'Everyone can see the results of this slash command');
-
-});
-```
 
 
 ### Ephemeral Messages
