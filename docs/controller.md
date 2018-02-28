@@ -40,14 +40,40 @@ controller.hears('open the (.*) doors',['message_received'],function(bot,message
 ### on(event, cb, is_hearing)
 NEEDS EXAMPLE
 
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
 https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1263
 
 ### trigger(event, data)
 NEEDS EXAMPLE
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
 https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L424
 
 ### hears_regexp(tests, message)
 NEEDS EXAMPLE
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
 hears_regexp - default string matcher uses regular expressions
 
 found in:
@@ -58,11 +84,27 @@ https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/
 ### changeEars(new_test)
 Needs Example
 
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
 https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1211
 https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/Botkit.d.ts#L120
 
 ### excludeFromConversations(event)
 Needs example
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
 
 https://github.com/howdyai/botkit/blob/e196bfa1b89657d36662dffe81f3b9672fb257a2/docs/readme.md#excluding-events-from-conversations
 
@@ -74,21 +116,105 @@ controller.excludeFromConversations('facebook_postback')
 ### spawn(config, cb)
 Needs example, but obviously there is a version of this in each integration.js
 
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
 ### defineBot(unit)
 needs example
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
 
 https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1335
 
 ### setTickDelay(delay)
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+
+https://github.com/howdyai/botkit/blob/e196bfa1b89657d36662dffe81f3b9672fb257a2/docs/readme.md#changing-the-speed-of-botkits-internal-tick
+
+For example:
+``` javascript
+// only wait 100ms between conversation loops
+controller.setTickDelay(100);
+```
+
 ### startTicking()
+
+Needs example, but there is a version of this in each integration.js
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+Why is this handled differently per integration?
 
 ### setupWebserver(port, cb)
 
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/Botkit.d.ts#L124 (appears in integrations as well)
+
 ### userAgent()
+
+Need examples
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1525
+
 ### version()
+needs examples
+
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
+
+Couldnt find this!
+
 ### shutdown()
 
+| Argument | Description
+|--- |---
+| x | x
+| x  | x
+| x | x
+| x | x
 
+needs example!
+https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1410
 
 
 ## Middlewares
