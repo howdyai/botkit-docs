@@ -218,6 +218,9 @@ https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/
 
 
 ## Middlewares
+needs explaination, the only reference to these is in code:
+https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L50
+
     spawn: ware(),
     ingest: ware(),
     normalize: ware(),
