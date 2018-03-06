@@ -36,7 +36,7 @@ controller.hears('hello','message_received',function(bot, message) {
 });
 ```
 
-[Read more about hearing things ›](core.md#matching-patterns-and-keywords-with-hears)
+[Read more about hearing things &raquo;](core.md#matching-patterns-and-keywords-with-hears)
 
 ## Responding to Events
 
@@ -49,13 +49,13 @@ controller.on('channel_join', function(bot, message) {
 });
 ```
 
-[See a full list of events and more information about handling them ›](core.md#responding-to-events)
+[See a full list of events and more information about handling them &raquo;](core.md#responding-to-events)
 
 ## Conversation Management
 
 Botkit has a flexible system for handling scripted dialog and transactional conversations involving questions, branching logic, and other dynamic behaviors.
 
-[Read about Conversations](core.md#multi-message-conversations)
+[Read about Conversations &raquo;](core.md#multi-message-conversations)
 
 
 ## Extend Botkit with Middleware
