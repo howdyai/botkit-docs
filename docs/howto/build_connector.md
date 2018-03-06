@@ -96,3 +96,9 @@ module.exports = function(Botkit, config) {
 
 }
 ```
+
+Now, load your new platform module like this:
+
+```
+var controller = require('my_module')(Botkit,{});
+```
