@@ -20,9 +20,7 @@ Botkit offers everything you need to design, build and operate an app:
 
 # Build Your Bot
 
-Building a bot should feel cool, and not too technically complicated.
-
-Botkit handles all the nitty gritty details like API calls, session management and authentication, allowing you to focus on building COOL FEATURES for your bot.
+Botkit is programming library (and suite of supporting tools and plugins) that provides bot builders a single, language-like interface for building bots on any messaging platform. It handles all the nitty gritty technical details, allowing you to focus on building COOL FEATURES for your bot.
 
 The toolkit is designed to provide meaningful building blocks for creating conversational user interfaces - with functions like `hears()`, `ask()`, and `reply()` that do what they say they do.
 
