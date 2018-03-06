@@ -19,7 +19,7 @@ Botkit offers everything you need to design, build and operate an app:
 [**New to Botkit?** Read our full guide to getting started with Botkit](/getstarted.html).
 
 
-### **Botkit Studio**
+### **Guided Process with Botkit Studio**
 
 Sign up for a free Botkit Studio account, and it will guide you through the process to create, configure and deploy your Botkit app!
 
