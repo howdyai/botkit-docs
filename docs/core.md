@@ -1,4 +1,4 @@
-## Core Concepts
+# Botkit Core
 
 Bots built with Botkit have a few key capabilities, which can be used to create clever, conversational applications. These capabilities map to the way real human people talk to each other.
 
@@ -7,6 +7,18 @@ Bots can [hear things](#receiving-messages), [say things and reply](#sending-mes
 With these two building blocks, almost any type of conversation can be created.
 
 To organize the things a bot says and does into useful units, Botkit bots have a subsystem available for managing [multi-message conversations](#multi-message-conversations). Conversations add features like the ability to ask a question, queue several messages at once, and track when an interaction has ended.  Handy!
+
+## Developing with Botkit
+
+Table of Contents
+
+* [Basic Usage](#basic-usage)
+* [Receiving Messages](#receiving-messages)
+* [Sending Messages](#sending-messages)
+* [Multi-message Conversations](#multi-message-conversations)
+* [Middleware](middleware.md)
+* [Advanced Topics](#advanced-topics)
+
 
 ## Basic Usage
 
@@ -37,18 +49,7 @@ controller.hears('hello',['direct_message','direct_mention','mention'],function(
 
 ```
 
-
-# Developing with Botkit
-
-Table of Contents
-
-* [Receiving Messages](#receiving-messages)
-* [Sending Messages](#sending-messages)
-* [Multi-message Conversations](#multi-message-conversations)
-* [Middleware](middleware.md)
-* [Advanced Topics](#advanced-topics)
-
-### Responding to events
+## Responding to events
 
 Once connected to a messaging platform, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events. The set of events your bot will receive will depend on what messaging platform it is connected to.
 
@@ -883,7 +884,7 @@ bot.say(
 ```
 
 
-### Botkit Statistics Gathering
+## Botkit Statistics Gathering
 
 As of version 0.4, Botkit records anonymous usage statistics about Botkit bots in the wild.
 These statistics are used by the Botkit team at [Howdy](http://howdy.ai) to measure and
@@ -904,10 +905,3 @@ var controller = Botkit.slackbot({
     stats_optout: true
 });
 ```
-
-# Advanced Topics
-
-## Use Botkit with an Express web server
-Instead of controller.setupWebserver(), it is possible to use a different web server to manage authentication flows, as well as serving web pages.
-
-Here is an example of [using an Express web server alongside Botkit](https://github.com/mvaragnat/botkit-express-demo).
