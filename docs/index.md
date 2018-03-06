@@ -55,7 +55,7 @@ controller.on('channel_join', function(bot, message) {
 
 Botkit has a flexible system for handling scripted dialog and transactional conversations involving questions, branching logic, and other dynamic behaviors.
 
-[Read about Conversations](code.md#multi-message-conversations)
+[Read about Conversations](core.md#multi-message-conversations)
 
 
 ## Extend Botkit with Middleware
@@ -93,3 +93,9 @@ controller.middleware.send.use(function(bot, message, next) {
 
 });
 ```
+
+# What's Next?
+
+* [Continue learning about Botkit's core features](core.md)
+* [See how Botkit Studio's content management system can power dynamic conversations](readme-studio.md)
+* [View set-up guides for all the major platforms](provisioning/)
