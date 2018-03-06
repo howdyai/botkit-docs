@@ -24,11 +24,12 @@ Botkit is programming library, along with a suite of supporting tools and plugin
 
 The toolkit is designed to provide meaningful building blocks for creating conversational user interfaces - with functions like `hears()`, `ask()`, and `reply()` that do what they say they do.
 
-## Hearing Keywords
+## Hearing Messages
 
 Most bots do their thing by listening for keywords, phrases or patterns in messages from users. Botkit has a special event handler called `hears()` that makes it easy to configure your bot to listen for this type of trigger.
 
 ```javascript
+// listen for a message containing the world "hello", and send a reply
 controller.hears('hello','message_received',function(bot, message) {
     // do something!
     bot.reply(message, 'Hello human')
@@ -39,9 +40,10 @@ controller.hears('hello','message_received',function(bot, message) {
 
 ## Responding to Events
 
-Bots can respond to non-verbal events as well, like when a new user joins a channel, a file gets uploaded, or a button gets clicked. These events are handled using an event handling pattern that should look familiar. Most events in Botkit can be replied to like normal messages.
+Bots can respond to non-verbal events as well, like when a new user joins a channel, a file gets uploaded, or a button gets clicked. These events are handled using an event handling pattern that should look familiar to most developers. Most events in Botkit can be replied to like normal messages.
 
 ```javascript
+// wait for a new user to join a channel, then say hi
 controller.on('channel_join', function(bot, message) {
     bot.reply(message,'Welcome to the channel!');
 });
@@ -49,11 +51,18 @@ controller.on('channel_join', function(bot, message) {
 
 [See a full list of events and more information about handling them ›](core.md#responding-to-events)
 
-## Middleware
+## Conversation Management
+
+Botkit has a flexible system for handling scripted dialog and transactional conversations involving questions, branching logic, and other dynamic behaviors.
+
+[Read about Conversations](code.md#multi-message-conversations)
+
+
+## Extend Botkit with Middleware
 
 In addition to taking direct action in response to a certain message or type of event, Botkit can also take passive action on messages as they move through the application using middlewares. Middleware functions work by changing messages, adding new fields, firing alternate events, and modifying or overriding the behavior of Botkit's core features.
 
-Middleware can be used to adjust how Botkit receives, processes, and sends messages. [Here is a list of available middleware endpoints](readme-pipeline.md).
+Middleware can be used to adjust how Botkit receives, processes, and sends messages. [Here is a list of available middleware endpoints](middleware.md).
 
 ```javascript
 // Log every message received
