@@ -1,4 +1,4 @@
-## Storing Information
+# Storing Information
 
 Botkit has a built in storage system used to keep data on behalf of users and teams between sessions. Botkit uses this system automatically when storing information for Slack Button applications (see below).
 
