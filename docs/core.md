@@ -13,10 +13,11 @@ To organize the things a bot says and does into useful units, Botkit bots have a
 Table of Contents
 
 * [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
-  * [Botkit Controller Methods List](#botkit-controller-object)
 * [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
 * [Multi-message Conversations](#multi-message-conversations)
+* [Controller Methods List](#botkit-controller-object)
+* [Bot Instance Methods List](#botkit-bot-instance-object)
 * [Middleware](middleware.md)
 * [Advanced Topics](#advanced-topics)
 
@@ -181,161 +182,33 @@ There are several ways to achieve this:
 
 ## Sending Messages
 
-Bots have to send messages to deliver information and present an interface for their
-functionality.  Botkit bots can send messages in several different ways, depending
-on the type and number of messages that will be sent.
+Botkit bots can send messages in several different ways, depending on the type and number of messages that will be sent.
 
-Single message replies to incoming commands can be sent using the `bot.reply()` function.
+Simple replies requiring only one message in response to an incoming event can be sent using the [bot.reply()](#botreply) function.
 
 Multi-message replies, particularly those that present questions for the end user to respond to,
-can be sent using the `bot.startConversation()` function and the related conversation sub-functions.
+can be sent using the [bot.startConversation()](#botstartconversation) function and the related conversation sub-functions.
 
 Bots can originate messages - that is, send a message based on some internal logic or external stimulus -
-using `bot.say()` method.
-
-All `message` objects must contain a `text` property, even if it's only an empty string.
+using [bot.say()](#botsay) method.
 
 ### Single Message Replies to Incoming Messages
 
-Once a bot has received a message using a `on()` or `hears()` event handler, a response
-can be sent using `bot.reply()`.
+Once a bot has received a message using a [controller.on()](#controlleron) or [controller.hears()](#controllerhears) event handler, a response
+can be sent using [bot.reply()](#botreply).
 
 Messages sent using `bot.reply()` are sent immediately. If multiple messages are sent via
 `bot.reply()` in a single event handler, they will arrive in the  client very quickly
-and may be difficult for the user to process. We recommend using `bot.startConversation()`
+and may be difficult for the user to process. We recommend using [bot.startConversation()](#botstartconversation)
 if more than one message needs to be sent.
 
 You may pass either a string, or a message object to the function.
 
-Message objects may also contain any additional fields supported by the messaging platform in use:
-
-[Slack's chat.postMessage](https://api.slack.com/methods/chat.postMessage) API accepts several additional fields. These fields can be used to adjust the message appearance, add attachments, or even change the displayed user name.
-
-This is also true of Facebook. Calls to [Facebook's Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference) can include attachments which result in interactive "structured messages" which can include images, links and action buttons.
-
-#### bot.reply()
-
-| Argument | Description
-|--- |---
-| message | Incoming message object
-| reply | _String_ or _Object_ Outgoing response
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-Simple reply example:
-```javascript
-controller.hears(['keyword','^pattern$'],['message_received'],function(bot,message) {
-
-  // do something to respond to message
-  // ...
-
-  bot.reply(message,"Tell me more!");
-
-});
-```
-
-Slack-specific fields and attachments:
-```javascript
-controller.on('ambient',function(bot,message) {
-
-    // do something...
-
-    // then respond with a message object
-    //
-    bot.reply(message,{
-      text: "A more complex response",
-      username: "ReplyBot",
-      icon_emoji: ":dash:",
-    });
-
-})
-
-//Using attachments
-controller.hears('another_keyword','direct_message,direct_mention',function(bot,message) {
-  var reply_with_attachments = {
-    'username': 'My bot' ,
-    'text': 'This is a pre-text',
-    'attachments': [
-      {
-        'fallback': 'To be useful, I need you to invite me in a channel.',
-        'title': 'How can I help you?',
-        'text': 'To be useful, I need you to invite me in a channel ',
-        'color': '#7CD197'
-      }
-    ],
-    'icon_url': 'http://lorempixel.com/48/48'
-    }
-
-  bot.reply(message, reply_with_attachments);
-});
-
-```
-
-
-Facebook-specific fields and attachments:
-```javascript
-// listen for the phrase `shirt` and reply back with structured messages
-// containing images, links and action buttons
-controller.hears(['shirt'],'message_received',function(bot, message) {
-    bot.reply(message, {
-        attachment: {
-            'type':'template',
-            'payload':{
-                 'template_type':'generic',
-                 'elements':[
-                   {
-                     'title':'Classic White T-Shirt',
-                     'image_url':'http://petersapparel.parseapp.com/img/item100-thumb.png',
-                     'subtitle':'Soft white cotton t-shirt is back in style',
-                     'buttons':[
-                       {
-                         'type':'web_url',
-                         'url':'https://petersapparel.parseapp.com/view_item?item_id=100',
-                         'title':'View Item'
-                       },
-                       {
-                         'type':'web_url',
-                         'url':'https://petersapparel.parseapp.com/buy_item?item_id=100',
-                         'title':'Buy Item'
-                       },
-                       {
-                         'type':'postback',
-                         'title':'Bookmark Item',
-                         'payload':'USER_DEFINED_PAYLOAD_FOR_ITEM100'
-                       }
-                     ]
-                   },
-                   {
-                     'title':'Classic Grey T-Shirt',
-                     'image_url':'http://petersapparel.parseapp.com/img/item101-thumb.png',
-                     'subtitle':'Soft gray cotton t-shirt is back in style',
-                     'buttons':[
-                       {
-                         'type':'web_url',
-                         'url':'https://petersapparel.parseapp.com/view_item?item_id=101',
-                         'title':'View Item'
-                       },
-                       {
-                         'type':'web_url',
-                         'url':'https://petersapparel.parseapp.com/buy_item?item_id=101',
-                         'title':'Buy Item'
-                       },
-                       {
-                         'type':'postback',
-                         'title':'Bookmark Item',
-                         'payload':'USER_DEFINED_PAYLOAD_FOR_ITEM101'
-                       }
-                     ]
-                   }
-                 ]
-               }
-        }
-    });
-});
-```
+Message objects may also contain any additional fields supported by the messaging platform in use. Refer to the platform-specific docs for more information.
 
 ## Multi-message Conversations
 
-For more complex commands, multiple messages may be necessary to send a response,
+For more complex interactions, multiple messages may be necessary to send a response,
 particularly if the bot needs to collect additional information from the user.
 
 Botkit provides a `Conversation` object type that is used to string together several
@@ -345,9 +218,8 @@ user interfaces that may span a several minutes of dialog with a user, without h
 the complexity of connecting multiple incoming and outgoing messages across
 multiple API calls into a single function.
 
-Messages sent as part of a conversation are sent no faster than one message per second,
+Messages sent as part of a conversation are queued and sent in order with a short delay between each message,
 which roughly simulates the time it would take for the bot to "type" the message.
-
 
 ### Conversation Threads
 
@@ -360,52 +232,6 @@ Threads are pre-built chains of dialog between the bot and end user that are bui
 You can build conversation threads in code, or you can use [Botkit Studio](readme-studio.md)'s script management tool to build them in a friendly web environment. Conversations you build yourself and conversations managed in Botkit Studio work the same way -- they run inside your bot and use your code to manage the outcome.
 
 If you've used the conversation system at all, you've used threads - you just didn't know it. When calling `convo.say()` and `convo.ask()`, you were actually adding messages to the `default` conversation thread that is activated when the conversation object is created.
-
-
-### Start a Conversation
-
-#### bot.startConversation()
-| Argument | Description
-|---  |---
-| message   | incoming message to which the conversation is in response
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-`startConversation()` is a function that creates conversation in response to an incoming message.
-The conversation will occur _in the same channel_ in which the incoming message was received.
-Only the user who sent the original incoming message will be able to respond to messages in the conversation.
-
-#### bot.startPrivateConversation()
-| Argument | Description
-|---  |---
-| message   | message object containing {user: userId} of the user you would like to start a conversation with
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-`startPrivateConversation()` is a function that initiates a conversation with a specific user. Note function is currently *Slack-only!*
-
-#### bot.createConversation()
-| Argument | Description
-|---  |---
-| message   | incoming message to which the conversation is in response
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-This works just like `startConversation()`, with one main difference - the conversation
-object passed into the callback will be in a dormant state. No messages will be sent,
-and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
-
-Use `createConversation()` instead of `startConversation()` when you plan on creating more complex conversation structures using [threads](#conversation-threads) or [variables and templates](#using-variable-tokens-and-templates-in-conversation-threads) in your messages.
-
-#### bot.createPrivateConversation()
-| Argument | Description
-|---  |---
-| message   | incoming message to which the conversation is in response
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-This works just like `startPrivateConversation()`, with one main difference - the conversation
-object passed into the callback will be in a dormant state. No messages will be sent,
-and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
-
-### Control Conversation Flow
-
 
 ### Automatically Switch Threads using Actions
 
@@ -616,38 +442,6 @@ This thread should be called `on_timeout`.
 convo.addMessage('Oh no! The time limit has expired.','on_timeout');
 convo.addMessage('TTYL.','on_timeout');
 ```
-
-
-### Originating Messages
-
-#### bot.say()
-| Argument | Description
-|--- |---
-| message | A message object
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-Slack-specific Example:
-```javascript
-bot.say(
-  {
-    text: 'my message text',
-    channel: 'C0H338YH4' // a valid slack channel, group, mpim, or im ID
-  }
-);
-```
-Note: If your primary need is to spontaneously send messages rather than respond to incoming messages, you may want to use [Slack's incoming webhooks feature](readme-slack.md#incoming-webhooks) rather than the real time API.
-
-
-Facebook-specific Example:
-```javascript
-bot.say(
-    {
-        text: 'my message_text',
-        channel: '+1(###)###-####' // a valid facebook user id or phone number
-    }
-);
-```
-
 
 ## Botkit Statistics Gathering
 
@@ -902,3 +696,94 @@ Returns the current package version of Botkit's core library
 #### controller.shutdown()
 
 This function _stops_ the event loop from processing active conversations. It is the opposite of [controller.startTicking()](#controller-startticking)
+
+
+# Botkit Bot Instance Objects
+
+#### bot.reply()
+| Argument | Description
+|--- |---
+| message | Incoming message object
+| reply | _String_ or _Object_ Outgoing response
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+Simple reply example:
+```javascript
+controller.hears(['keyword','^pattern$'],['message_received'],function(bot,message) {
+
+  // do something to respond to message
+  // ...
+
+  bot.reply(message,"Tell me more!");
+
+});
+```
+
+
+#### bot.say()
+| Argument | Description
+|--- |---
+| message | A message object
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+Slack-specific Example:
+```javascript
+bot.say(
+  {
+    text: 'my message text',
+    channel: 'C0H338YH4' // a valid slack channel, group, mpim, or im ID
+  }
+);
+```
+Note: If your primary need is to spontaneously send messages rather than respond to incoming messages, you may want to use [Slack's incoming webhooks feature](readme-slack.md#incoming-webhooks) rather than the real time API.
+
+
+Facebook-specific Example:
+```javascript
+bot.say(
+    {
+        text: 'my message_text',
+        channel: '+1(###)###-####' // a valid facebook user id or phone number
+    }
+);
+```
+
+#### bot.startConversation()
+| Argument | Description
+|---  |---
+| message   | incoming message to which the conversation is in response
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+`startConversation()` is a function that creates conversation in response to an incoming message.
+The conversation will occur _in the same channel_ in which the incoming message was received.
+Only the user who sent the original incoming message will be able to respond to messages in the conversation.
+
+#### bot.startPrivateConversation()
+| Argument | Description
+|---  |---
+| message   | message object containing {user: userId} of the user you would like to start a conversation with
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+`startPrivateConversation()` is a function that initiates a conversation with a specific user. Note function is currently *Slack-only!*
+
+#### bot.createConversation()
+| Argument | Description
+|---  |---
+| message   | incoming message to which the conversation is in response
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+This works just like `startConversation()`, with one main difference - the conversation
+object passed into the callback will be in a dormant state. No messages will be sent,
+and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
+
+Use `createConversation()` instead of `startConversation()` when you plan on creating more complex conversation structures using [threads](#conversation-threads) or [variables and templates](#using-variable-tokens-and-templates-in-conversation-threads) in your messages.
+
+#### bot.createPrivateConversation()
+| Argument | Description
+|---  |---
+| message   | incoming message to which the conversation is in response
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+This works just like `startPrivateConversation()`, with one main difference - the conversation
+object passed into the callback will be in a dormant state. No messages will be sent,
+and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
