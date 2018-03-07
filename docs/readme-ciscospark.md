@@ -114,15 +114,20 @@ var controller = Botkit.sparkbot({
 
 ## Event List
 
- All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some  platform specific events.
 
- In addition, the following custom Botkit-specific events are fired:
+All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
 
+### Incoming Message Events
 | Event | Description
 |--- |---
 | direct_message | Bot has received a message as a DM
 | direct_mention | Bot has been mentioned in a public space
 | self_message | Bot has received a message it sent
+
+### User Activity Events:
+| Event | Description
+|--- |---
 | user_space_join | a user has joined a space in which the bot is present
 | bot_space_join | the bot has joined a new space
 | user_space_leave | a user has left a space in which the bot is present

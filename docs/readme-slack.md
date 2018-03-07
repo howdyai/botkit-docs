@@ -77,7 +77,7 @@ var controller = Botkit.slackbot({
 
 ## Event List
 
-In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some additional platform specific events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
 In fact, Botkit will receive, normalize and emit any event that it receives from Slack.
 This includes all of the events [listed here](https://api.slack.com/events), as well as
@@ -92,7 +92,6 @@ events based on the `subtype` field of incoming messages, [as listed here](https
 | ambient | the message received had no mention of the bot
 
 ### User Activity Events:
-
 | Event | Description
 |--- |---
 | bot_channel_join | the bot has joined a channel
@@ -121,7 +120,7 @@ events based on the `subtype` field of incoming messages, [as listed here](https
 | oauth_error | An error occured during the oauth process
 
 
-### Ephemeral Messages
+## Ephemeral Messages
 
 Using the Web API, messages can be sent to a user "ephemerally" which will only show to them, and no one else. Learn more about ephemeral messages at the [Slack API Documentation](https://api.slack.com/methods/chat.postEphemeral). When sending an ephemeral message, you must specify a valid `user` and `channel` id. Valid meaning the specified user is in the specified channel. Currently, updating interactive messages are not supported by ephemeral messages, but you can still create them and listen to the events. They will not have a reference to the original message, however.
 
