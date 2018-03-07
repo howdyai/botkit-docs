@@ -42,6 +42,8 @@ Each platform has its own set of configuration options - refer to the platform c
 * [Twilio IPM](readme-twilioipm.md#create-a-controller)
 * [Microsoft Bot Framework](readme-botframework.md#create-a-controller)
 
+Below is an example showing a [Botkit Anywhere](readme-web.md) controller being created.
+
 ```javascript
 var Botkit = require('botkit');
 
@@ -58,57 +60,65 @@ controller.hears('hello','message_received',function(bot,message) {
 
 Once connected to a messaging platform, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events. The set of events your bot will receive will depend on what messaging platform it is connected to.
 
-All platforms will receive the `message_received` event. This event is the first event fired for every message of any type received - before any platform specific events are fired.
+To respond to events, use [controller.on()](#controlleron) to define a handler function that receives the event details and takes actions.
+_Most_ of event handlers will receive 2 arguments - a bot instance, and the event object itself.  The event object can be used with [bot.reply()](#botreply)
+or [bot.startConversation()](#botstartconversation) to send replies.
+
+Here is an example of an event handler declaration:
 
 ```javascript
 controller.on('message_received', function(bot, message) {
-
-    // carefully examine and
-    // handle the message here!
-    // Note: Platforms such as Slack send many kinds of messages, not all of which contain a text field!
+  bot.reply(message,'I heard a message');
 });
 ```
 
-Due to the multi-channel, multi-user nature of Slack, Botkit does additional filtering on the messages (after firing message_received), and will fire more specific events based on the type of message - for example, `direct_message` events indicate a message has been sent directly to the bot, while `direct_mention` indicates that the bot has been mentioned in a multi-user channel.
-[List of Slack-specific Events](readme-slack.md#slack-specific-events)
+### Incoming Message Events
 
-Similarly, bots in Cisco Spark will receive `direct_message` events to indicate a message has been sent directly to the bot, while `direct_mention` indicates that the bot has been mentioned in a multi-user channel. Several other Spark-specific events will also fire. [List of Cisco Spark-specific Events](readme-ciscospark.md#spark-specific-events)
+| Event | Description
+|-- |--
+| message_received | In a 1:1 platform, indicates an incoming message from user has been received
+| direct_mention | In a multi-user platform, indicates a message was directed at the bot in a group channel "@bot hello"
+| mention | In a multi-user platform, indicates a message in a group channel mentioned the bot indirectly "hello @bot"
+| ambient | In a multi-user platform, indicates a message in a group channel that does not mention the bot in any way
+| direct_message | In a multi-user platform, indicates a message sent privately to the bot
 
-Twilio IPM bots can also exist in a multi-channel, multi-user environment. As a result, there are many additional events that will fire. In addition, Botkit will filter some messages, so that the bot will not receive it's own messages or messages outside of the channels in which it is present.
-[List of Twilio IPM-specific Events](readme-twilioipm.md#twilio-ipm-specific-events)
+### Conversation Lifecycle Events
 
-Facebook messages are fairly straightforward. However, because Facebook supports inline buttons, there is an additional event fired when a user clicks a button.
-[List of Facebook-specific Events](readme-facebook.md#facebook-specific-events)
+| Event | Description
+|-- |--
+| heard-trigger | A trigger defined with [controller.hears()](#controllerhears) was fired
+| conversationStarted | A conversation has started
+| conversationEnded | A conversation has ended
+| tick | The event loop has ticked
+
+### Bot Lifecycle events
+
+| Event | Description
+|-- |--
+| spawned | A bot instance spawned
+
+### Application Events
+
+| Event | Description
+|-- |--
+| webserver_up | This event occurs when [controller.setupWebserver()](#controllersetupwebserver) has configured a webserver
 
 
-## Receiving Messages
+### Platform Specific Events
 
-Botkit bots receive messages through a system of specialized event handlers. Handlers can be set up to respond to specific types of messages, or to messages that match a given keyword or pattern.
+For a list of the platform-specific events that Botkit emits, refer to the platform specific docs:
 
-These message events can be handled by attaching an event handler to the main controller object.
-These event handlers take two parameters: the name of the event, and a callback function which is invoked whenever the event occurs.
-The callback function receives a bot object, which can be used to respond to the message, and a message object.
+* [Web and Apps](readme-web.md#event-list)
+* [Slack](readme-slack.md#event-list)
+* [Cisco Spark](readme-ciscospark.md#event-list)
+* [Microsoft Teams](readme-teams.md#event-list)
+* [Facebook Messenger](readme-facebook.md#event-list)
+* [Twilio SMS](readme-twiliosms.md#event-list)
+* [Twilio IPM](readme-twilioipm.md#event-list)
+* [Microsoft Bot Framework](readme-botframework.md#event-list)
 
-```javascript
-// reply to any incoming message
-controller.on('message_received', function(bot, message) {
-    bot.reply(message, 'I heard... something!');
-});
 
-// reply to a direct mention - @bot hello
-controller.on('direct_mention',function(bot,message) {
-  // reply to _message_ by using the _bot_ object
-  bot.reply(message,'I heard you mention me!');
-});
-
-// reply to a direct message
-controller.on('direct_message',function(bot,message) {
-  // reply to _message_ by using the _bot_ object
-  bot.reply(message,'You are talking directly to me');
-});
-```
-
-### Matching Patterns and Keywords with `hears()`
+## Matching Patterns and Keywords with `hears()`
 
 In addition to these traditional event handlers, Botkit also provides the [controller.hears()](#controller-hears) function,
 which configures event handlers based on matching specific keywords or phrases in the message text.

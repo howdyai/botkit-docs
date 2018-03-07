@@ -3,7 +3,8 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Slack-specific Events](#slack-specific-events)
+* [Create a Controller](#create-a-controller)
+* [Slack-specific Events](#event-list)
 * [Working with Slack Custom Integrations](#working-with-slack-integrations)
 * [Using the Slack Button](#use-the-slack-button)
 * [Message Buttons](#message-buttons)
@@ -75,7 +76,7 @@ var controller = Botkit.slackbot({
 ```
 
 
-### Event List
+## Event List
 
 Once connected to Slack, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events.
 

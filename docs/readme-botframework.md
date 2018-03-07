@@ -6,7 +6,7 @@ The [Microsoft Bot Framework](https://botframework.com) makes it easy to create 
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Bot Framework Specific Events](#bot-framework-specific-events)
+* [Bot Framework Specific Events](#event-list)
 * [Working with the Bot Framework](#working-with-the-bot-framework)
 * [Sending Cards and Attachments](#sending-cards-and-attachments)
 * [Typing Indicator](#typing-indicator)

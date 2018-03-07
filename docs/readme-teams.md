@@ -144,7 +144,7 @@ Botkit bots can send rich attachments with interactive buttons, integrate into
 the message composer, and expose integrated tab applications that live inside
 the Teams window and share data with the bot.
 
-* [Events](#microsoft-teams-specific-events)
+* [Events](#event-list)
 * [API Methods](#api-methods)
 * [Attachments](#working-with-attachments-and-media)
 * [Buttons](#buttons)
@@ -152,7 +152,7 @@ the Teams window and share data with the bot.
 * [Compose Extensions](#using-compose-extensions)
 * [Tabs](#using-tabs)
 
-### Microsoft Teams-specific Events
+### Event List
 
 Botkit receives and makes available all of the events supported by Microsoft Teams.
 

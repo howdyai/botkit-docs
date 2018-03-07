@@ -92,7 +92,7 @@ var controller = Botkit.facebookbot({
 })
 ```
 
-## Events List
+## Event List
 
 Once connected to Facebook, bots receive a constant stream of events.
 
