@@ -61,7 +61,7 @@ When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org
 
 ## Create a controller
 
-To connect Botkit to Facebook, use the constructor method, [Botkit.facebookbot()](#botkit-facebookbot).
+To connect Botkit to Facebook, use the constructor method, [Botkit.facebookbot()](#botkitfacebookbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.facebookbot()

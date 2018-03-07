@@ -26,7 +26,7 @@ a boilerplate application that includes all the components needed to operate you
 
 ## Create a Controller
 
-Use the Botkit Anywhere constructor method, [Botkit.anywhere()](#botkit-anywhere).
+Use the Botkit Anywhere constructor method, [Botkit.anywhere()](#botkitanywhere).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.anywhere()

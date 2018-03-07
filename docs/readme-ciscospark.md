@@ -84,10 +84,10 @@ controller.on('direct_message', function(bot, message) {
 
 ## Create a Controller
 
-To connect Botkit to Cisco Spark, use the Spark constructor method, [Botkit.sparkbot()](#botkit-sparkbot).
+To connect Botkit to Cisco Spark, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
-#### Botkit.sparkbot
+#### Botkit.sparkbot()
 | Argument | Description
 |--- |---
 | studio_token | String | An API token from [Botkit Studio](#readme-studio.md)

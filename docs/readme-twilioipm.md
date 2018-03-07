@@ -100,7 +100,7 @@ When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org
 
 ## Create a controller
 
-To connect Botkit to Twilio IPM, use the constructor method, [Botkit.twilioipmbot()](#botkit-twilioipmbot).
+To connect Botkit to Twilio IPM, use the constructor method, [Botkit.twilioipmbot()](#botkittwilioipmbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.twilioipmbot()

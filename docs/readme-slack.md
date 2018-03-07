@@ -38,7 +38,7 @@ Type: `/invite @<my bot>` to invite your bot into another channel.
 
 ## Create a Controller
 
-To connect Botkit to Slack, use the Slack constructor method, [Botkit.slackbot()](#botkit-slackbot).
+To connect Botkit to Slack, use the Slack constructor method, [Botkit.slackbot()](#botkitslackbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.slackbot()
