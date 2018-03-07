@@ -13,8 +13,6 @@ Table of Contents
 
 ## Getting Started
 
-## Getting Started
-
 1. [Install Botkit on your computer](/getstarted.html)
 
 2. Create a Botkit powered Node app:
@@ -28,7 +26,6 @@ Table of Contents
   ```
 
 3. [Follow this guide to configuring the Cisco Spark API](/docs/provisioning/cisco-spark.md)
-
 
 
 

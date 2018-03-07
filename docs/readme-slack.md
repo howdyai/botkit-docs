@@ -12,8 +12,6 @@ Table of Contents
 * [Events API](#events-api)
 * [Using RTM Connection](#using-rtm-connection)
 
----
-
 ## Getting Started
 
 1. [Install Botkit on your computer](/getstarted.html)
