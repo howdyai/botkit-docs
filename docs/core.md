@@ -2,7 +2,7 @@
 
 Table of Contents
 
-* [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
+* [Thea pu  Botkit Controller](#the-botkit-controller)
 * [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
 * [Multi-message Conversations](#multi-message-conversations)
@@ -11,7 +11,7 @@ Table of Contents
 * [Conversation Methods List](#botkit-conversation-objects)
 
 
-## Setting up a Botkit Controller
+## The Botkit Controller
 
 The robot brain inside every Botkit applications is the `controller`, an interface that is used to define all the features and functionality of an app. Botkit's core library provides a platform-independent interface for sending and receiving messages so that bots on any platform can be created using the same set of tools.
 
