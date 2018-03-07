@@ -45,7 +45,7 @@
 To connect Botkit to Twilio SMS, use the constructor method, [Botkit.twiliosmsbot()](#botkit-twiliosmsbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
-### Botkit.twiliosmsbot()
+#### Botkit.twiliosmsbot()
 | Argument | Description
 |--- |---
 | config | an object containing configuration options
