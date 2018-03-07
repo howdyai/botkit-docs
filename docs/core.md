@@ -27,7 +27,7 @@ The robot brain inside every Botkit applications is the `controller`, an interfa
 
 By attaching event handlers to the controller object, developers can specify what type of messages and events their bot should look for and respond to, including keywords, patterns and status events. These event handlers can be thought of metaphorically as skills or features the robot brain has -- each event handler defines a new "When a human says THIS the bot does THAT."
 
-Once created, the controller will handle incoming messages, [spawn bot instances](#controller-spawn) and [trigger handlers](#responding-to-events).
+Once created, the controller will handle incoming messages, [spawn bot instances](#controllerspawn) and [trigger handlers](#responding-to-events).
 
 For each platform, there is a specialized version of the controller object. These specialized controllers customize Botkit's core features to work with the platform, and add additional features above and beyond core that offer developers access platform-specific features.
 
