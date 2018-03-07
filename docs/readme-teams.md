@@ -152,29 +152,11 @@ the Teams window and share data with the bot.
 * [Compose Extensions](#using-compose-extensions)
 * [Tabs](#using-tabs)
 
-### Event List
+## Event List
 
-Botkit receives and makes available all of the events supported by Microsoft Teams.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
 The full list and payload schema of these events is [available from Microsoft](https://msdn.microsoft.com/en-us/microsoft-teams/botevents).
-
-These events undergo a normalization process for use inside Botkit,
-so that any type of event can be passed to `bot.reply()` in order for a normal
-message response to be sent. All incoming events will have _at least_ the following fields:
-
-```
-{
-  type: <type of event>,
-  user: <microsoft teams user ID>,
-  channel: <id for channel or 1:1 conversation>,
-  text: <text of message or primary payload value if present>,
-  raw_message: <the original event data>
-}
-```
-
-Botkit leaves all the native fields intact, so any fields that come in from Teams are still present in the original message.
-However, our recommendation for accessing any Teams-native fields is to use the `message.raw_message` sub-object
-which contains an unmodified version of the event data.
 
 ### Message Received Events
 | Event | Description
@@ -206,7 +188,7 @@ which contains an unmodified version of the event data.
 | composeExtension | user submitted a query with the compose extension [See Compose Extensions](#using-compose-extensions)
 
 
-### API Methods
+## API Methods
 
 The [Microsoft Teams API](https://msdn.microsoft.com/en-us/microsoft-teams/botapis) provides a number of features the bot developer can use to power a useful bot application that operates seamlessly in Teams.
 

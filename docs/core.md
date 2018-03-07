@@ -61,8 +61,26 @@ controller.hears('hello','message_received',function(bot,message) {
 Once connected to a messaging platform, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events. The set of events your bot will receive will depend on what messaging platform it is connected to.
 
 To respond to events, use [controller.on()](#controlleron) to define a handler function that receives the event details and takes actions.
-_Most_ of event handlers will receive 2 arguments - a bot instance, and the event object itself.  The event object can be used with [bot.reply()](#botreply)
-or [bot.startConversation()](#botstartconversation) to send replies.
+_Most_ of event handlers will receive 2 arguments - a bot instance, and the event object itself.  
+
+Events received from messaging platforms events undergo a [normalization process](readme-pipeline.md) for use inside Botkit,
+so that any type of event can be used with [bot.reply()](#botreply), [bot.startConversation()](#botstartconversation) and similar methods to send replies.
+
+Incoming events will have _at least_ the following fields:
+
+```
+{
+  type: <type of event>,
+  user: <unique id of user who sent the message>,
+  channel: <unique id for channel or 1:1 conversation>,
+  text: <text of message or primary payload value if present>,
+  raw_message: <the original event data>
+}
+```
+
+Note that Botkit leaves all the native fields intact, so any fields that come in from the platform are still present in the object.
+However, our recommendation for accessing any platform-native fields is to use the `message.raw_message` sub-object
+which contains an unmodified version of the event data. Before accessing these fields, we recommend that you first check `bot.type` to ensure that the message originated on the appropriate platform.
 
 
 ### Incoming Message Events
