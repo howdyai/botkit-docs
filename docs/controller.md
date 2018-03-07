@@ -1,4 +1,4 @@
-# Botkit Controller Object 
+# Botkit Controller Object
 
 #### controller.hears()
 | Argument | Description
@@ -18,7 +18,7 @@ controller.hears(['keyword','^pattern$'],['message_received'],function(bot,messa
 });
 ```
 
-When using the built in regular expression matching, the results of the expression will be stored in the `message.match` field and will match the expected output of normal Javascript `string.match(/pattern/i)`. 
+When using the built in regular expression matching, the results of the expression will be stored in the `message.match` field and will match the expected output of normal Javascript `string.match(/pattern/i)`.
 
 For example:
 
@@ -55,7 +55,7 @@ controller.on('channel_join', function(bot, event) {
 });
 ```
 
-Note that you may also trigger your own events using [controller.trigger()](#controllertrigger) and handle them. This can be 
+Note that you may also trigger your own events using [controller.trigger()](#controllertrigger) and handle them. This can be
 useful for separating the trigger logic from the actual event handlers, as in the example below.
 
 ```javascript
@@ -67,7 +67,7 @@ controller.hears('help', 'message_received', function(bot, message) {
 });
 
 controller.on('help_request', function(bot, message) {
-  
+
   bot.reply(message,'I am here to help!');
 
 });
@@ -165,9 +165,9 @@ The configuration options required to spawn a bot instance differ from platform 
 function sendAlertToBot(alert_message) {
 
   controller.spawn({}, function(bot) {
-    
+
     bot.say(alert_message);
-    
+
   });
 
 }
@@ -217,14 +217,14 @@ Create an instance of the [Express.js webserver](https://expressjs.com) for use 
 
 Botkit provides a simple Express webserver for those who don't know or don't want to set up their own. However, if you want to do anything with your webserver other than those required by Botkit, it is our recommendation that you manage your own instance of Express. A good place to see this in action is [inside all of the botkit starter kits](starterkits.md).
 
-### controller.userAgent()
+#### controller.userAgent()
 
 Returns a user agent string for use when making API requests to external resources.
 
-### controller.version()
+#### controller.version()
 
 Returns the current package version of Botkit's core library
 
-### controller.shutdown()
+#### controller.shutdown()
 
 This function _stops_ the event loop from processing active conversations. It is the opposite of [controller.startTicking()](#controller-startticking)
