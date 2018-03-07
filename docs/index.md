@@ -94,7 +94,7 @@ controller.on('channel_join', function(bot, message) {
 });
 ```
 
-[See a full list of events and more information about handling them &raquo;](core.md#responding-to-events)
+[See a full list of events and more information about handling them &raquo;](core.md#receiving-messages-and-events)
 
 ## Conversation Management
 

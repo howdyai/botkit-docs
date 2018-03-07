@@ -2,7 +2,7 @@
 
 Bots built with Botkit have a few key capabilities, which can be used to create clever, conversational applications. These capabilities map to the way real human people talk to each other.
 
-Bots can [hear things](#receiving-messages), [say things and reply](#sending-messages) to what they hear.
+Bots can [hear things](#receiving-messages-and-events), [say things and reply](#sending-messages) to what they hear.
 
 With these two building blocks, almost any type of conversation can be created.
 
@@ -14,7 +14,7 @@ Table of Contents
 
 * [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
   * [Botkit Controller Methods List](#botkit-controller-object)
-* [Receiving Messages](#receiving-messages)
+* [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
 * [Multi-message Conversations](#multi-message-conversations)
 * [Middleware](middleware.md)
@@ -27,7 +27,7 @@ The robot brain inside every Botkit applications is the `controller`, an interfa
 
 By attaching event handlers to the controller object, developers can specify what type of messages and events their bot should look for and respond to, including keywords, patterns and status events. These event handlers can be thought of metaphorically as skills or features the robot brain has -- each event handler defines a new "When a human says THIS the bot does THAT."
 
-Once created, the controller will handle incoming messages, [spawn bot instances](#controllerspawn) and [trigger handlers](#responding-to-events).
+Once created, the controller will handle incoming messages, [spawn bot instances](#controllerspawn) and [trigger handlers](#receiving-messages-and-events).
 
 For each platform, there is a specialized version of the controller object. These specialized controllers customize Botkit's core features to work with the platform, and add additional features above and beyond core that offer developers access platform-specific features.
 
@@ -56,7 +56,7 @@ controller.hears('hello','message_received',function(bot,message) {
 });
 ```
 
-## Responding to events
+## Receiving Messages and Events
 
 Once connected to a messaging platform, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events. The set of events your bot will receive will depend on what messaging platform it is connected to.
 
@@ -690,7 +690,7 @@ controller.hears('open the (.*) doors',['message_received'],function(bot,message
 
 Handle events emitted by Botkit. The vast majority of events will call a callback function with 2 parameters - a bot instance, and the event object.  
 
-[Read about receiving and handling events](core.md#responding-to-events)
+[Read about receiving and handling events](core.md#receiving-messages-and-events)
 
 ```javascript
 // handle a message event
