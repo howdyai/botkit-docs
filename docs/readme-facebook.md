@@ -3,7 +3,7 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Facebook-specific Events](#facebook-specific-events)
+* [Facebook-specific Events](#event-list)
 * [Working with Facebook Webhooks](#working-with-facebook-messenger)
 * [Using Structured Messages and Postbacks](#using-structured-messages-and-postbacks)
 * [Thread Settings](#thread-settings-api)
@@ -58,16 +58,41 @@ Since Facebook delivers messages via web hook, your application must be availabl
 
 When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org), a _free_ SSL Certificate Signing Authority which can be used to secure your website very quickly. It is fabulous and we love it.
 
-## Validate Requests - Secure your webhook!
-Facebook sends an X-HUB signature header with requests to your webhook. You can verify the requests are coming from Facebook by enabling `validate_requests: true` when creating your bot controller. This checks the sha1 signature of the incoming payload against your Facebook App Secret (which is seperate from your webhook's verify_token), preventing unauthorized access to your webhook. You must also pass your `app_secret` into your environment variables when running your bot.
 
-The Facebook App secret is available on the Overview page of your Facebook App's admin page. Click show to reveal it.
+## Create a controller
 
+To connect Botkit to Facebook, use the constructor method, [Botkit.facebookbot()](#botkit-facebookbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+### Botkit.facebookbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a new Botkit controller.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| access_token | string | Page access token from Facebook
+| verify_token| string | Verification token from Facebook
+| require_appsecret_proof | Boolean | [Enable checking for app secret](#app-secret-proof)
+| require_delivery | Boolean | [Require delivery confirmation of messages](#require-delivery-confirmation)
+
+For example:
+
+```javascript
+var Botkit = require('botkit');
+var controller = Botkit.facebookbot({
+        access_token: process.env.access_token,
+        verify_token: process.env.verify_token,
+})
 ```
-app_secret=abcdefg12345 page_token=123455abcd verify_token=VerIfY-tOkEn node examples/facebook_bot.js
-```
 
-## Facebook-specific Events
+## Events List
 
 Once connected to Facebook, bots receive a constant stream of events.
 
@@ -149,6 +174,16 @@ controller.hears(['cookies'], 'message_received', function(bot, message) {
 });
 ```
 
+
+## Validate Requests - Secure your webhook!
+Facebook sends an X-HUB signature header with requests to your webhook. You can verify the requests are coming from Facebook by enabling `validate_requests: true` when creating your bot controller. This checks the sha1 signature of the incoming payload against your Facebook App Secret (which is seperate from your webhook's verify_token), preventing unauthorized access to your webhook. You must also pass your `app_secret` into your environment variables when running your bot.
+
+The Facebook App secret is available on the Overview page of your Facebook App's admin page. Click show to reveal it.
+
+```
+app_secret=abcdefg12345 page_token=123455abcd verify_token=VerIfY-tOkEn node examples/facebook_bot.js
+```
+
 ### Receive Postback Button Clicks as "Typed" Messages
 
 Facebook Messenger supports including "postback" buttons, which, when clicked,
@@ -188,21 +223,6 @@ var controller = Botkit.facebookbot({
         require_delivery: true,
 })
 ```
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-If you need more than a simple webserver to receive webhooks,
-you should by all means create your own Express webserver! Here is a [boilerplate demo](https://github.com/mvaragnat/botkit-messenger-express-demo).
-
-The callback function receives the Express object as a parameter,
-which may be used to add further web server routes.
 
 #### controller.createWebhookEndpoints()
 

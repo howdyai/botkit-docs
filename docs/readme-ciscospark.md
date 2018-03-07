@@ -82,13 +82,16 @@ controller.on('direct_message', function(bot, message) {
 
 ```
 
-## Controller Options
+## Create a Controller
 
-When creating the Botkit controller, there are several platform-specific options available.
+To connect Botkit to Cisco Spark, use the Spark constructor method, [Botkit.sparkbot()](#botkit-sparkbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 ### Botkit.sparkbot
 | Argument | Description
 |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
 | public_address | _required_ the root url of your application (https://mybot.com)
 | `ciscospark_access_token` | _required_ token provided by Cisco Spark for your bot
 | secret | _required_ secret for validating webhooks originate from Cisco Spark
@@ -109,7 +112,7 @@ var controller = Botkit.sparkbot({
 });
 ```
 
-## Spark Specific Events
+## Event List
 
  All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
 
@@ -245,3 +248,12 @@ controller.on('bot_space_join', function(bot, message) {
   });
 });
 ```
+
+
+# Additional Controller methods
+
+#### controller.createWebhookEndpoints()
+
+#### controller.resetWebhookSubscriptions()
+
+#### controller.handleWebhookPayload()

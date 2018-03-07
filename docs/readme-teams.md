@@ -104,14 +104,24 @@ Here is a [COMPLETE SAMPLE](../examples/teams/manifest.json)
 [How to sideload your app](https://msdn.microsoft.com/en-us/microsoft-teams/sideload)
 
 
+## Create a Controller
 
 #### Botkit.teamsbot()
 | Argument | Description
 |--- |---
+| config | an object containing configuration options
+
+This function returns a Teams-ready Botkit controller. The values for clientId and clientSecret must be acquired from [Bot Framework](http://dev.botframework.com).
+
+The `config` argument is an object with these properties:
+
+| Argument | Description
+|--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
 | clientId | The application' client id, provided by Bot Framework
 | clientSecret | The application's client secret, provided by Bot Framework
 
-This function creates a Teams-ready Botkit controller. The values for clientId and clientSecret must be acquired from [Bot Framework](http://dev.botframework.com).
 
 ```javascript
 var controller = Botkit.teamsbot({
@@ -122,64 +132,6 @@ var controller = Botkit.teamsbot({
 });
 ```
 
-#### controller.spawn()
-| Argument | Description
-|--- |---
-| options | An object defining options for this specific bot instance - MUST include a serviceUrl.
-
-This function returns a new instance of the bot. This is used internally by Botkit
-to respond to incoming events.
-
-When spawning a bot for Microsoft Teams, you must pass in a `serviceUrl` field as part of
-the options parameter.  The serviceUrl can be extracted from the incoming message payload at `message.serviceUrl`.
-
-For those curious about this parameter: the serviceUrl is used to construct API calls the bot makes to Microsoft's API endpoints.
-The endpoint URLs are actually defined dynamically in response to different kinds of incoming messages. This is because Microsoft Teams is just one of a
-network of Microsoft products that uses the Bot Framework API specification, each one with its own endpoint URLs.
-
-In the event that your bot needs to send outbound messages without first receiving an inbound event from teams,
-you should capture and store the serviceUrl value you receive from the `bot_channel_join` event, which indicates
-that a bot has been added to a new team.
-
-```
-var bot = controller.spawn({serviceUrl: my_team_info.serviceUrl});
-```
-
-### Using the built-in webserver
-
-In order to receive messages and other events from Microsoft Teams, Botkit must
-expose multiple web endpoints.
-
-Botkit includes a simple built-in webserver based on Express that is great for
-getting started. With just a few lines of code, Botkit automatically configure
-the necessary web endpoints. There are very few options available for the built-in
-webserver, as it is intended to be used only for stand-alone bots.
-
-If you want your bot application to have additional web features (like [tabs](#using-tabs)),
-or if you need to add bot functionality to an existing Express website,
-or if you want to configure your own custom endpoints,
-we suggest using the [Express Webserver component](https://github.com/howdyai/botkit-starter-teams/blob/master/components/express_webserver.js)
-and [Incoming Webhook Route](https://github.com/howdyai/botkit-starter-teams/blob/master/components/routes/teams.js)
-from the Botkit Starter Kit as a guide for your custom implementation.
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-#### controller.createWebhookEndpoints()
-| Argument | Description
-|---  |---
-| webserver | An instance of the Express webserver
-
-This function configures the route `http://_your_server_/teams/receive`
-to receive incoming event data from Microsoft Teams.
-
-This url should be used when configuring your Bot Framework record.
 
 ## Working with Microsoft Teams
 
@@ -959,4 +911,40 @@ controller.hears('save', 'direct_message', function(bot, message) {
     });
   });
 });
+```
+
+## Additional Controller methods
+
+#### controller.createWebhookEndpoints()
+| Argument | Description
+|---  |---
+| webserver | An instance of the Express webserver
+
+This function configures the route `http://_your_server_/teams/receive`
+to receive incoming event data from Microsoft Teams.
+
+This url should be used when configuring your Bot Framework record.
+
+
+#### controller.spawn()
+| Argument | Description
+|--- |---
+| options | An object defining options for this specific bot instance - MUST include a serviceUrl.
+
+This function returns a new instance of the bot. This is used internally by Botkit
+to respond to incoming events.
+
+When spawning a bot for Microsoft Teams, you must pass in a `serviceUrl` field as part of
+the options parameter.  The serviceUrl can be extracted from the incoming message payload at `message.serviceUrl`.
+
+For those curious about this parameter: the serviceUrl is used to construct API calls the bot makes to Microsoft's API endpoints.
+The endpoint URLs are actually defined dynamically in response to different kinds of incoming messages. This is because Microsoft Teams is just one of a
+network of Microsoft products that uses the Bot Framework API specification, each one with its own endpoint URLs.
+
+In the event that your bot needs to send outbound messages without first receiving an inbound event from teams,
+you should capture and store the serviceUrl value you receive from the `bot_channel_join` event, which indicates
+that a bot has been added to a new team.
+
+```
+var bot = controller.spawn({serviceUrl: my_team_info.serviceUrl});
 ```

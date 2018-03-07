@@ -19,13 +19,13 @@ Table of Contents
 
 2. Create a Botkit powered Node app:
 
-* [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
-* Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-slack)
-* Or: Use the command line tool:
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-slack)
+  * Or: Use the command line tool:
 
-```
-botkit new --platform slack
-```
+  ```
+  botkit new --platform slack
+  ```
 
 3. [Follow this guide to configuring the Slack API](/docs/provisioning/slack-events-api.md)
 
@@ -36,9 +36,35 @@ Much like a vampire, a bot has to be invited into a channel. DO NOT WORRY bots a
 Type: `/invite @<my bot>` to invite your bot into another channel.
 
 
-### Botkit.slackbot(config)
+## Create a Controller
 
-Creates a new Botkit SlackBot controller.
+To connect Botkit to Slack, use the Slack constructor method, [Botkit.slackbot()](#botkit-slackbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+### Botkit.slackbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a new Botkit SlackBot controller.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| clientId | string | client Id value from a Slack app
+| clientSecret | string | client secret value from a Slack app
+| scopes | array | list of scopes to request during oauth
+| stale_connection_timeout  | Positive integer | Number of milliseconds to wait for a connection keep-alive "pong" response before declaring the connection stale. Default is `12000`
+| send_via_rtm  | Boolean   | Send outgoing messages via the RTM instead of using Slack's RESTful API which supports more features
+| retry | Positive integer or `Infinity` | Maximum number of reconnect attempts after failed connection to Slack's real time messaging API. Retry is disabled by default
+| api_root | Alternative root URL which allows routing requests to the Slack API through a proxy, or use of a mocked endpoints for testing. defaults to `https://slack.com`
+| disable_startup_messages | Boolean | Disable start up messages, like: `"Initializing Botkit vXXX"`
+| clientVerificationToken | String | Value of verification token from Slack used to confirm source of incoming messages
+
+For example:
 
 ```javascript
 var controller = Botkit.slackbot({
@@ -48,23 +74,8 @@ var controller = Botkit.slackbot({
 });
 ```
 
-`config` parameter is an object with these properties:
 
-| Name | Type | Description
-|--- |--- |---
-| clientId | string | client Id value from a Slack app
-| clientSecret | string | client secret value from a Slack app
-| scopes | array | list of scopes to request during oauth
-| debug | Boolean | Enable debug logging
-| stale_connection_timeout  | Positive integer | Number of milliseconds to wait for a connection keep-alive "pong" response before declaring the connection stale. Default is `12000`
-| send_via_rtm  | Boolean   | Send outgoing messages via the RTM instead of using Slack's RESTful API which supports more features
-| retry | Positive integer or `Infinity` | Maximum number of reconnect attempts after failed connection to Slack's real time messaging API. Retry is disabled by default
-| api_root | Alternative root URL which allows routing requests to the Slack API through a proxy, or use of a mocked endpoints for testing. defaults to `https://slack.com`
-| disable_startup_messages | Boolean | Disable start up messages, like: `"Initializing Botkit vXXX"`
-| clientVerificationToken | String | Value of verification token from Slack used to confirm source of incoming messages
-
-
-### Slack-Specific Events
+### Event List
 
 Once connected to Slack, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events.
 
@@ -354,18 +365,6 @@ controller.on('outgoing_webhook',function(bot,message) {
 })
 ```
 
-#### controller.createWebhookEndpoints()
-
-This function configures the route `http://_your_server_/slack/receive`
-to receive webhooks from Slack.
-
-This url should be used when configuring Slack.
-
-When a slash command is received from Slack, Botkit fires the `slash_command` event.
-
-When an outgoing webhook is received from Slack, Botkit fires the `outgoing_webhook` event.
-
-
 #### bot.replyAcknowledge
 
 | Argument | Description
@@ -491,63 +490,6 @@ For Slack button applications, Botkit provides:
 
 See the [included examples](core.md#included-examples) for several ready to use example apps.
 
-#### controller.configureSlackApp()
-
-| Argument | Description
-|---  |---
-| config | configuration object containing clientId, clientSecret, redirectUri and scopes
-
-Configure Botkit to work with a Slack application.
-
-Get a clientId and clientSecret from [Slack's API site](https://api.slack.com/applications).
-Configure Slash command, incoming webhook, or bot user integrations on this site as well.
-
-Configuration must include:
-
-* clientId - Application clientId from Slack
-* clientSecret - Application clientSecret from Slack
-* redirectUri - the base url of your application
-* scopes - an array of oauth permission scopes
-
-Slack has [_many, many_ oauth scopes](https://api.slack.com/docs/oauth-scopes)
-that can be combined in different ways. There are also [_special oauth scopes_
-used when requesting Slack Button integrations](https://api.slack.com/docs/slack-button).
-It is important to understand which scopes your application will need to function,
-as without the proper permission, your API calls will fail.
-
-#### controller.createOauthEndpoints()
-| Argument | Description
-|---  |---
-| webserver | an Express webserver Object
-| error_callback | function to handle errors that may occur during oauth
-
-Call this function to create two web urls that handle login via Slack.
-Once called, the resulting webserver will have two new routes: `http://_your_server_/login` and `http://_your_server_/oauth`. The second url will be used when configuring
-the "Redirect URI" field of your application on Slack's API site.
-
-
-```javascript
-var Botkit = require('botkit');
-var controller = Botkit.slackbot();
-
-controller.configureSlackApp({
-  clientId: process.env.clientId,
-  clientSecret: process.env.clientSecret,
-  redirectUri: 'http://localhost:3002',
-  scopes: ['incoming-webhook','team:read','users:read','channels:read','im:read','im:write','groups:read','emoji:read','chat:write:bot']
-});
-
-controller.setupWebserver(process.env.port,function(err,webserver) {
-
-  // set up web endpoints for oauth, receiving webhooks, etc.
-  controller
-    .createHomepageEndpoint(controller.webserver)
-    .createOauthEndpoints(controller.webserver,function(err,req,res) { ... })
-    .createWebhookEndpoints(controller.webserver);
-
-});
-
-```
 
 ### Custom auth flows
 In addition to the Slack Button, you can send users through an auth flow via a Slack interaction.
@@ -1157,4 +1099,76 @@ bot.startRTM(function(err, bot, payload) {
 
 // some time later (e.g. 10s) when finished with the RTM connection and worker
 setTimeout(bot.destroy.bind(bot), 10000)
+```
+
+## Additional Controller Methods
+
+#### controller.createWebhookEndpoints()
+
+This function configures the route `http://_your_server_/slack/receive`
+to receive webhooks from Slack.
+
+This url should be used when configuring Slack.
+
+When a slash command is received from Slack, Botkit fires the `slash_command` event.
+
+When an outgoing webhook is received from Slack, Botkit fires the `outgoing_webhook` event.
+
+
+#### controller.configureSlackApp()
+
+| Argument | Description
+|---  |---
+| config | configuration object containing clientId, clientSecret, redirectUri and scopes
+
+Configure Botkit to work with a Slack application.
+
+Get a clientId and clientSecret from [Slack's API site](https://api.slack.com/applications).
+Configure Slash command, incoming webhook, or bot user integrations on this site as well.
+
+Configuration must include:
+
+* clientId - Application clientId from Slack
+* clientSecret - Application clientSecret from Slack
+* redirectUri - the base url of your application
+* scopes - an array of oauth permission scopes
+
+Slack has [_many, many_ oauth scopes](https://api.slack.com/docs/oauth-scopes)
+that can be combined in different ways. There are also [_special oauth scopes_
+used when requesting Slack Button integrations](https://api.slack.com/docs/slack-button).
+It is important to understand which scopes your application will need to function,
+as without the proper permission, your API calls will fail.
+
+#### controller.createOauthEndpoints()
+| Argument | Description
+|---  |---
+| webserver | an Express webserver Object
+| error_callback | function to handle errors that may occur during oauth
+
+Call this function to create two web urls that handle login via Slack.
+Once called, the resulting webserver will have two new routes: `http://_your_server_/login` and `http://_your_server_/oauth`. The second url will be used when configuring
+the "Redirect URI" field of your application on Slack's API site.
+
+
+```javascript
+var Botkit = require('botkit');
+var controller = Botkit.slackbot();
+
+controller.configureSlackApp({
+  clientId: process.env.clientId,
+  clientSecret: process.env.clientSecret,
+  redirectUri: 'http://localhost:3002',
+  scopes: ['incoming-webhook','team:read','users:read','channels:read','im:read','im:write','groups:read','emoji:read','chat:write:bot']
+});
+
+controller.setupWebserver(process.env.port,function(err,webserver) {
+
+  // set up web endpoints for oauth, receiving webhooks, etc.
+  controller
+    .createHomepageEndpoint(controller.webserver)
+    .createOauthEndpoints(controller.webserver,function(err,req,res) { ... })
+    .createWebhookEndpoints(controller.webserver);
+
+});
+
 ```

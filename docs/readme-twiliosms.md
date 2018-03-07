@@ -40,6 +40,40 @@
 
     Try the following messages: `Hi`, `Call me bob`, `what's my name?`
 
+## Create a controller
+
+To connect Botkit to Twilio SMS, use the constructor method, [Botkit.twiliosmsbot()](#botkit-twiliosmsbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+### Botkit.twiliosmsbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a new Botkit controller.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| account_sid | found in your [Twilio Console Dashboard](https://www.twilio.com/console)
+| auth_token |  found in your [Twilio Console Dashboard](https://www.twilio.com/console)
+| twilio_number | your app's phone number, found in your [Phone Numbers Dashboard](https://www.twilio.com/console/phone-numbers/dashboard) **The phone number format must be: `+15551235555`**
+
+
+For example:
+
+```javascript
+var Botkit = require('botkit');
+var controller = Botkit.facebookbot({
+  account_sid: process.env.TWILIO_ACCOUNT_SID,
+  auth_token: process.env.TWILIO_AUTH_TOKEN,
+  twilio_number: process.env.TWILIO_NUMBER
+})
+```
+
 ## Usage
 
 *Note: This document assumes that you are familiarized with Botkit and Twilio's Programmable SMS API*

@@ -97,7 +97,34 @@ eval $onMemberAddedCurl
 
 When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org), a _free_ SSL Certificate Signing Authority which can be used to secure your website very quickly. It is fabulous and we love it.
 
-## Twilio IPM Specific Events
+
+## Create a controller
+
+To connect Botkit to Twilio IPM, use the constructor method, [Botkit.twilioipmbot()](#botkit-twilioipmbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+### Botkit.twilioipmbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a new Botkit controller.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+
+For example:
+
+```javascript
+var Botkit = require('botkit');
+var controller = Botkit.twilioipmbot({})
+```
+
+## Event List
 
 Once connected to your Twilio IPM service, bots receive a constant stream of events.
 
@@ -174,22 +201,6 @@ controller.hears(['cookies'], 'message_received', function(bot, message) {
     });
 });
 ```
-
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-If you need more than a simple webserver to receive webhooks,
-you should by all means create your own Express webserver!
-
-The callback function receives the Express object as a parameter,
-which may be used to add further web server routes.
 
 #### controller.createWebhookEndpoints()
 
