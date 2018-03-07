@@ -55,7 +55,7 @@ controller.on('channel_join', function(bot, event) {
 });
 ```
 
-Note that you may also trigger your own events using [controller.trigger()](#controller-trigger) and handle them. This can be 
+Note that you may also trigger your own events using [controller.trigger()](#controllertrigger) and handle them. This can be 
 useful for separating the trigger logic from the actual event handlers, as in the example below.
 
 ```javascript
