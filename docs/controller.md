@@ -213,61 +213,18 @@ However, if your bot seems to freeze up after the first message in any conversat
 | port | a port number for the webserver
 | callback | a function in the form function(err, webserver) {...}
 
-Create an instance of the [Express.js webserver](https://expressjs.com) 
+Create an instance of the [Express.js webserver](https://expressjs.com) for use with platform-specific features like oauth and incoming webhooks.
 
+Botkit provides a simple Express webserver for those who don't know or don't want to set up their own. However, if you want to do anything with your webserver other than those required by Botkit, it is our recommendation that you manage your own instance of Express. A good place to see this in action is [inside all of the botkit starter kits](starterkits.md).
 
+### controller.userAgent()
 
-### userAgent()
+Returns a user agent string for use when making API requests to external resources.
 
-Need examples
+### controller.version()
 
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+Returns the current package version of Botkit's core library
 
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1525
+### controller.shutdown()
 
-### version()
-needs examples
-
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
-
-Couldnt find this!
-
-### shutdown()
-
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
-
-needs example!
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1410
-
-
-## Middlewares
-needs explaination, the only reference to these is in code:
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L50
-
-    spawn: ware(),
-    ingest: ware(),
-    normalize: ware(),
-    categorize: ware(),
-    receive: ware(),
-    heard: ware(), // best place for heavy i/o because fewer messages
-    triggered: ware(), // like heard, but for other events
-    capture: ware(),
-    format: ware(),
-    send: ware(),
-    conversationStart: ware(),
-    conversationEnd: ware(),
+This function _stops_ the event loop from processing active conversations. It is the opposite of [controller.startTicking()](#controller-startticking)
