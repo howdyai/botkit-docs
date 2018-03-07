@@ -1,5 +1,7 @@
 # Botkit Core
 
+Table of Contents
+
 * [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
 * [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
