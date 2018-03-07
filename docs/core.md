@@ -64,6 +64,7 @@ To respond to events, use [controller.on()](#controlleron) to define a handler f
 _Most_ of event handlers will receive 2 arguments - a bot instance, and the event object itself.  The event object can be used with [bot.reply()](#botreply)
 or [bot.startConversation()](#botstartconversation) to send replies.
 
+
 ### Incoming Message Events
 
 | Event | Description
@@ -86,9 +87,9 @@ controller.on('message_received', function(bot, message) {
 
 | Event | Description
 |-- |--
-| conversationStarted | A conversation has started. handler should be in the form of function(bot, convo) { ... }
-| conversationEnded | A conversation has ended. handler should be in the form of function(bot, convo) { ... }
-| heard-trigger | A trigger defined with [controller.hears()](#controllerhears) was fired. handler should be in the form of function(bot, triggers, message) { ... }
+| conversationStarted | A conversation has started. handler should be in the form of function(bot, convo)
+| conversationEnded | A conversation has ended. handler should be in the form of function(bot, convo)
+| heard-trigger | A trigger defined with [controller.hears()](#controllerhears) was fired. handler should be in the form of function(bot, triggers, message)
 | tick | The event loop has ticked. handler does not receive any parameters.
 
 Here is an example of a handler for a message event:
@@ -128,7 +129,7 @@ For a list of the platform-specific events that Botkit emits, refer to the platf
 
 ## Matching Patterns and Keywords with `hears()`
 
-In addition to these traditional event handlers, Botkit also provides the [controller.hears()](#controller-hears) function,
+In addition to these traditional event handlers, Botkit also provides the [controller.hears()](#controllerhears) function,
 which configures event handlers based on matching specific keywords or phrases in the message text.
 The hears function works just like the other event handlers, but takes a third parameter which
 specifies the keywords to match.

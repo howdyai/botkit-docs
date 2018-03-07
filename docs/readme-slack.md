@@ -75,64 +75,30 @@ var controller = Botkit.slackbot({
 });
 ```
 
-
 ## Event List
 
-Once connected to Slack, bots receive a constant stream of events - everything from the normal messages you would expect to typing notifications and presence change events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some additional platform specific events.
 
-Botkit's message parsing and event system does a great deal of filtering on this
-real time stream so developers do not need to parse every message.  See [Receiving Messages](core.md#receiving-messages)
-for more information about listening for and responding to messages.
+In fact, Botkit will receive, normalize and emit any event that it receives from Slack.
+This includes all of the events [listed here](https://api.slack.com/events), as well as
+events based on the `subtype` field of incoming messages, [as listed here](https://api.slack.com/events/message)
 
-It is also possible to bind event handlers directly to any of the enormous number of native Slack events, as well as a handful of custom events emitted by Botkit.
-
-You can receive and handle any of the [native events thrown by slack](https://api.slack.com/events).
-
-```javascript
-controller.on('channel_joined',function(bot,message) {
-
-  // message contains data sent by slack
-  // in this case:
-  // https://api.slack.com/events/channel_joined
-
-});
-```
-
-You can also receive and handle a long list of additional events caused
-by messages that contain a subtype field, [as listed here](https://api.slack.com/events/message)
-
-```javascript
-controller.on('channel_leave',function(bot,message) {
-
-  // message format matches this:
-  // https://api.slack.com/events/message/channel_leave
-
-})
-```
-
-Finally, Botkit throws a handful of its own events!
-Events related to the general operation of bots are below.
-When used in conjunction with the Slack Button, Botkit also fires
-a [few additional events](#use-the-slack-button).
-
-
-### User Activity Events:
-
-| Event | Description
-|--- |---
-| message_received | a message was received by the bot
-| bot_channel_join | the bot has joined a channel
-| user_channel_join | a user has joined a channel
-| bot_group_join | the bot has joined a group
-| user_group_join | a user has joined a group
-
-### Message Received Events
+### Incoming Message Events
 | Event | Description
 |--- |---
 | direct_message | the bot received a direct message from a user
 | direct_mention | the bot was addressed directly in a channel
 | mention | the bot was mentioned by someone in a message
 | ambient | the message received had no mention of the bot
+
+### User Activity Events:
+
+| Event | Description
+|--- |---
+| bot_channel_join | the bot has joined a channel
+| user_channel_join | a user has joined a channel
+| bot_group_join | the bot has joined a group
+| user_group_join | a user has joined a group
 
 ### Websocket Events:
 
@@ -141,6 +107,18 @@ a [few additional events](#use-the-slack-button).
 | rtm_open | a connection has been made to the RTM api
 | rtm_close | a connection to the RTM api has closed
 | rtm_reconnect_failed | if retry enabled, retry attempts have been exhausted
+
+### Application Lifecycle Events:
+
+| Event | Description
+|--- |---
+| create_incoming_webhook | The app was installed and created an incoming webhook integration
+| create_bot | The app was installed and created a bot user integration
+| create_team | The app was installed on a new team
+| update_team | The app was installed by a second user on an existing team
+| create_user | A new user completed the oauth process
+| update_user | An existing user completed the oauth process again
+| oauth_error | An error occured during the oauth process
 
 
 ### Ephemeral Messages
