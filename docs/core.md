@@ -661,7 +661,7 @@ Adjust the speed of Botkit's event loops. By default, this is set to 1500ms, whi
 Decreasing this time will increase the speed at which bots send replies in conversations.
 
 For example:
-``` javascript
+```javascript
 // only wait 100ms between conversation loops
 controller.setTickDelay(100);
 ```
