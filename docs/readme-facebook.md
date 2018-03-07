@@ -38,8 +38,6 @@ Table of Contents
 
 3. [Follow this guide to configuring the Slack API](/docs/provisioning/facebook_messenger.md)
 
-### Th
-
 
 ### Things to note
 
