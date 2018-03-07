@@ -3,6 +3,7 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
+* [Create a Controller](#create-a-controller)
 * [Facebook-specific Events](#event-list)
 * [Working with Facebook Webhooks](#working-with-facebook-messenger)
 * [Using Structured Messages and Postbacks](#using-structured-messages-and-postbacks)
@@ -23,33 +24,21 @@ Table of Contents
 
 ## Getting Started
 
-1) Install Botkit [more info here](core.md#installation)
+1. [Install Botkit on your computer](/getstarted.html)
 
-2) Create a [Facebook App for Web](https://developers.facebook.com/quickstarts/?platform=web) and note down or [create a new Facebook Page](https://www.facebook.com/pages/create/).  Your Facebook page will be used for the app's identity.
+2. Create a Botkit powered Node app:
 
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-facebook)
+  * Or: Use the command line tool:
 
-3) [Get a page access token for your app](https://developers.facebook.com/docs/messenger-platform/guides/setup#page_access_token)
+  ```
+  botkit new --platform facebook
+  ```
 
-Copy this token, you'll need it!
+3. [Follow this guide to configuring the Slack API](/docs/provisioning/facebook_messenger.md)
 
-4) Define your own "verify token" - this is a string that you control that Facebook will use to verify your web hook endpoint.
-
-5) Run the example bot app, using the two tokens you just created. If you are _not_ running your bot at a public, SSL-enabled internet address, use the --lt option and note the URL it gives you.
-
-```
-page_token=<MY PAGE TOKEN> verify_token=<MY_VERIFY_TOKEN> node examples/facebook_bot.js [--lt [--ltsubdomain CUSTOM_SUBDOMAIN]]
-```
-
-6) [Set up a webhook endpoint for your app](https://developers.facebook.com/docs/messenger-platform/guides/setup#webhook_setup) that uses your public URL. Use the verify token you defined in step 4!
-
-* *Note* - You will need to provide Facebook a callback endpoint to receive requests from Facebook. By default Botkit will serve content from "https://YOURSERVER/facebook/receive". You can use a tool like [ngrok.io](http://ngrok.io) or [localtunnel.me](http://localtunnel.me) to expose your local development enviroment to the outside world for the purposes of testing your Messenger bot.
-
-7) Your bot should be online! Within Facebook, find your page, and click the "Message" button in the header.
-
-Try:
-  * who are you?
-  * call me Bob
-  * shutdown
+### Th
 
 
 ### Things to note

@@ -3,105 +3,25 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Developing with Botkit for Microsoft Teams](#developing-with-botkit-for-microsoft-teams)
+* [Create a Controller](#create-a-controller)
+* [Teams-specific Events](#event-list)
 * [Working with Microsoft Teams](#working-with-microsoft-teams)
 
 ## Getting Started
 
-Building bots is a fun and rewarding experience, but requires a few technical details be sorted out before you can start poking around inside your robot's brain.
+1. [Install Botkit on your computer](/getstarted.html)
 
-To get started building your bot, you'll need get these *three components* set up so that they can communicate with each other:
+2. Create a Botkit powered Node app:
 
-* A Botkit-powered Node.js web app - this is the container inside which your bot brain lives, and where all its capabilities are defined
-* The messaging platform - the place users interact with your bot, which provides a set of features, APIs and client applications
-* A hosting environment - this gives your bot application a publicly reachable address on the public internet, which allows the messaging platform to communicate with your bot
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-teams)
+  * Or: Use the command line tool:
 
-Getting these elements in place is a multi-step process, but only takes a few minutes, and in most cases, only has to be done once!
+  ```
+  botkit new --platform teams
+  ```
 
-### Fastest Option: Use Botkit Studio
-
-The fastest way to get up and running with Botkit for Microsoft Teams is to use [Botkit Studio](https://studio.botkit.ai/signup?code=teams).
-Botkit Studio will guide you through the process of setting up the [Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams), walk you through the process of configuring the Microsoft Teams and Bot Framework APIs, and deploy your bot to a stable hosting environment so that you can start building right away.
-
-**[![Sign up for Botkit Studio](studio.png)](https://studio.botkit.ai/signup?code=readme)**
-
-### Manual Setup: Get the Starter Kit
-
-If you are comfortable with developer tools like Git, NPM, and setting up your own web host,
-or if you want to build your bot on your laptop before making it available on the internet,
-you can start by cloning the [Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams).
-The starter kit contains everything you need to build your bot, including a pre-configured Express webserver,
-customizable webhook endpoints, and a set of example features that provide a great base for your new bot.
-
-[Get Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams)
-
-[Read our step-by-step guide for configuring your starter kit](provisioning/teams.md)
-
-### Expert Option: Get Botkit from NPM
-
-If you are excited about building your entire bot from scratch,
-or if you want to integrate bot functionality into an existing Node application,
-you can install the Botkit core library directly from NPM.
-
-`npm install --save botkit`
-
-If you choose to use Botkit's core library directly like this, you'll need
-to either use Botkit's simple [built-in webserver](#using-the-built-in-webserver),
-or configure your own webserver and connect it to Botkit.
-An example of this can be seen [in the starter kit](https://github.com/howdyai/botkit-starter-teams).
-
-([Our step-by-step guide to setting things up is probably still be useful, even for experts.](provisioning/teams.md))
-
-
-## Developing with Botkit for Microsoft Teams
-
-The full code for a simple Microsoft Teams bot is below:
-
-```javascript
-var Botkit = require('botkit');
-
-var controller = Botkit.teamsbot({
-  clientId: process.env.clientId,
-  clientSecret: process.env.clientSecret,
-});
-
-controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
-    controller.createWebhookEndpoints(webserver, function() {
-        console.log("BOTKIT: Webhooks set up!");
-    });
-});
-
-controller.hears('hello', 'direct_message,direct_mention', function(bot, message) {
-    bot.reply(message, 'Hi');
-});
-
-controller.on('direct_mention', function(bot, message) {
-    bot.reply(message, 'You mentioned me and said, "' + message.text + '"');
-});
-
-controller.on('direct_message', function(bot, message) {
-    bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
-});
-```
-
-
-### App Package / Manifest File
-
-Before your bot application can be used, you must prepare an "App Package" -
-a zip file containing a JSON file of configuration options, and (optionally)
-icons for your bot to use inside the Teams interface. This file must then be
-"sideloaded" into your Microsoft Teams account - this is just a fancy way
-of saying that you will have to upload this file into a settings page.
-
-The manifest.json file is a hefty document, with lots of options! [Here is the full documentation from Microsoft](https://msdn.microsoft.com/en-us/microsoft-teams/schema).
-We highly recommend using [Botkit Studio](https://studio.botkit.ai) to build your app package, as we have provided
-an easy to use tool to configure and generate the necessary file!
-
-Here is a [COMPLETE SAMPLE](../examples/teams/manifest.json)
-
-[Manifest.json schema docs](https://msdn.microsoft.com/en-us/microsoft-teams/schema)
-
-[How to sideload your app](https://msdn.microsoft.com/en-us/microsoft-teams/sideload)
+3. [Follow this guide to configuring the Slack API](/docs/provisioning/teams.md)
 
 
 ## Create a Controller
@@ -187,6 +107,56 @@ The full list and payload schema of these events is [available from Microsoft](h
 | invoke | a user clicked an `invoke` button [See Buttons](#buttons)
 | composeExtension | user submitted a query with the compose extension [See Compose Extensions](#using-compose-extensions)
 
+
+## Developing with Botkit for Microsoft Teams
+
+The full code for a simple Microsoft Teams bot is below:
+
+```javascript
+var Botkit = require('botkit');
+
+var controller = Botkit.teamsbot({
+  clientId: process.env.clientId,
+  clientSecret: process.env.clientSecret,
+});
+
+controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
+    controller.createWebhookEndpoints(webserver, function() {
+        console.log("BOTKIT: Webhooks set up!");
+    });
+});
+
+controller.hears('hello', 'direct_message,direct_mention', function(bot, message) {
+    bot.reply(message, 'Hi');
+});
+
+controller.on('direct_mention', function(bot, message) {
+    bot.reply(message, 'You mentioned me and said, "' + message.text + '"');
+});
+
+controller.on('direct_message', function(bot, message) {
+    bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
+});
+```
+
+
+### App Package / Manifest File
+
+Before your bot application can be used, you must prepare an "App Package" -
+a zip file containing a JSON file of configuration options, and (optionally)
+icons for your bot to use inside the Teams interface. This file must then be
+"sideloaded" into your Microsoft Teams account - this is just a fancy way
+of saying that you will have to upload this file into a settings page.
+
+The manifest.json file is a hefty document, with lots of options! [Here is the full documentation from Microsoft](https://msdn.microsoft.com/en-us/microsoft-teams/schema).
+We highly recommend using [Botkit Studio](https://studio.botkit.ai) to build your app package, as we have provided
+an easy to use tool to configure and generate the necessary file!
+
+Here is a [COMPLETE SAMPLE](../examples/teams/manifest.json)
+
+[Manifest.json schema docs](https://msdn.microsoft.com/en-us/microsoft-teams/schema)
+
+[How to sideload your app](https://msdn.microsoft.com/en-us/microsoft-teams/sideload)
 
 ## API Methods
 

@@ -3,7 +3,8 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Spark-specific Events](#spark-specific-events)
+* [Create a Controller](#create-a-controller)
+* [Spark-specific Events](#event-list)
 * [Message Formatting](#message-formatting)
 * [Attaching Files](#attaching-files)
 * [Receiving Files](#receiving-files)
@@ -12,25 +13,24 @@ Table of Contents
 
 ## Getting Started
 
-1) Install Botkit [more info here](core.md#installation)
+## Getting Started
 
-2) [Create a bot in the Spark for Developers site](https://developer.ciscospark.com/add-bot.html). You'll receive an `access token`.
+1. [Install Botkit on your computer](/getstarted.html)
 
-Copy this token, you'll need it!
+2. Create a Botkit powered Node app:
 
-3) If you are _not_ running your bot at a public, SSL-enabled internet address, use a tool like [ngrok](http://ngrok.io) or [localtunnel](http://localtunnel.me) to create a secure route to your development application.
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-ciscospark)
+  * Or: Use the command line tool:
 
-```
-ngrok http 3000
-```
+  ```
+  botkit new --platform ciscospark
+  ```
 
-4) Run your bot application using the access token you received, the base url of your bot application, and a secret which is used to validate the origin of incoming webhooks:
+3. [Follow this guide to configuring the Slack API](/docs/provisioning/cisco-spark.md)
 
-```
-access_token=<MY ACCESS TOKEN> public_address=<https://my_bot_url> secret=<my_secret_phrase> node examples/spark_bot.js
-```
 
-5) Your bot should now come online and respond to requests! Find it in Cisco Spark by searching for it's name.
+
 
 ## Working with Cisco Spark
 
