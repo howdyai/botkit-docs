@@ -64,14 +64,6 @@ To respond to events, use [controller.on()](#controlleron) to define a handler f
 _Most_ of event handlers will receive 2 arguments - a bot instance, and the event object itself.  The event object can be used with [bot.reply()](#botreply)
 or [bot.startConversation()](#botstartconversation) to send replies.
 
-Here is an example of an event handler declaration:
-
-```javascript
-controller.on('message_received', function(bot, message) {
-  bot.reply(message,'I heard a message');
-});
-```
-
 ### Incoming Message Events
 
 | Event | Description
@@ -82,14 +74,30 @@ controller.on('message_received', function(bot, message) {
 | ambient | In a multi-user platform, indicates a message in a group channel that does not mention the bot in any way
 | direct_message | In a multi-user platform, indicates a message sent privately to the bot
 
+Here is an example of a handler for a message event:
+
+```javascript
+controller.on('message_received', function(bot, message) {
+  bot.reply(message,'I heard a message');
+});
+```
+
 ### Conversation Lifecycle Events
 
 | Event | Description
 |-- |--
-| heard-trigger | A trigger defined with [controller.hears()](#controllerhears) was fired
-| conversationStarted | A conversation has started
-| conversationEnded | A conversation has ended
-| tick | The event loop has ticked
+| conversationStarted | A conversation has started. handler should be in the form of function(bot, convo) { ... }
+| conversationEnded | A conversation has ended. handler should be in the form of function(bot, convo) { ... }
+| heard-trigger | A trigger defined with [controller.hears()](#controllerhears) was fired. handler should be in the form of function(bot, triggers, message) { ... }
+| tick | The event loop has ticked. handler does not receive any parameters.
+
+Here is an example of a handler for a message event:
+
+```javascript
+controller.on('conversationStarted', function(bot, convo) {
+  console.log('A conversation started with ', convo.context.user);
+});
+```
 
 ### Bot Lifecycle events
 
