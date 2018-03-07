@@ -29,7 +29,6 @@ Table of Contents
 3. [Follow this guide to configuring the Slack API](/docs/provisioning/slack-events-api.md)
 
 ### Things to note
-​
 Much like a vampire, a bot has to be invited into a channel. DO NOT WORRY bots are not vampires.
 
 Type: `/invite @<my bot>` to invite your bot into another channel.
