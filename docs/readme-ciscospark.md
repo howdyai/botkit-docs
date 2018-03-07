@@ -27,7 +27,7 @@ Table of Contents
   botkit new --platform ciscospark
   ```
 
-3. [Follow this guide to configuring the Slack API](/docs/provisioning/cisco-spark.md)
+3. [Follow this guide to configuring the Cisco Spark API](/docs/provisioning/cisco-spark.md)
 
 
 

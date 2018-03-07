@@ -36,7 +36,7 @@ Table of Contents
   botkit new --platform facebook
   ```
 
-3. [Follow this guide to configuring the Slack API](/docs/provisioning/facebook_messenger.md)
+3. [Follow this guide to configuring the Facebook API](/docs/provisioning/facebook_messenger.md)
 
 
 ### Things to note

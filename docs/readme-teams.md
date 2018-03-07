@@ -21,7 +21,7 @@ Table of Contents
   botkit new --platform teams
   ```
 
-3. [Follow this guide to configuring the Slack API](/docs/provisioning/teams.md)
+3. [Follow this guide to configuring the Teams API](/docs/provisioning/teams.md)
 
 
 ## Create a Controller
