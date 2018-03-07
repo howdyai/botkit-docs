@@ -133,7 +133,7 @@ var reply = {
 Botkit on the web works much the same as it does on all the other platforms. Developers have full access to all of [Botkit's core features](core.md) -
 and a few extra ones that are specific to operating on the web!
 
-### controller.openSocketServer(webserver_instance)
+#### controller.openSocketServer(webserver_instance)
 
 This function takes an instance of an http server object - that is, the results of a call to `http.createServer()`.
 
@@ -143,6 +143,6 @@ It connects a `ws` powered websocket server to the web server, and allows the ap
 
 ## Additional Bot Instance Methods
 
-### bot.replyWithTyping(message, reply)
+#### bot.replyWithTyping(message, reply)
 
 This works just like the normal `bot.reply()`, but instead of sending the message immediately, sends a typing indicator first, then waits for a short period before sending the actual message.
