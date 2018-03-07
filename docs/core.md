@@ -763,7 +763,7 @@ Only the user who sent the original incoming message will be able to respond to 
 
 This works just like `startConversation()`, with one main difference - the conversation
 object passed into the callback will be in a dormant state. No messages will be sent,
-and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
+and the conversation will not collect responses until it is activated using [convo.activate()](#convoactivate).
 
 Use `createConversation()` instead of `startConversation()` when you plan on creating more complex conversation structures using [threads](#conversation-threads) or [variables and templates](#using-variable-tokens-and-templates-in-conversation-threads) in your messages.
 
@@ -775,7 +775,7 @@ Use `createConversation()` instead of `startConversation()` when you plan on cre
 
 This works just like `startPrivateConversation()`, with one main difference - the conversation
 object passed into the callback will be in a dormant state. No messages will be sent,
-and the conversation will not collect responses until it is activated using [convo.activate()](#conversationactivate).
+and the conversation will not collect responses until it is activated using [convo.activate()](#convoactivate).
 
 
 # Botkit Conversation Objects
