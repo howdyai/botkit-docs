@@ -73,18 +73,19 @@ controller.on('help_request', function(bot, message) {
 });
 ```
 
-### trigger(event, data)
-NEEDS EXAMPLE
-
+#### controller.trigger()
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| event_name | the name of a custom event
+| parameters | an array of parameters to be passed on to any handler functions
 
+Triggers a custom event, which can then be handled by [controller.on()](#controlleron).
 
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L424
+The second argument to `controller.trigger()` is an array which should contain an array of parameters that will be passed on to any handler functions. While not required, it is highly recommended that custom events conform to the pattern used by native Botkit events and include a bot instance as the first parameter, and if applicable, a normalized Botkit event object as the second paramter:
+
+```javascript
+controller.trigger('my_custom_event', [bot, event]);
+```
 
 ### hears_regexp(tests, message)
 NEEDS EXAMPLE
