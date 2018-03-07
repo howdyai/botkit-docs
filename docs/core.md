@@ -1109,7 +1109,7 @@ In most cases, this is called internally by a platform connector and does not ha
 However, if your bot seems to freeze up after the first message in any conversation, you may need to call it!
 
 
-#### controller.setupWebserver(port, cb)
+#### controller.setupWebserver()
 | Argument | Description
 |--- |---
 | port | a port number for the webserver
