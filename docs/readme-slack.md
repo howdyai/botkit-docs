@@ -104,7 +104,7 @@ When used in conjunction with the Slack Button, Botkit also fires
 a [few additional events](#use-the-slack-button).
 
 
-#### User Activity Events:
+### User Activity Events:
 
 | Event | Description
 |--- |---
@@ -114,7 +114,7 @@ a [few additional events](#use-the-slack-button).
 | bot_group_join | the bot has joined a group
 | user_group_join | a user has joined a group
 
-#### Message Received Events
+### Message Received Events
 | Event | Description
 |--- |---
 | direct_message | the bot received a direct message from a user
@@ -122,7 +122,7 @@ a [few additional events](#use-the-slack-button).
 | mention | the bot was mentioned by someone in a message
 | ambient | the message received had no mention of the bot
 
-#### Websocket Events:
+### Websocket Events:
 
 | Event | Description
 |--- |---
@@ -135,7 +135,7 @@ a [few additional events](#use-the-slack-button).
 
 Using the Web API, messages can be sent to a user "ephemerally" which will only show to them, and no one else. Learn more about ephemeral messages at the [Slack API Documentation](https://api.slack.com/methods/chat.postEphemeral). When sending an ephemeral message, you must specify a valid `user` and `channel` id. Valid meaning the specified user is in the specified channel. Currently, updating interactive messages are not supported by ephemeral messages, but you can still create them and listen to the events. They will not have a reference to the original message, however.
 
-#### Ephemeral Message Authorship
+### Ephemeral Message Authorship
 
 Slack allows you to post an ephemeral message as either the user you have an auth token for (would be your bot user in most cases), or as your app. The display name and icon will be different accordingly. The default is set to `as_user: true` for all functions except `bot.sendEphemeral()`. Override the default of any message by explicitly setting `as_user` on the outgoing message.
 
@@ -187,7 +187,7 @@ controller.on('custom_triggered_event', function(bot, trigger) {
 })
 ```
 
-#### Ephemeral Conversations
+### Ephemeral Conversations
 
 To reply to a user ephemerally in a conversation, pass a message object to `convo.say()` `convo.sayFirst()` `convo.ask()` `convo.addMessage()` `convo.addQuestion()` that sets ephemeral to true.
 
@@ -315,7 +315,7 @@ controller.setupWebserver(port,function(err,express_webserver) {
 });
 ```
 
-#### Securing Outgoing Webhooks and Slash commands
+### Securing Outgoing Webhooks and Slash commands
 
 You can optionally protect your application with authentication of the requests
 from Slack.  Slack will generate a unique request token for each Slash command and
@@ -335,7 +335,7 @@ controller.setupWebserver(port,function(err,express_webserver) {
 });
 ```
 
-#### Handling `slash_command` and `outgoing_webhook` events
+### Handling `slash_command` and `outgoing_webhook` events
 
 ```javascript
 controller.on('slash_command',function(bot,message) {
@@ -353,21 +353,6 @@ controller.on('outgoing_webhook',function(bot,message) {
 
 })
 ```
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-If you need more than a simple webserver to receive webhooks,
-you should by all means create your own Express webserver!
-
-The callback function receives the Express object as a parameter,
-which may be used to add further web server routes.
 
 #### controller.createWebhookEndpoints()
 
@@ -564,7 +549,7 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
 
 ```
 
-#### Custom auth flows
+### Custom auth flows
 In addition to the Slack Button, you can send users through an auth flow via a Slack interaction.
 The `getAuthorizeURL` provides the url. It requires the `team_id` and accepts an optional `redirect_params` argument.
 ```javascript
@@ -801,22 +786,22 @@ var dialog = bot.createDialog(
 bot.replyWithDialog(message, dialog.asObject());
 ```
 
-##### dialog.title()
+#### dialog.title()
 | Argument | Description
 |---  |---
 | value | value for the dialog title
 
-##### dialog.callback_id()
+#### dialog.callback_id()
 | Argument | Description
 |---  |---
 | value | value for the dialog title
 
-##### dialog.submit_label()
+#### dialog.submit_label()
 | Argument | Description
 |---  |---
 | value | value for the dialog title
 
-##### dialog.addText()
+#### dialog.addText()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -827,7 +812,7 @@ bot.replyWithDialog(message, dialog.asObject());
 Add a one-line text element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addEmail()
+#### dialog.addEmail()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -838,7 +823,7 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line email address element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addNumber()
+#### dialog.addNumber()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -849,7 +834,7 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line number element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addTel()
+#### dialog.addTel()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -860,7 +845,7 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line telephone number element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addUrl()
+#### dialog.addUrl()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -871,7 +856,7 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line url element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addTextarea()
+#### dialog.addTextarea()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -883,7 +868,7 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line text element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder`, `optional`, `min_length` and `max_length`
 
-##### dialog.addSelect()
+#### dialog.addSelect()
 | Argument | Description
 |---  |---
 | label | label of field
@@ -896,11 +881,11 @@ including `placeholder`, `optional`, `min_length` and `max_length`
 Add a one-line text element to the dialog. The `options` object can contain [any of the parameters listed in Slack's documentation for this element](https://api.slack.com/dialogs),
 including `placeholder` and `optional`
 
-##### dialog.toObject()
+#### dialog.toObject()
 
 Return the dialog as a Javascript object
 
-##### dialog.asString()
+#### dialog.asString()
 
 Return the dialog as JSON
 

@@ -412,7 +412,7 @@ Remove all domains
 
 Get a list of the whitelisted domains.
 
-### controller.api.messenger_profile.home_url()
+#### controller.api.messenger_profile.home_url()
 | Argument | Description
 |---  |---
 | payload | A home_url object with the properties `url`, `webview_height_ratio`, `in_test`
@@ -421,15 +421,15 @@ View the facebook documentation for details of the [home_url](https://developers
 
 *NB.* The value of the `url` property must be present in the domain_whitelist array
 
-### controller.api.messenger_profile.delete_home_url()
+#### controller.api.messenger_profile.delete_home_url()
 
 Remove the home_url setting
 
-### controller.api.messenger_profile.get_home_url()
+#### controller.api.messenger_profile.get_home_url()
 
 Get the home_url
 
-#### Using the The Messenger Profile API
+### Using the The Messenger Profile API
 
 ```js
 controller.api.messenger_profile.greeting('Hello! I\'m a Botkit bot!');
@@ -713,7 +713,7 @@ controller.api.broadcast.get_broadcast_metrics("<BROADCAST_ID>", function (err, 
 
 By default, the Broadcast API sends your message to all open conversations with your Messenger bot. To allow you broadcast to a subset of conversations, the Broadcast API supports 'custom labels', which can be associated with individual PSIDs.
 
-#### Creating a Label
+### Creating a Label
 
 To create a label:
 
@@ -723,7 +723,7 @@ controller.api.broadcast.create_label("<LABEL_NAME>", function (err, body) {
 });
 ```
 
-#### Associating a Label to a user
+### Associating a Label to a user
 
 To associate a label to a specific user:
 
@@ -733,7 +733,7 @@ controller.api.broadcast.add_user_to_label(message.user, "<LABEL_ID>", function 
 });
 ```
 
-#### Sending a Message with a Label
+### Sending a Message with a Label
 
 To send a broadcast message to the set of users associated with a label:
 
@@ -745,7 +745,7 @@ controller.api.broadcast.send('<BROADCAST_MESSAGE_ID>', '<CUSTOM_LABEL_ID>', fun
 });
 ```
 
-#### Removing a Label From a user
+### Removing a Label From a user
 
 To remove a label currently associated with a user:
 
@@ -755,7 +755,7 @@ controller.api.broadcast.remove_user_from_label(message.user, '<LABEL_ID>', func
 });
 ```
 
-#### Retrieving Labels Associated with a USER
+### Retrieving Labels Associated with a USER
 
 To retrieve the labels currently associated with a USER:
 
@@ -775,7 +775,7 @@ controller.api.broadcast.get_label_details('<LABEL_ID>', ['name'], function (err
 });
 ```
 
-#### Retrieving a List of All Labels
+### Retrieving a List of All Labels
 
 To retrieve the list of all the labels for the page:
 
@@ -785,7 +785,7 @@ controller.api.broadcast.get_all_labels(['name'], function (err, body) {
 });
 ```
 
-#### Deleting a Label
+### Deleting a Label
 
 To delete a label:
 

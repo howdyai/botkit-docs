@@ -553,7 +553,7 @@ convo.addMessage('This is the end!', 'the_end');
 convo.transitionTo('the_end','Well I think I am all done.');
 ```
 
-### convo.beforeThread
+#### convo.beforeThread
 | Argument | Description
 |--- |---
 | thread_name | String defining the name of a thread
@@ -608,7 +608,7 @@ convo.beforeThread('completed', function(convo, next) {
 ```
 
 
-#### Automatically Switch Threads using Actions
+### Automatically Switch Threads using Actions
 
 You can direct a conversation to switch from one thread to another automatically
 by including the `action` field on a message object. Botkit will switch threads immediately after sending the message.
@@ -678,7 +678,7 @@ bot.createConversation(message, function(err, convo) {
 });
 ```
 
-#### Special Actions
+### Special Actions
 
 In addition to routing from one thread to another using actions, you can also use
 one of a few reserved words to control the conversation flow.
@@ -895,7 +895,7 @@ or transmit any message content, user data, or personally identifiable informati
 The information that is collected is anonymized inside Botkit and converted using one-way encryption
 into a hash before being transmitted.
 
-#### Opt Out of Stats
+### Opt Out of Stats
 
 To opt out of the stats collection, pass in the `stats_optout` parameter when initializing Botkit,
 as seen in the example below:

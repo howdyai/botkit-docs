@@ -85,7 +85,7 @@ controller.on('direct_message', function(bot, message) {
 ```
 
 
-#### App Package / Manifest File
+### App Package / Manifest File
 
 Before your bot application can be used, you must prepare an "App Package" -
 a zip file containing a JSON file of configuration options, and (optionally)
@@ -145,7 +145,7 @@ that a bot has been added to a new team.
 var bot = controller.spawn({serviceUrl: my_team_info.serviceUrl});
 ```
 
-#### Using the built-in webserver
+### Using the built-in webserver
 
 In order to receive messages and other events from Microsoft Teams, Botkit must
 expose multiple web endpoints.
@@ -221,14 +221,14 @@ Botkit leaves all the native fields intact, so any fields that come in from Team
 However, our recommendation for accessing any Teams-native fields is to use the `message.raw_message` sub-object
 which contains an unmodified version of the event data.
 
-#### Message Received Events
+### Message Received Events
 | Event | Description
 |--- |---
 | direct_message | the bot received a 1:1 direct message from a user
 | direct_mention | the bot was addressed directly in a mult-user channel ("@bot hello!")
 | mention | the bot was mentioned by someone in a message ("hello everyone including @bot")
 
-#### User Activity Events:
+### User Activity Events:
 
 | Event | Description
 |--- |---
@@ -237,21 +237,21 @@ which contains an unmodified version of the event data.
 | bot_channel_leave | the bot has left a channel
 | user_channel_leave | a user has left a channel
 
-#### Channel Events
+### Channel Events
 | Event | Description
 |--- |---
 | channelDeleted | a channel was deleted
 | channelRenamed | a channel was renamed
 | channelCreated | a new channel was created
 
-#### Teams Features
+### Teams Features
 | Event | Description
 |--- |---
 | invoke | a user clicked an `invoke` button [See Buttons](#buttons)
 | composeExtension | user submitted a query with the compose extension [See Compose Extensions](#using-compose-extensions)
 
 
-#### API Methods
+### API Methods
 
 The [Microsoft Teams API](https://msdn.microsoft.com/en-us/microsoft-teams/botapis) provides a number of features the bot developer can use to power a useful bot application that operates seamlessly in Teams.
 
@@ -423,7 +423,7 @@ This is used internally by Botkit inside functions like `startPrivateConversatio
 (to create the 1:1 channel between user and bot). It is not intended to be used directly by developers.
 
 
-#### Working with attachments and media
+### Working with attachments and media
 
 In addition to, or as an alternative to text, messages in Microsoft Teams can include one or more attachments.
 Attachments appear as interactive cards inside the Teams client, and can include elements such as images,
@@ -436,7 +436,7 @@ Botkit provides a few helper functions to make creating attachment objects easie
 
 ##### Attachment Helpers
 
-##### bot.createHero()
+#### bot.createHero()
 | Parameter | Description
 |--- |---
 | title OR object| string value for the title of the card, OR an object representing all the fields in the card
@@ -448,7 +448,7 @@ Botkit provides a few helper functions to make creating attachment objects easie
 
 (See usage notes below)
 
-##### bot.createThumbnail()
+#### bot.createThumbnail()
 | Parameter | Description
 |--- |---
 | title OR object| string value for the title of the card, OR an object representing all the fields in the card
@@ -464,42 +464,42 @@ quickly create attachment objects for inclusion in a message.
 The return value of these functions is an attachment object that can be directly added to the outgoing message object's `attachments` array.
 In addition, the returned attachment object has a few helper methods of its that allow developers to adjust the values:
 
-###### attachment.title()
+#### attachment.title()
 | Parameter | Description
 |--- |---
 | value | new value for the title field
 
-###### attachment.subtitle()
+#### attachment.subtitle()
 | Parameter | Description
 |--- |---
 | value | new value for the subtitle field
 
-###### attachment.text()
+#### attachment.text()
 | Parameter | Description
 |--- |---
 | value | new value for the text field
 
-###### attachment.image()
+#### attachment.image()
 | Parameter | Description
 |--- |---
 | url | url to image
 | alt | alt description for image
 
-###### attachment.button()
+#### attachment.button()
 | Parameter | Description
 |--- |---
 | type OR button object | type of button OR an button object {type: string, title: string, value: string}
 | title | string value for the button title
 | value | string for the object payload.
 
-###### attachment.tap()
+#### attachment.tap()
 | Parameter | Description
 |--- |---
 | type OR button object | new value for the title field
 | title | string value for the action title
 | value | string for the object payload.
 
-###### attachment.asString()
+#### attachment.asString()
 
 Returns the stringified version of the attachment object
 
@@ -781,7 +781,7 @@ var attachment = {
   }
 ```
 
-#### Handling Invoke Events
+### Handling Invoke Events
 
 Botkit translates button clicks into `invoke` events.  To respond to button click events, create one or more handlers for the invoke event.
 
@@ -828,7 +828,7 @@ controller.hears('mention me', function(bot, message) {
 ```
 
 
-#### Using Compose Extensions
+### Using Compose Extensions
 
 One of the unique features of Microsoft Teams is support for "[compose extensions](https://msdn.microsoft.com/en-us/microsoft-teams/composeextensions)" -
 custom UI elements that appear adjacent to the "compose" bar in the Teams client that allow users to
@@ -869,7 +869,7 @@ controller.on('composeExtension', function(bot, message) {
 ```
 
 
-#### Using Tabs
+### Using Tabs
 
 Tab applications provide the ability to display web content directly in the Teams UI.  There are a few different types of tab, and applications can contain multiple tabs. [Microsoft has extensive documentation about building tab applications](https://msdn.microsoft.com/en-us/microsoft-teams/tabs), but the short story is: your bot can include an integrated web app component that interacts with Teams in some neat ways. Microsoft provides an easy to use [Javascript library](https://msdn.microsoft.com/en-us/microsoft-teams/jslibrary) that
 is used to set tab configuration options, and provide information about the user, team, and channels in which the tab is installed.

@@ -28,7 +28,7 @@ a boilerplate application that includes all the components needed to operate you
 
 When using [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web) and the built-in [web chat client](https://github.com/howdyai/botkit-starter-web/blob/master/docs/botkit_web_client.md), Botkit will fire a small number of native events.
 
-#### Built-in Events
+### Built-in Events
 
 | Event | Description
 |-- |--
@@ -37,7 +37,7 @@ When using [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web) and 
 | welcome_back | a returning user has established a new connection to the bot
 | reconnect | an ongoing user session has experienced a disconnect/reconnect
 
-#### Custom Events
+### Custom Events
 
 Developers may also fire custom events from the web client. Custom events triggered in the front-end client will arrive at the Botkit app based on their `type` field.
 
@@ -59,7 +59,7 @@ Botkit has a very liberal policy on adding additional fields to the message obje
 
 In addition, the Botkit Studio and the built-in web chat client feature support for quick replies and file attachments to be included in messages.
 
-#### Quick Replies
+### Quick Replies
 
 Quick replies are buttons that appear at the bottom of the message client, and offer suggested replies to the user.  Clicking a quick reply is essentially the same as the user typing the suggested reply and sending it as a message.
 
@@ -82,7 +82,7 @@ var reply = {
 ```
 
 
-#### File Attachments
+### File Attachments
 
 Files can be attached to Botkit Web messages by adding a `files` field that includes an array of objects, each with a `url` and an `image` field. The url field should contain a valid URL, and the image should be set to `true` if the file is an image.
 
