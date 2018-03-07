@@ -94,17 +94,29 @@ var controller = Botkit.facebookbot({
 
 ## Event List
 
-Once connected to Facebook, bots receive a constant stream of events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
+
+In fact, Botkit will receive, normalize and emit any event that it receives from Facebook.
+This includes all of the events [listed here](https://developers.facebook.com/docs/messenger-platform/webhook-reference).
 
 Normal messages will be sent to your bot using the `message_received` event.  In addition, several other events may fire, depending on your implementation and the webhooks you subscribed to within your app's Facebook configuration.
 
+### Incoming Message Events
 | Event | Description
 |--- |---
 | message_received | a message was received by the bot
 | facebook_postback | user clicked a button in an attachment and triggered a webhook postback
+
+### Message Delivery Events
+| Event | Description
+|--- |---
 | message_delivered | a confirmation from Facebook that a message has been received
 | message_echo | if enabled in Facebook, an "echo" of any message sent by the bot
 | message_read | a confirmation from Facebook that a message has been read
+
+### Facebook Activity Events
+| Event | Description
+|--- |---
 | facebook_account_linking | a user has started the account linking
 | facebook_optin | a user has clicked the [Send-to-Messenger plugin](https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin)
 | facebook_referral | a user has clicked on a [m.me URL with a referral param](https://developers.facebook.com/docs/messenger-platform/referral-params)
@@ -113,13 +125,6 @@ Normal messages will be sent to your bot using the `message_received` event.  In
 | facebook_receive_thread_control | This callback will occur when thread ownership for a user has been passed to your application.
 | facebook_lose_thread_control | This callback will occur when thread ownership for a user has been taken away from your application.
 
-All incoming events will contain the fields `user` and `channel`, both of which represent the Facebook user's ID, and a `timestamp` field.
-
-`message_received` events will also contain either a `text` field or an `attachment` field.
-
-`facebook_postback` events will contain a `payload` field.
-
-More information about the data found in these fields can be found [here](https://developers.facebook.com/docs/messenger-platform/webhook-reference).
 
 ## Working with Facebook Messenger
 
