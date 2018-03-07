@@ -12,7 +12,7 @@ To organize the things a bot says and does into useful units, Botkit bots have a
 
 Table of Contents
 
-* [Setting up a Botkit Controller](#botkit-controller)
+* [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
   * [Botkit Controller Methods List](#botkit-controller-object)
 * [Receiving Messages](#receiving-messages)
 * [Sending Messages](#sending-messages)
