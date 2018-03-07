@@ -1,12 +1,6 @@
-# Botkit Controllers
+# Botkit Controller Object 
 
-
-
-## Methods
-
-
-### hears(keywords, events, middleware_or_cb, cb)
-
+#### controller.hears()
 | Argument | Description
 |--- |---
 | patterns | An _array_ or a _comma separated string_ containing a list of regular expressions to match
@@ -23,9 +17,11 @@ controller.hears(['keyword','^pattern$'],['message_received'],function(bot,messa
 
 });
 ```
+
 When using the built in regular expression matching, the results of the expression will be stored in the `message.match` field and will match the expected output of normal Javascript `string.match(/pattern/i)`. 
 
 For example:
+
 ```javascript
 controller.hears('open the (.*) doors',['message_received'],function(bot,message) {
   var doorType = message.match[1]; //match[1] is the (.*) group. match[0] is the entire group (open the (.*) doors).
@@ -37,18 +33,45 @@ controller.hears('open the (.*) doors',['message_received'],function(bot,message
 ```
 
 
-### on(event, cb, is_hearing)
-NEEDS EXAMPLE
-
+### controller.on()
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| event_name | a string or array containing an event or comma-separated list of events
+| callback  | callback function in the form of form of function(bot, event) {...}
 
+Handle events emitted by Botkit. The vast majority of events will call a callback function with 2 parameters - a bot instance, and the event object.  
 
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1263
+[Read about receiving and handling events](core.md#responding-to-events)
+
+```javascript
+// handle a message event
+controller.on('message_received', function(bot, message) {
+  bot.reply(message,'Received');
+});
+
+// handle a channel join event
+controller.on('channel_join', function(bot, event) {
+  bot.reply(event,'Welcome to the channel!');
+});
+```
+
+Note that you may also trigger your own events using [controller.trigger()](#controller-trigger) and handle them. This can be 
+useful for separating the trigger logic from the actual event handlers, as in the example below.
+
+```javascript
+
+// listen for a help request.. and then trigger a help_request event.
+controller.hears('help', 'message_received', function(bot, message) {
+  // this event can be triggered whenever a user needs help
+  bot.trigger('help_request', [bot, message]);
+});
+
+controller.on('help_request', function(bot, message) {
+  
+  bot.reply(message,'I am here to help!');
+
+});
+```
 
 ### trigger(event, data)
 NEEDS EXAMPLE
