@@ -2,7 +2,7 @@
 
 Table of Contents
 
-* [Thea pu  Botkit Controller](#the-botkit-controller)
+* [The Botkit Controller](#the-botkit-controller)
 * [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
 * [Multi-message Conversations](#multi-message-conversations)
