@@ -147,10 +147,21 @@ For a list of the platform-specific events that Botkit emits, refer to the platf
 
 ## Matching Patterns and Keywords with `hears()`
 
-In addition to these traditional event handlers, Botkit also provides the [controller.hears()](#controllerhears) function,
-which configures event handlers based on matching specific keywords or phrases in the message text.
-The hears function works just like the other event handlers, but takes a third parameter which
-specifies the keywords to match.
+In addition to traditional event handlers, Botkit also provides the [controller.hears()](#controllerhears) function,
+which configures event handlers that look for specific keywords or phrases in the message.
+
+Each call to `controller.hears()` sets up a separate set of patterns to listen for.
+Developers may specify a single pattern to match, or an array of patterns.
+By default, Botkit treats these patterns as regular expressions to be evaluated against the `message.text` field in incoming messages.
+This behavior can be modified using [controller.changeEars()](#controllerchangeears)
+
+In addition to the array of patterns, `hears()` also receives as an argument one or more event types.
+Only events of the type listed will be evaluated.
+
+It is important to note that Botkit will *stop processing handlers* when the first `hears()` trigger is matched.
+Triggers are evaluated in the order in which they are defined in the code.
+This is a major difference in the way most event handling systems work, which will fire all matching handlers, and differs from handlers
+configured with [controller.on()](#controlleron), which behave as expected.
 
 ```javascript
 controller.hears(['keyword','^pattern$'],['message_received'],function(bot,message) {
@@ -161,17 +172,12 @@ controller.hears(['keyword','^pattern$'],['message_received'],function(bot,messa
 });
 ```
 
-When using the built in regular expression matching, the results of the expression will be stored in the `message.match` field and will match the expected output of normal Javascript `string.match(/pattern/i)`. For example:
+In many cases, developers will want to expand the capability of Botkit's hearing system
+to look for different types of patterns, or to evaluate different fields in the message payload.
+There are several ways to achieve this:
 
-```javascript
-controller.hears('open the (.*) doors',['message_received'],function(bot,message) {
-  var doorType = message.match[1]; //match[1] is the (.*) group. match[0] is the entire group (open the (.*) doors).
-  if (doorType === 'pod bay') {
-    return bot.reply(message, 'I\'m sorry, Dave. I\'m afraid I can\'t do that.');
-  }
-  return bot.reply(message, 'Okay');
-});
-```
+* Globally replace the function used to evaluate patterns by using [controller.changeEars()](#controllerchangeears)
+* Replace the function on a handler-by-handler basis using [hears middleware functions](middleware.md#hear-middleware)
 
 ## Sending Messages
 
