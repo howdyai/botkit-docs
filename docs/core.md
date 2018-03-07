@@ -19,7 +19,6 @@ Table of Contents
 * [Controller Methods List](#botkit-controller-object)
 * [Bot Instance Methods List](#botkit-bot-instance-objects)
 * [Conversation Methods List](#botkit-conversation-objects)
-
 * [Middleware](middleware.md)
 * [Advanced Topics](#advanced-topics)
 
