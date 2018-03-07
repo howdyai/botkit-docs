@@ -33,7 +33,7 @@ controller.hears('open the (.*) doors',['message_received'],function(bot,message
 ```
 
 
-### controller.on()
+#### controller.on()
 | Argument | Description
 |--- |---
 | event_name | a string or array containing an event or comma-separated list of events
@@ -87,79 +87,101 @@ The second argument to `controller.trigger()` is an array which should contain a
 controller.trigger('my_custom_event', [bot, event]);
 ```
 
-### hears_regexp(tests, message)
-NEEDS EXAMPLE
+### controller.changeEars()
+| Argument | Description
+|--- |---
+| test_function | a function in the form function(tests_array, message_object)
+
+This function can be used to modify the way Botkit's hearing system works by replacing the pattern matching function with a custom function.
+
+The test function must perform synchronous tests, and should return true if the message represents a match, and otherwise return false.
+
+Code based on Botkit's built-in regular expression test is below:
+
+```
+var hears_regexp = function(tests, message) {
+    for (var t = 0; t < tests.length; t++) {
+        if (message.text) {
+
+            // the pattern might be a string to match (including regular expression syntax)
+            // or it might be a prebuilt regular expression
+            var test = null;
+            if (typeof(tests[t]) == 'string') {
+                try {
+                    test = new RegExp(tests[t], 'i');
+                } catch (err) {
+                    botkit.log('Error in regular expression: ' + tests[t] + ': ' + err);
+                    return false;
+                }
+                if (!test) {
+                    return false;
+                }
+            } else {
+                test = tests[t];
+            }
+
+            if (match = message.text.match(test)) {
+                message.match = match;
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+controller.changeEars(hears_regexp);
+```
+
+#### controller.excludeFromConversations(event)
 
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| events | single event or an array of events to exclude from conversations
 
+Messaging platforms send a dizzying array of event types - and new ones are added all the time!
 
-hears_regexp - default string matcher uses regular expressions
-
-found in:
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1173
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/Botkit.d.ts#L96
-
-
-### changeEars(new_test)
-Needs Example
-
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
-
-
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1211
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/Botkit.d.ts#L120
-
-### excludeFromConversations(event)
-Needs example
-
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
-
-
-https://github.com/howdyai/botkit/blob/e196bfa1b89657d36662dffe81f3b9672fb257a2/docs/readme.md#excluding-events-from-conversations
+Sometimes, it is desirable to exclude certain event types from inclusion in Botkit conversations. To do this, call `excludeFromConversations()` after creating your controller object.
 
 For example:
+
 ```javascript
 // always exclude facebook postback events from conversations
 controller.excludeFromConversations('facebook_postback')
 ```
-### spawn(config, cb)
-Needs example, but obviously there is a version of this in each integration.js
 
+#### controller.spawn()
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| configuration | an object with instance-specific configuration options
+| callback | a function that will receive the new bot instance as a parameter
 
+Spawn a new instance of the bot in order to send messages or handle replies.
 
-### defineBot(unit)
-needs example
+Whenever the bot is doing something in response to an incoming message, Botkit will handle spawning bot instances for you.  However, in the event that your bot needs to send an alert or subscription message that is not directly in reply to an incoming message, spawning a bot is required.
 
+The configuration options required to spawn a bot instance differ from platform to platform. In many cases, no additional configuration is required. Refer to the platform specific documnentation for more detail.
+
+```javascript
+function sendAlertToBot(alert_message) {
+
+  controller.spawn({}, function(bot) {
+    
+    bot.say(alert_message);
+    
+  });
+
+}
+```
+
+#### controller.defineBot(unit)
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| bot_constructor | function of the form function(botkit_controller, configuration) which returns a bot instance
 
+This function is used to create new platform connectors for Botkit, and is used to define the specific behaviors and features of that platform's bot instance.
 
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/CoreBot.js#L1335
+For more information, [read the guide to creating new platform connectors for Botkit](howto/build_connector.md)
+
 
 ### setTickDelay(delay)
 
