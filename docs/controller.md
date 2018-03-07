@@ -87,7 +87,7 @@ The second argument to `controller.trigger()` is an array which should contain a
 controller.trigger('my_custom_event', [bot, event]);
 ```
 
-### controller.changeEars()
+#### controller.changeEars()
 | Argument | Description
 |--- |---
 | test_function | a function in the form function(tests_array, message_object)
