@@ -68,7 +68,7 @@ so that any type of event can be used with [bot.reply()](#botreply), [bot.startC
 
 Incoming events will have _at least_ the following fields:
 
-```
+```javascript
 {
   type: <type of event>,
   user: <unique id of user who sent the message>,
