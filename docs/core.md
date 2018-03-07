@@ -1,17 +1,5 @@
 # Botkit Core
 
-Bots built with Botkit have a few key capabilities, which can be used to create clever, conversational applications. These capabilities map to the way real human people talk to each other.
-
-Bots can [hear things](#receiving-messages-and-events), [say things and reply](#sending-messages) to what they hear.
-
-With these two building blocks, almost any type of conversation can be created.
-
-To organize the things a bot says and does into useful units, Botkit bots have a subsystem available for managing [multi-message conversations](#multi-message-conversations). Conversations add features like the ability to ask a question, queue several messages at once, and track when an interaction has ended.  Handy!
-
-## Developing with Botkit
-
-Table of Contents
-
 * [Setting up a Botkit Controller](#setting-up-a-botkit-controller)
 * [Receiving Messages](#receiving-messages-and-events)
 * [Sending Messages](#sending-messages)
@@ -19,8 +7,6 @@ Table of Contents
 * [Controller Methods List](#botkit-controller-object)
 * [Bot Instance Methods List](#botkit-bot-instance-objects)
 * [Conversation Methods List](#botkit-conversation-objects)
-* [Middleware](middleware.md)
-* [Advanced Topics](#advanced-topics)
 
 
 ## Setting up a Botkit Controller
@@ -193,7 +179,7 @@ can be sent using the [bot.startConversation()](#botstartconversation) function 
 Bots can originate messages - that is, send a message based on some internal logic or external stimulus -
 using [bot.say()](#botsay) method.
 
-### Single Message Replies to Incoming Messages
+## Single Message Replies to Incoming Messages
 
 Once a bot has received a message using a [controller.on()](#controlleron) or [controller.hears()](#controllerhears) event handler, a response
 can be sent using [bot.reply()](#botreply).
