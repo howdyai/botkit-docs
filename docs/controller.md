@@ -132,7 +132,7 @@ var hears_regexp = function(tests, message) {
 controller.changeEars(hears_regexp);
 ```
 
-#### controller.excludeFromConversations(event)
+#### controller.excludeFromConversations()
 
 | Argument | Description
 |--- |---
@@ -173,7 +173,7 @@ function sendAlertToBot(alert_message) {
 }
 ```
 
-#### controller.defineBot(unit)
+#### controller.defineBot()
 | Argument | Description
 |--- |---
 | bot_constructor | function of the form function(botkit_controller, configuration) which returns a bot instance
@@ -183,17 +183,14 @@ This function is used to create new platform connectors for Botkit, and is used 
 For more information, [read the guide to creating new platform connectors for Botkit](howto/build_connector.md)
 
 
-### setTickDelay(delay)
-
+#### controller.setTickDelay()
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| delay | time between event loops
 
+Adjust the speed of Botkit's event loops. By default, this is set to 1500ms, which means that Botkit will evaluate all active conversations and send any pending replies every 1.5 seconds.
 
-https://github.com/howdyai/botkit/blob/e196bfa1b89657d36662dffe81f3b9672fb257a2/docs/readme.md#changing-the-speed-of-botkits-internal-tick
+Decreasing this time will increase the speed at which bots send replies in conversations.
 
 For example:
 ``` javascript
@@ -201,29 +198,24 @@ For example:
 controller.setTickDelay(100);
 ```
 
-### startTicking()
+#### controller.startTicking()
 
-Needs example, but there is a version of this in each integration.js
+This function begins Botkit's internal event loop, which will tick at an interval of once every 1.5 seconds unless modified using [controller.setTickDelay()](#controller-settickdelay)
 
+In most cases, this is called internally by a platform connector and does not have to be called directly by bot code.
+
+However, if your bot seems to freeze up after the first message in any conversation, you may need to call it!
+
+
+#### controller.setupWebserver(port, cb)
 | Argument | Description
 |--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
+| port | a port number for the webserver
+| callback | a function in the form function(err, webserver) {...}
 
-Why is this handled differently per integration?
+Create an instance of the [Express.js webserver](https://expressjs.com) 
 
-### setupWebserver(port, cb)
 
-| Argument | Description
-|--- |---
-| x | x
-| x  | x
-| x | x
-| x | x
-
-https://github.com/howdyai/botkit/blob/dc0e780d3a50ffbfe89bc8f3908d1f8869d61466/lib/Botkit.d.ts#L124 (appears in integrations as well)
 
 ### userAgent()
 
