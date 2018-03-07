@@ -59,7 +59,7 @@ Generally speaking your bot needs to be configured with both an [appId](https://
 
 ## Event List
 
-Once connected to the Bot Framework, bots receive a constant stream of events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
 Normal messages will be sent to your bot using the `message_received` event.  In addition, several other events may fire, depending on the channel your bot is configured to support.
 

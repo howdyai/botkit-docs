@@ -126,7 +126,7 @@ var controller = Botkit.twilioipmbot({})
 
 ## Event List
 
-Once connected to your Twilio IPM service, bots receive a constant stream of events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
 Normal messages will be sent to your bot using the `message_received` event.  In addition, Botkit will trigger these Botkit-specific events:
 
