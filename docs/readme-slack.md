@@ -50,7 +50,7 @@ The `config` argument is an object with these properties:
 
 | Name | Type | Description
 |--- |--- |---
-| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| studio_token | String | An API token from [Botkit Studio](readme-studio.md)
 | debug | Boolean | Enable debug logging
 | clientId | string | client Id value from a Slack app
 | clientSecret | string | client secret value from a Slack app
