@@ -13,7 +13,7 @@ Table of Contents
 * [Dialogs](#dialogs)
 * [Ephemeral Messages](#ephemeral-messages)
 * [Slack Threads](#slack-threads)
-* [Using RTM Connection](#using-the-rtm-connection)
+* [Using the RTM Connection](#using-the-rtm-connection)
 
 ## Getting Started
 
@@ -838,7 +838,10 @@ controller.on('create_user', function(bot, user, redirect_params) {
 
 ## Using the RTM Connection
 
-Bot users connect to Slack using a real time API based on web sockets. The bot connects to Slack using the same protocol that the native Slack clients use!
+Legacy custom bot users connect to Slack using a [real time API based on web sockets](https://api.slack.com/rtm). The bot connects to Slack using the same protocol that the native Slack clients use.
+
+It is now Slack's official recommendation that developers use the [Events API](#events-api)
+to receive messages rather than RTM connections, but it still works. [Read this FAQ to learn more.](https://api.slack.com/faq#events_api)
 
 To connect a bot to Slack, [get a Bot API token from the Slack integrations page](https://my.slack.com/services/new/bot).
 
@@ -846,7 +849,6 @@ Note: Since API tokens can be used to connect to your team's Slack, it is best p
 This is particularly true if you store and use API tokens on behalf of users other than yourself!
 
 [Read Slack's Bot User documentation](https://api.slack.com/bot-users)
-
 
 ### Require Delivery Confirmation for RTM Messages
 
