@@ -6,7 +6,7 @@ Table of Contents
 * [Create a Controller](#create-a-controller)
 * [Slack-specific Events](#event-list)
 * [Events API](#events-api)
-* [Outgoing Webhooks and Slash commands](#outgoing-webhooks-and-slash-commands)
+* [Slash commands](#slash-commands)
 * [Incoming Webhooks](#incoming-webhooks)
 * [Using the Slack Web API](#using-the-slack-web-api)
 * [Message Buttons](#message-buttons)
@@ -948,8 +948,6 @@ to receive webhooks from Slack.
 This url should be used when configuring Slack.
 
 When a slash command is received from Slack, Botkit fires the `slash_command` event.
-
-When an outgoing webhook is received from Slack, Botkit fires the `outgoing_webhook` event.
 
 
 #### controller.configureSlackApp()
