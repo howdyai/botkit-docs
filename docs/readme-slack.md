@@ -9,7 +9,7 @@ Table of Contents
 * [Slash commands](#slash-commands)
 * [Incoming Webhooks](#incoming-webhooks)
 * [Using the Slack Web API](#using-the-slack-web-api)
-* [Message Buttons](#message-buttons)
+* [Interactive Messages](#interactive-messages)
 * [Dialogs](#dialogs)
 * [Ephemeral Messages](#ephemeral-messages)
 * [Slack Threads](#slack-threads)
@@ -303,9 +303,9 @@ bot.api.channels.list({},function(err,response) {
 })
 ```
 
-## Message Buttons
+## Interactive Messages
 
-Slack applications can use "message buttons" or "interactive messages" to include buttons inside attachments. [Read the official Slack documentation here](https://api.slack.com/docs/message-buttons)
+Slack applications can use "interactive messages" to include buttons, menus and other interactive elements inside attachments. [Read the official Slack documentation here](https://api.slack.com/docs/message-buttons)
 
 Interactive messages can be sent via any of Botkit's built in functions by passing in
 the appropriate attachment as part of the message. When users click the buttons in Slack,
