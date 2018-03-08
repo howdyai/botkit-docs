@@ -38,8 +38,6 @@ $ TWILIO_ACCOUNT_SID=<YOUR_ACCOUNT_SID> TWILIO_AUTH_TOKEN=<YOUR_AUTH_TOKEN> TWIL
 
 6) Your bot should be online! Grab your phone and text `hi` to your Twilio Number and you will get a `Hello.` message back!
 
-Try the following messages: `Hi`, `Call me bob`, `what's my name?`
-
 ## Create a controller
 
 To connect Botkit to Twilio SMS, use the constructor method, [Botkit.twiliosmsbot()](#botkittwiliosmsbot).
