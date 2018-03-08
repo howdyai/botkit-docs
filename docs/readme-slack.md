@@ -13,7 +13,7 @@ Table of Contents
 * [Dialogs](#dialogs)
 * [Ephemeral Messages](#ephemeral-messages)
 * [Slack Threads](#slack-threads)
-* [Using RTM Connection](#using-rtm-connection)
+* [Using RTM Connection](#using-the-rtm-connection)
 
 ## Getting Started
 
