@@ -124,7 +124,7 @@ events based on the `subtype` field of incoming messages, [as listed here](https
 
 The [Events API](https://api.slack.com/events-api) is a streamlined way to build apps and bots that respond to activities in Slack. You must setup a [Slack App](https://api.slack.com/slack-apps) to use Events API. Slack events are delivered to a secure webhook, and allows you to connect to slack without the RTM websocket connection.
 
-[Read our step-by-step guide to setting up the Events API to work with Botkit](provisioning/slack-event-api.md)
+[Read our step-by-step guide to setting up the Events API to work with Botkit](provisioning/slack-events-api.md)
 
 
 ## Slash commands
