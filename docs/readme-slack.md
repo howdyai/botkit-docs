@@ -124,35 +124,24 @@ events based on the `subtype` field of incoming messages, [as listed here](https
 
 The [Events API](https://api.slack.com/events-api) is a streamlined way to build apps and bots that respond to activities in Slack. You must setup a [Slack App](https://api.slack.com/slack-apps) to use Events API. Slack events are delivered to a secure webhook, and allows you to connect to slack without the RTM websocket connection.
 
-During development, a tool such as [localtunnel.me](http://localtunnel.me) is useful for temporarily exposing a compatible webhook url to Slack while running Botkit privately.
+[Read our step-by-step guide to setting up the Events API to work with Botkit](provisioning/slack-event-api.md)
 
 
-
-## Outgoing Webhooks and Slash commands
-
-Outgoing webhooks and Slash commands allow you to send data out of Slack.
-
-Outgoing webhooks are used to match keywords or phrases in Slack. [Read Slack's official documentation here.](https://api.slack.com/outgoing-webhooks)
+## Slash commands
 
 Slash commands are special commands triggered by typing a "/" then a command.
 [Read Slack's official documentation here.](https://api.slack.com/slash-commands)
 
-Though these integrations are subtly different, Botkit normalizes the details
-so developers may focus on providing useful functionality rather than peculiarities
-of the Slack API parameter names.
-
-Note that since these integrations use send webhooks from Slack to your application,
-your application will have to be hosted at a public IP address or domain name,
-and properly configured within Slack.
-
-[Set up an outgoing webhook](https://my.slack.com/services/new/outgoing-webhook)
-
-[Set up a Slash command](https://my.slack.com/services/new/slash-commands)
+### Handling `slash_command` events
 
 ```javascript
-controller.setupWebserver(port,function(err,express_webserver) {
-  controller.createWebhookEndpoints(express_webserver)
-});
+controller.on('slash_command',function(bot,message) {
+
+    // reply to slash command
+    bot.replyPublic(message,'Everyone can see this part of the slash command');
+    bot.replyPrivate(message,'Only the person who used the slash command can see this.');
+
+})
 ```
 
 ### Securing Outgoing Webhooks and Slash commands
@@ -175,24 +164,7 @@ controller.setupWebserver(port,function(err,express_webserver) {
 });
 ```
 
-### Handling `slash_command` and `outgoing_webhook` events
 
-```javascript
-controller.on('slash_command',function(bot,message) {
-
-    // reply to slash command
-    bot.replyPublic(message,'Everyone can see this part of the slash command');
-    bot.replyPrivate(message,'Only the person who used the slash command can see this.');
-
-})
-
-controller.on('outgoing_webhook',function(bot,message) {
-
-    // reply to outgoing webhook command
-    bot.replyPublic(message,'Everyone can see the results of this webhook command');
-
-})
-```
 
 #### bot.replyAcknowledge
 
@@ -203,7 +175,6 @@ controller.on('outgoing_webhook',function(bot,message) {
 When used with slash commands, this function responds with a 200 OK response
 with an empty response body.
 [View Slack's docs here](https://api.slack.com/slash-commands)
-
 
 
 #### bot.replyPublic()
@@ -270,9 +241,6 @@ controller.hears('hello', ['ambient'], function(bot, msg) {
   });
 });
 ```
-
-
-
 
 ## Incoming webhooks
 
