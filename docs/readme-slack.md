@@ -5,11 +5,14 @@ Table of Contents
 * [Getting Started](#getting-started)
 * [Create a Controller](#create-a-controller)
 * [Slack-specific Events](#event-list)
-* [Working with Slack Custom Integrations](#working-with-slack-integrations)
-* [Using the Slack Button](#use-the-slack-button)
+* [Events API](#events-api)
+* [Outgoing Webhooks and Slash commands](#outgoing-webhooks-and-slash-commands)
+* [Incoming Webhooks](#incoming-webhooks)
+* [Using the Slack Web API](#using-the-slack-web-api)
 * [Message Buttons](#message-buttons)
 * [Dialogs](#dialogs)
-* [Events API](#events-api)
+* [Ephemeral Messages](#ephemeral-messages)
+* [Slack Threads](#slack-threads)
 * [Using RTM Connection](#using-rtm-connection)
 
 ## Getting Started
@@ -117,164 +120,15 @@ events based on the `subtype` field of incoming messages, [as listed here](https
 | oauth_error | An error occured during the oauth process
 
 
-## Ephemeral Messages
+## Events API
 
-Using the Web API, messages can be sent to a user "ephemerally" which will only show to them, and no one else. Learn more about ephemeral messages at the [Slack API Documentation](https://api.slack.com/methods/chat.postEphemeral). When sending an ephemeral message, you must specify a valid `user` and `channel` id. Valid meaning the specified user is in the specified channel. Currently, updating interactive messages are not supported by ephemeral messages, but you can still create them and listen to the events. They will not have a reference to the original message, however.
+The [Events API](https://api.slack.com/events-api) is a streamlined way to build apps and bots that respond to activities in Slack. You must setup a [Slack App](https://api.slack.com/slack-apps) to use Events API. Slack events are delivered to a secure webhook, and allows you to connect to slack without the RTM websocket connection.
 
-### Ephemeral Message Authorship
-
-Slack allows you to post an ephemeral message as either the user you have an auth token for (would be your bot user in most cases), or as your app. The display name and icon will be different accordingly. The default is set to `as_user: true` for all functions except `bot.sendEphemeral()`. Override the default of any message by explicitly setting `as_user` on the outgoing message.
-
-
-#### bot.whisper()
-| Argument | Description
-|--- |---
-| src | Message object to reply to, **src.user is required**
-| message | _String_ or _Object_ Outgoing response
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-Functions the same as `bot.reply()` but sends the message ephemerally. Note, src message must have a user field set in addition to a channel
-
-
-`bot.whisper()` defaults to `as_user: true` unless otherwise specified on the message object. This means messages will be attributed to your bot user, or whichever user who's token you are making the API call with.
-
-
-#### bot.sendEphemeral()
-| Argument | Description
-|--- |---
-| message | _String_ or _Object_ Outgoing response, **message.user is required**
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-To send a spontaneous ephemeral message (which slack discourages you from doing) use `bot.sendEphemeral` which functions similarly as `bot.say()` and `bot.send()`
-
-
-```javascript
-controller.hears(['^spooky$'], function(bot, message) {
-	// default behavior, post as the bot user
-	bot.whisper(message, 'Booo! This message is ephemeral and private to you')
-})
-
-controller.hears(['^spaghetti$'], function(bot, message) {
-	// attribute slack message to app, not bot user
-	bot.whisper(message, {as_user: false, text: 'I may be a humble App, but I too love a good noodle'})
-})
-
-controller.on('custom_triggered_event', function(bot, trigger) {
-	// pretend to get a list of user ids from out analytics api...
-	fetch('users/champions', function(err, userArr) {
-		userArr.map(function(user) {
-			// iterate over every user and send them a message
-			bot.sendEphemeral({
-				channel: 'general',
-				user: user.id,
-				text: "Pssst! You my friend, are a true Bot Champion!"})
-		})
-	})
-})
-```
-
-### Ephemeral Conversations
-
-To reply to a user ephemerally in a conversation, pass a message object to `convo.say()` `convo.sayFirst()` `convo.ask()` `convo.addMessage()` `convo.addQuestion()` that sets ephemeral to true.
-
-When using interactive message attachments with ephemeral messaging, Slack does not send the original message as part of the payload. With non-ephemeral interactive messages Slack sends a copy of the original message for you to edit and send back. To respond with an edited message when updating ephemeral interactive messages, you must construct a new message to send as the response, containing at least a text field.
-
-```javascript
-controller.hears(['^tell me a secret$'], 'direct_mention, ambient, mention', function(bot, message) {
-	bot.startConversation(message, function(err, convo) {
-		convo.say('Better take this private...')
-		convo.say({ ephemeral: true, text: 'These violent delights have violent ends' })
-	})
-})
-
-```
-
-### Slack Threads
-
-Messages in Slack may now exist as part of a thread, separate from the messages included in the main channel.
-Threads can be used to create new and interesting interactions for bots. [This blog post discusses some of the possibilities.](https://blog.howdy.ai/threads-serious-software-in-slack-ba6b5ceec94c#.jzk3e7i2d)
-
-Botkit's default behavior is for replies to be sent in-context. That is, if a bot replies to a message in a main channel, the reply will be added to the main channel. If a bot replies to a message in a thread, the reply will be added to the thread. This behavior can be changed by using one of the following specialized functions:
-
-#### bot.replyInThread()
-| Argument | Description
-|--- |---
-| message | Incoming message object
-| reply | _String_ or _Object_ Outgoing response
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-This specialized version of [bot.reply()](core.md#botreply) ensures that the reply being sent will be in a thread.
-When used to reply to a message that is already in a thread, the reply will be properly added to the thread.
-Developers who wish to ensure their bot's replies appear in threads should use this function instead of bot.reply().
-
-#### bot.startConversationInThread()
-| Argument | Description
-|---  |---
-| message   | incoming message to which the conversation is in response
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-Like [bot.startConversation()](core.md#botstartconversation), this creates conversation in response to an incoming message.
-However, the resulting conversation and all followup messages will occur in a thread attached to the original incoming message.
-
-#### bot.createConversationInThread()
-| Argument | Description
-|---  |---
-| message   | incoming message to which the conversation is in response
-| callback  | a callback function in the form of  function(err,conversation) { ... }
-
-Creates a conversation that lives in a thread, but returns it in an inactive state.  See [bot.createConversation()](core.md#botcreateconversation) for details.
+During development, a tool such as [localtunnel.me](http://localtunnel.me) is useful for temporarily exposing a compatible webhook url to Slack while running Botkit privately.
 
 
 
-### Incoming webhooks
-
-Incoming webhooks allow you to send data from your application into Slack.
-To configure Botkit to send an incoming webhook, first set one up
-via [Slack's integration page](https://my.slack.com/services/new/incoming-webhook/).
-
-Once configured, use the `sendWebhook` function to send messages to Slack.
-
-[Read official docs](https://api.slack.com/incoming-webhooks)
-
-#### bot.configureIncomingWebhook()
-
-| Argument | Description
-|--- |---
-| config | Configure a bot to send webhooks
-
-Add a webhook configuration to an already spawned bot.
-It is preferable to spawn the bot pre-configured, but hey, sometimes
-you need to do it later.
-
-#### bot.sendWebhook()
-
-| Argument | Description
-|--- |---
-| message | A message object
-| callback | _Optional_ Callback in the form function(err,response) { ... }
-
-Pass `sendWebhook` an object that contains at least a `text` field.
- This object may also contain other fields defined [by Slack](https://api.slack.com/incoming-webhooks) which can alter the
- appearance of your message.
-
-```javascript
-var bot = controller.spawn({
-  incoming_webhook: {
-    url: <my_webhook_url>
-  }
-})
-
-bot.sendWebhook({
-  text: 'This is an incoming webhook',
-  channel: '#general',
-},function(err,res) {
-  if (err) {
-    // ...
-  }
-});
-```
-
-### Outgoing Webhooks and Slash commands
+## Outgoing Webhooks and Slash commands
 
 Outgoing webhooks and Slash commands allow you to send data out of Slack.
 
@@ -419,7 +273,56 @@ controller.hears('hello', ['ambient'], function(bot, msg) {
 
 
 
-### Using the Slack Web API
+
+## Incoming webhooks
+
+Incoming webhooks allow you to send data from your application into Slack.
+To configure Botkit to send an incoming webhook, first set one up
+via [Slack's integration page](https://my.slack.com/services/new/incoming-webhook/).
+
+Once configured, use the `sendWebhook` function to send messages to Slack.
+
+[Read official docs](https://api.slack.com/incoming-webhooks)
+
+#### bot.configureIncomingWebhook()
+
+| Argument | Description
+|--- |---
+| config | Configure a bot to send webhooks
+
+Add a webhook configuration to an already spawned bot.
+It is preferable to spawn the bot pre-configured, but hey, sometimes
+you need to do it later.
+
+#### bot.sendWebhook()
+
+| Argument | Description
+|--- |---
+| message | A message object
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+Pass `sendWebhook` an object that contains at least a `text` field.
+ This object may also contain other fields defined [by Slack](https://api.slack.com/incoming-webhooks) which can alter the
+ appearance of your message.
+
+```javascript
+var bot = controller.spawn({
+  incoming_webhook: {
+    url: <my_webhook_url>
+  }
+})
+
+bot.sendWebhook({
+  text: 'This is an incoming webhook',
+  channel: '#general',
+},function(err,res) {
+  if (err) {
+    // ...
+  }
+});
+```
+
+## Using the Slack Web API
 
 All (or nearly all - they change constantly!) of Slack's current web api methods are supported
 using a syntax designed to match the endpoints themselves.
@@ -431,83 +334,6 @@ bot.api.channels.list({},function(err,response) {
   //Do something...
 })
 ```
-
-
-
-## Use the Slack Button
-
-The [Slack Button](https://api.slack.com/docs/slack-button) is a way to offer a Slack
-integration as a service available to multiple teams. Botkit includes a framework
-on top of which Slack Button applications can be built.
-
-Slack button applications can use one or more of the [real time API](http://api.slack.com/rtm),
-[incoming webhook](http://api.slack.com/incoming-webhooks) and [slash command](http://api.slack.com/slash-commands) integrations, which can be
-added *automatically* to a team using a special oauth scope.
-
-If special oauth scopes sounds scary, this is probably not for you!
-The Slack Button is useful for developers who want to offer a service
-to multiple teams.
-
-How many teams can a Slack button app built using Botkit handle?
-This will largely be dependent on the environment it is hosted in and the
-type of integrations used.  A reasonably well equipped host server should
-be able to easily handle _at least one hundred_ real time connections at once.
-
-To handle more than one hundred bots at once, [consider speaking to the
-creators of Botkit at Howdy.ai](http://howdy.ai)
-
-For Slack button applications, Botkit provides:
-
-* A simple webserver
-* OAuth Endpoints for login via Slack
-* Storage of API tokens and team data via built-in Storage
-* Events for when a team joins, a new integration is added, and others...
-
-See the [included examples](core.md#included-examples) for several ready to use example apps.
-
-
-### Custom auth flows
-In addition to the Slack Button, you can send users through an auth flow via a Slack interaction.
-The `getAuthorizeURL` provides the url. It requires the `team_id` and accepts an optional `redirect_params` argument.
-```javascript
-controller.getAuthorizeURL(team_id, redirect_params);
-```
-
-The `redirect_params` argument is passed back into the `create_user` and `update_user` events so you can handle
-auth flows in different ways. For example:
-
-```javascript
-controller.on('create_user', function(bot, user, redirect_params) {
-    if (redirect_params.slash_command_id) {
-        // continue processing the slash command for the user
-    }
-});
-```
-
-### How to identify what team your message came from
-```javascript
-var team = bot.identifyTeam() // returns team id
-```
-
-
-### How to identify the bot itself (for RTM only)
-```javascript
-var identity = bot.identifyBot() // returns object with {name, id, team_id}
-```
-
-
-### Slack Button specific events:
-
-| Event | Description
-|--- |---
-| create_incoming_webhook |
-| create_bot |
-| update_team |
-| create_team |
-| create_user |
-| update_user |
-| oauth_error |
-
 
 ## Message Buttons
 
@@ -912,66 +738,134 @@ name of the field in which the error is present.
 
 
 
-## Events API
 
-The [Events API](https://api.slack.com/events-api) is a streamlined way to build apps and bots that respond to activities in Slack. You must setup a [Slack App](https://api.slack.com/slack-apps) to use Events API. Slack events are delivered to a secure webhook, and allows you to connect to slack without the RTM websocket connection.
+## Ephemeral Messages
 
-During development, a tool such as [localtunnel.me](http://localtunnel.me) is useful for temporarily exposing a compatible webhook url to Slack while running Botkit privately.
+Using the Web API, messages can be sent to a user "ephemerally" which will only show to them, and no one else. Learn more about ephemeral messages at the [Slack API Documentation](https://api.slack.com/methods/chat.postEphemeral). When sending an ephemeral message, you must specify a valid `user` and `channel` id. Valid meaning the specified user is in the specified channel. Currently, updating interactive messages are not supported by ephemeral messages, but you can still create them and listen to the events. They will not have a reference to the original message, however.
 
-### To get started with the Events API:
+### Ephemeral Message Authorship
 
-1. Create a [Slack App](https://api.slack.com/apps/new)
-2. Setup oauth url with Slack so teams can add your app with the slack button. Botkit creates an oAuth endpoint at `http://MY_HOST/oauth` if using localtunnel your url may look like this `https://example-134l123.localtunnel.me/oauth`
-3. Setup request URL under Events API to receive events at. Botkit will create webhooks for slack to send messages to at `http://MY_HOST/slack/receive`. if using localtunnel your url may look like this `https://example-134l123.localtunnel.me/slack/receive`
-4. Select the specific events you would like to subscribe to with your bot. Slack only sends your webhook the events you subscribe to. Read more about Event Types [here](https://api.slack.com/events)
-5. When running your bot, you must configure the slack app, setup webhook endpoints, and oauth endpoints.
+Slack allows you to post an ephemeral message as either the user you have an auth token for (would be your bot user in most cases), or as your app. The display name and icon will be different accordingly. The default is set to `as_user: true` for all functions except `bot.sendEphemeral()`. Override the default of any message by explicitly setting `as_user` on the outgoing message.
 
-Note:  If you are not also establishing an RTM connection, you will need to manually run the `controller.startTicking()` method for conversations to work properly.
+
+#### bot.whisper()
+| Argument | Description
+|--- |---
+| src | Message object to reply to, **src.user is required**
+| message | _String_ or _Object_ Outgoing response
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+Functions the same as `bot.reply()` but sends the message ephemerally. Note, src message must have a user field set in addition to a channel
+
+
+`bot.whisper()` defaults to `as_user: true` unless otherwise specified on the message object. This means messages will be attributed to your bot user, or whichever user who's token you are making the API call with.
+
+
+#### bot.sendEphemeral()
+| Argument | Description
+|--- |---
+| message | _String_ or _Object_ Outgoing response, **message.user is required**
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+To send a spontaneous ephemeral message (which slack discourages you from doing) use `bot.sendEphemeral` which functions similarly as `bot.say()` and `bot.send()`
+
 
 ```javascript
-var controller = Botkit.slackbot({
-    debug: false,
-}).configureSlackApp({
-    clientId: process.env.clientId,
-    clientSecret: process.env.clientSecret,
-    // Disable receiving messages via the RTM even if connected
-    rtm_receive_messages: false,
-    // Request bot scope to get all the bot events you have signed up for
-    scopes: ['bot'],
-});
+controller.hears(['^spooky$'], function(bot, message) {
+	// default behavior, post as the bot user
+	bot.whisper(message, 'Booo! This message is ephemeral and private to you')
+})
 
-// Setup the webhook which will receive Slack Event API requests
-controller.setupWebserver(process.env.port, function(err, webserver) {
-    controller.createWebhookEndpoints(controller.webserver);
+controller.hears(['^spaghetti$'], function(bot, message) {
+	// attribute slack message to app, not bot user
+	bot.whisper(message, {as_user: false, text: 'I may be a humble App, but I too love a good noodle'})
+})
 
-    controller.createOauthEndpoints(controller.webserver, function(err, req, res) {
-        if (err) {
-            res.status(500).send('ERROR: ' + err);
-        } else {
-            res.send('Success!');
-        }
-    });
+controller.on('custom_triggered_event', function(bot, trigger) {
+	// pretend to get a list of user ids from out analytics api...
+	fetch('users/champions', function(err, userArr) {
+		userArr.map(function(user) {
+			// iterate over every user and send them a message
+			bot.sendEphemeral({
+				channel: 'general',
+				user: user.id,
+				text: "Pssst! You my friend, are a true Bot Champion!"})
+		})
+	})
+})
+```
 
-    // If not also opening an RTM connection
-    controller.startTicking();
+### Ephemeral Conversations
+
+To reply to a user ephemerally in a conversation, pass a message object to `convo.say()` `convo.sayFirst()` `convo.ask()` `convo.addMessage()` `convo.addQuestion()` that sets ephemeral to true.
+
+When using interactive message attachments with ephemeral messaging, Slack does not send the original message as part of the payload. With non-ephemeral interactive messages Slack sends a copy of the original message for you to edit and send back. To respond with an edited message when updating ephemeral interactive messages, you must construct a new message to send as the response, containing at least a text field.
+
+```javascript
+controller.hears(['^tell me a secret$'], 'direct_mention, ambient, mention', function(bot, message) {
+	bot.startConversation(message, function(err, convo) {
+		convo.say('Better take this private...')
+		convo.say({ ephemeral: true, text: 'These violent delights have violent ends' })
+	})
+})
+
+```
+
+## Slack Threads
+
+Messages in Slack may now exist as part of a thread, separate from the messages included in the main channel.
+Threads can be used to create new and interesting interactions for bots. [This blog post discusses some of the possibilities.](https://blog.howdy.ai/threads-serious-software-in-slack-ba6b5ceec94c#.jzk3e7i2d)
+
+Botkit's default behavior is for replies to be sent in-context. That is, if a bot replies to a message in a main channel, the reply will be added to the main channel. If a bot replies to a message in a thread, the reply will be added to the thread. This behavior can be changed by using one of the following specialized functions:
+
+#### bot.replyInThread()
+| Argument | Description
+|--- |---
+| message | Incoming message object
+| reply | _String_ or _Object_ Outgoing response
+| callback | _Optional_ Callback in the form function(err,response) { ... }
+
+This specialized version of [bot.reply()](core.md#botreply) ensures that the reply being sent will be in a thread.
+When used to reply to a message that is already in a thread, the reply will be properly added to the thread.
+Developers who wish to ensure their bot's replies appear in threads should use this function instead of bot.reply().
+
+#### bot.startConversationInThread()
+| Argument | Description
+|---  |---
+| message   | incoming message to which the conversation is in response
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+Like [bot.startConversation()](core.md#botstartconversation), this creates conversation in response to an incoming message.
+However, the resulting conversation and all followup messages will occur in a thread attached to the original incoming message.
+
+#### bot.createConversationInThread()
+| Argument | Description
+|---  |---
+| message   | incoming message to which the conversation is in response
+| callback  | a callback function in the form of  function(err,conversation) { ... }
+
+Creates a conversation that lives in a thread, but returns it in an inactive state.  See [bot.createConversation()](core.md#botcreateconversation) for details.
+
+
+
+## Custom auth flows
+In addition to the Slack Button, you can send users through an auth flow via a Slack interaction.
+The `getAuthorizeURL` provides the url. It requires the `team_id` and accepts an optional `redirect_params` argument.
+```javascript
+controller.getAuthorizeURL(team_id, redirect_params);
+```
+
+The `redirect_params` argument is passed back into the `create_user` and `update_user` events so you can handle
+auth flows in different ways. For example:
+
+```javascript
+controller.on('create_user', function(bot, user, redirect_params) {
+    if (redirect_params.slash_command_id) {
+        // continue processing the slash command for the user
+    }
 });
 ```
 
-### Bot Presence
-
-Currently [presence](https://api.slack.com/docs/presence) is not supported by Slack Events API, so bot users will appear offline, but will still function normally.
-Developers may want to establish an RTM connection in order to make the bot appear online.
-
-Since the Events API will send duplicates copies of many of the messages normally received via RTM, Botkit provides a configuration option that allows an RTM connection to be open, but for messages received via that connection to be discarded in favor
-of the Events API.
-
-To enable this option, pass in `rtm_receive_messages: false` to your Botkit controller:
-
-```javascript
-var controller = Botkit.slackbot({
-    rtm_receive_messages: false
-});
-```
 
 
 ## Using the RTM Connection
