@@ -190,6 +190,7 @@ When used with outgoing webhooks, this function sends an immediate response that
 
 When used with slash commands, this function has the same functionality. However,
 slash commands also support private, and delayed messages. See below.
+
 [View Slack's docs here](https://api.slack.com/slash-commands)
 
 #### bot.replyPrivate()
@@ -199,6 +200,12 @@ slash commands also support private, and delayed messages. See below.
 | src | source message as received from slash
 | reply | reply message (string or object)
 | callback | optional callback
+
+Send a response to the slash command that is only visible to the user who executed the command.
+
+Note that this function can only be used ONCE, and must be used within 3 seconds of the initial event or Slack will consider it to have failed.
+
+To send multiple or delayed replies, use [bot.replyPrivateDelayed()](#botreplyprivatedelayed)
 
 
 #### bot.replyPublicDelayed()
@@ -217,31 +224,8 @@ slash commands also support private, and delayed messages. See below.
 | reply | reply message (string or object)
 | callback | optional callback
 
-#### bot.replyAndUpdate()
+Send up to 5 private responses within 30 minutes of the initial slash command event.
 
-| Argument | Description
-|---  |---
-| src | source message as received from slash or webhook
-| reply | reply message that might get updated (string or object)
-| callback | optional asynchronous callback that performs a task and updates the reply message
-
-Sending a message, performing a task and then updating the sent message based on the result of that task is made simple with this method:
-
-> **Note**: For the best user experience, try not to use this method to indicate bot activity. Instead, use `bot.startTyping`.
-
-```javascript
-// fixing a typo
-controller.hears('hello', ['ambient'], function(bot, msg) {
-  // send a message back: "hellp"
-  bot.replyAndUpdate(msg, 'hellp', function(err, src, updateResponse) {
-    if (err) console.error(err);
-    // oh no, "hellp" is a typo - let's update the message to "hello"
-    updateResponse('hello', function(err) {
-      console.error(err)
-    });
-  });
-});
-```
 
 ## Incoming webhooks
 
@@ -702,6 +686,38 @@ otherwise Slack will display an error and will appear to reject the form submiss
 Send one or more validation errors back to Slack to display in the dialog.
 The parameter can be one or more objects, where the `name` field matches the
 name of the field in which the error is present.
+
+
+## Updating Messages
+
+Messages in Slack can be replaced with new versions in response to button clicks and other events.
+
+#### bot.replyAndUpdate()
+
+| Argument | Description
+|---  |---
+| src | source message as received from slash or webhook
+| reply | reply message that might get updated (string or object)
+| callback | optional asynchronous callback that performs a task and updates the reply message
+
+Sending a message, performing a task and then updating the sent message based on the result of that task is made simple with this method:
+
+> **Note**: For the best user experience, try not to use this method to indicate bot activity. Instead, use `bot.startTyping`.
+
+```javascript
+// fixing a typo
+controller.hears('hello', ['ambient'], function(bot, msg) {
+  // send a message back: "hellp"
+  bot.replyAndUpdate(msg, 'hellp', function(err, src, updateResponse) {
+    if (err) console.error(err);
+    // oh no, "hellp" is a typo - let's update the message to "hello"
+    updateResponse('hello', function(err) {
+      console.error(err)
+    });
+  });
+});
+```
+
 
 ## Files
 
