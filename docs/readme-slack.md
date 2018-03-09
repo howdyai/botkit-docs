@@ -11,6 +11,7 @@ Table of Contents
 * [Using the Slack Web API](#using-the-slack-web-api)
 * [Interactive Messages](#interactive-messages)
 * [Dialogs](#dialogs)
+* [Uploaded Files](#files)
 * [Ephemeral Messages](#ephemeral-messages)
 * [Slack Threads](#slack-threads)
 * [Using the RTM Connection](#using-the-rtm-connection)
@@ -702,9 +703,37 @@ Send one or more validation errors back to Slack to display in the dialog.
 The parameter can be one or more objects, where the `name` field matches the
 name of the field in which the error is present.
 
+## Files
 
+Downloading files shared in Slack requires a special authorization header in the request. The necessary value is located in `bot.config.bot.token`.
 
+Below is an example handler for the `file_share` event that fetches the file and writes it to the filesystem.
 
+```javascript
+var request = require('request'); 
+var fs = require('fs');
+  
+controller.on('file_share', function(bot, message) {
+
+	var destination_path = '/tmp/uploaded';
+
+	// the url to the file is in url_private. there are other fields containing image thumbnails as appropriate
+	var url = message.file.url_private;
+
+	var opts = {
+		method: 'GET',
+		url: url,
+		headers: {
+		  Authorization: 'Bearer ' + bot.config.bot.token, // Authorization header with bot's access token
+		}
+	};
+
+	request(opts, function(err, res, body) {
+		// body contains the content
+		console.log('FILE RETRIEVE STATUS',res.statusCode);          
+	}).pipe(fs.createWriteStream(destination_path)); // pipe output to filesystem
+});
+```  
 
 
 ## Ephemeral Messages
