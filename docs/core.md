@@ -379,7 +379,7 @@ so that it is sent immediately, before any other queued messages.
 
 ### Changing the pace of the conversation with custom per-message delay
 
-Botkit will send each messages in a conversation at the rate dictated by the global tick speed - by default, this is 1.5 seconds, but can be customized using [controller.setTickInterval()](#controllersettickinterval)
+Botkit will send each messages in a conversation at the rate dictated by the global tick speed - by default, this is 1.5 seconds, but can be customized using [controller.setTickDelay()](#controllersettickdelay)
 
 It is also possible to set a custom delay on a per-message basis.  To do this, include a `delay` field in the message object.  Note that the value specified will only have an affect if it is greater than the global tick interval.
 
