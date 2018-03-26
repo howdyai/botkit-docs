@@ -22,7 +22,7 @@ Table of Contents
   * Or: Use the command line tool:
 
   ```
-  botkit new --platform ciscospark
+  botkit new --platform spark
   ```
 
 3. [Follow this guide to configuring the Cisco Spark API](/docs/provisioning/cisco-spark.md)
