@@ -1,6 +1,6 @@
 # This is the new home of the Botkit Studio docs
 
-##Getting Started
+## Getting Started
 
 * What can bots do?
 * Intro to Botkit Studio
