@@ -7,6 +7,8 @@ To help Botkit developers, we are pulling out detailed provisioning documents fo
 
 ### [Slack (Events API)](slack-events-api.md)
 
+### [Microsoft Teams](teams.md)
+
 ### [Facebook Messenger](facebook_messenger.md)
 
 ### [Cisco Spark](cisco-spark.md)
