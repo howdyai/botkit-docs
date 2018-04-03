@@ -3,7 +3,8 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Spark-specific Events](#spark-specific-events)
+* [Create a Controller](#create-a-controller)
+* [Spark-specific Events](#event-list)
 * [Message Formatting](#message-formatting)
 * [Attaching Files](#attaching-files)
 * [Receiving Files](#receiving-files)
@@ -12,25 +13,21 @@ Table of Contents
 
 ## Getting Started
 
-1) Install Botkit [more info here](core.md#installation)
+1. [Install Botkit on your computer](/getstarted.html)
 
-2) [Create a bot in the Spark for Developers site](https://developer.ciscospark.com/add-bot.html). You'll receive an `access token`.
+2. Create a Botkit powered Node app:
 
-Copy this token, you'll need it!
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-ciscospark)
+  * Or: Use the command line tool:
 
-3) If you are _not_ running your bot at a public, SSL-enabled internet address, use a tool like [ngrok](http://ngrok.io) or [localtunnel](http://localtunnel.me) to create a secure route to your development application.
+  ```
+  botkit new --platform spark
+  ```
 
-```
-ngrok http 3000
-```
+3. [Follow this guide to configuring the Cisco Spark API](/docs/provisioning/cisco-spark.md)
 
-4) Run your bot application using the access token you received, the base url of your bot application, and a secret which is used to validate the origin of incoming webhooks:
 
-```
-access_token=<MY ACCESS TOKEN> public_address=<https://my_bot_url> secret=<my_secret_phrase> node examples/spark_bot.js
-```
-
-5) Your bot should now come online and respond to requests! Find it in Cisco Spark by searching for it's name.
 
 ## Working with Cisco Spark
 
@@ -82,13 +79,16 @@ controller.on('direct_message', function(bot, message) {
 
 ```
 
-## Controller Options
+## Create a Controller
 
-When creating the Botkit controller, there are several platform-specific options available.
+To connect Botkit to Cisco Spark, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
-### Botkit.sparkbot
+#### Botkit.sparkbot()
 | Argument | Description
 |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
 | public_address | _required_ the root url of your application (https://mybot.com)
 | `ciscospark_access_token` | _required_ token provided by Cisco Spark for your bot
 | secret | _required_ secret for validating webhooks originate from Cisco Spark
@@ -109,17 +109,22 @@ var controller = Botkit.sparkbot({
 });
 ```
 
-## Spark Specific Events
+## Event List
 
- All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some  platform specific events.
 
- In addition, the following custom Botkit-specific events are fired:
+All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
 
+### Incoming Message Events
 | Event | Description
 |--- |---
 | direct_message | Bot has received a message as a DM
 | direct_mention | Bot has been mentioned in a public space
 | self_message | Bot has received a message it sent
+
+### User Activity Events:
+| Event | Description
+|--- |---
 | user_space_join | a user has joined a space in which the bot is present
 | bot_space_join | the bot has joined a new space
 | user_space_leave | a user has left a space in which the bot is present
@@ -245,3 +250,12 @@ controller.on('bot_space_join', function(bot, message) {
   });
 });
 ```
+
+
+# Additional Controller methods
+
+#### controller.createWebhookEndpoints()
+
+#### controller.resetWebhookSubscriptions()
+
+#### controller.handleWebhookPayload()

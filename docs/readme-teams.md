@@ -3,54 +3,109 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Developing with Botkit for Microsoft Teams](#developing-with-botkit-for-microsoft-teams)
+* [Create a Controller](#create-a-controller)
+* [Teams-specific Events](#event-list)
 * [Working with Microsoft Teams](#working-with-microsoft-teams)
 
 ## Getting Started
 
-Building bots is a fun and rewarding experience, but requires a few technical details be sorted out before you can start poking around inside your robot's brain.
+1. [Install Botkit on your computer](/getstarted.html)
 
-To get started building your bot, you'll need get these *three components* set up so that they can communicate with each other:
+2. Create a Botkit powered Node app:
 
-* A Botkit-powered Node.js web app - this is the container inside which your bot brain lives, and where all its capabilities are defined
-* The messaging platform - the place users interact with your bot, which provides a set of features, APIs and client applications
-* A hosting environment - this gives your bot application a publicly reachable address on the public internet, which allows the messaging platform to communicate with your bot
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-teams)
+  * Or: Use the command line tool:
 
-Getting these elements in place is a multi-step process, but only takes a few minutes, and in most cases, only has to be done once!
+  ```
+  botkit new --platform teams
+  ```
 
-### Fastest Option: Use Botkit Studio
+3. [Follow this guide to configuring the Teams API](/docs/provisioning/teams.md)
 
-The fastest way to get up and running with Botkit for Microsoft Teams is to use [Botkit Studio](https://studio.botkit.ai/signup?code=teams).
-Botkit Studio will guide you through the process of setting up the [Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams), walk you through the process of configuring the Microsoft Teams and Bot Framework APIs, and deploy your bot to a stable hosting environment so that you can start building right away.
 
-**[![Sign up for Botkit Studio](studio.png)](https://studio.botkit.ai/signup?code=readme)**
+## Create a Controller
 
-### Manual Setup: Get the Starter Kit
+To connect Botkit to Teams, use the  constructor method, [Botkit.slackbot()](#botkitteamsbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
-If you are comfortable with developer tools like Git, NPM, and setting up your own web host,
-or if you want to build your bot on your laptop before making it available on the internet,
-you can start by cloning the [Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams).
-The starter kit contains everything you need to build your bot, including a pre-configured Express webserver,
-customizable webhook endpoints, and a set of example features that provide a great base for your new bot.
+#### Botkit.teamsbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
 
-[Get Botkit Starter Kit for Microsoft Teams](https://github.com/howdyai/botkit-starter-teams)
+This function returns a Teams-ready Botkit controller. The values for clientId and clientSecret must be acquired from [Bot Framework](http://dev.botframework.com).
 
-[Read our step-by-step guide for configuring your starter kit](provisioning/teams.md)
+The `config` argument is an object with these properties:
 
-### Expert Option: Get Botkit from NPM
+| Argument | Description
+|--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| clientId | The application' client id, provided by Bot Framework
+| clientSecret | The application's client secret, provided by Bot Framework
 
-If you are excited about building your entire bot from scratch,
-or if you want to integrate bot functionality into an existing Node application,
-you can install the Botkit core library directly from NPM.
 
-`npm install --save botkit`
+```javascript
+var controller = Botkit.teamsbot({
+    debug: true,
+    log: true,
+    clientId: process.env.clientId,
+    clientSecret: process.env.clientSecret
+});
+```
 
-If you choose to use Botkit's core library directly like this, you'll need
-to either use Botkit's simple [built-in webserver](#using-the-built-in-webserver),
-or configure your own webserver and connect it to Botkit.
-An example of this can be seen [in the starter kit](https://github.com/howdyai/botkit-starter-teams).
 
-([Our step-by-step guide to setting things up is probably still be useful, even for experts.](provisioning/teams.md))
+## Working with Microsoft Teams
+
+In addition to sending and receiving chat messages, Botkit bots can use all
+of the other features in the Microsoft Teams API. With these other features,
+Botkit bots can send rich attachments with interactive buttons, integrate into
+the message composer, and expose integrated tab applications that live inside
+the Teams window and share data with the bot.
+
+* [Events](#event-list)
+* [API Methods](#api-methods)
+* [Attachments](#working-with-attachments-and-media)
+* [Buttons](#buttons)
+* [User Mentions](#user-mentions)
+* [Compose Extensions](#using-compose-extensions)
+* [Tabs](#using-tabs)
+
+## Event List
+
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
+
+The full list and payload schema of these events is [available from Microsoft](https://msdn.microsoft.com/en-us/microsoft-teams/botevents).
+
+### Message Received Events
+| Event | Description
+|--- |---
+| direct_message | the bot received a 1:1 direct message from a user
+| direct_mention | the bot was addressed directly in a mult-user channel ("@bot hello!")
+| mention | the bot was mentioned by someone in a message ("hello everyone including @bot")
+
+### User Activity Events:
+
+| Event | Description
+|--- |---
+| bot_channel_join | the bot has joined a channel
+| user_channel_join | a user has joined a channel
+| bot_channel_leave | the bot has left a channel
+| user_channel_leave | a user has left a channel
+
+### Channel Events
+| Event | Description
+|--- |---
+| channelDeleted | a channel was deleted
+| channelRenamed | a channel was renamed
+| channelCreated | a new channel was created
+
+### Teams Features
+| Event | Description
+|--- |---
+| invoke | a user clicked an `invoke` button [See Buttons](#buttons)
+| composeExtension | user submitted a query with the compose extension [See Compose Extensions](#using-compose-extensions)
 
 
 ## Developing with Botkit for Microsoft Teams
@@ -85,7 +140,7 @@ controller.on('direct_message', function(bot, message) {
 ```
 
 
-#### App Package / Manifest File
+### App Package / Manifest File
 
 Before your bot application can be used, you must prepare an "App Package" -
 a zip file containing a JSON file of configuration options, and (optionally)
@@ -103,155 +158,7 @@ Here is a [COMPLETE SAMPLE](../examples/teams/manifest.json)
 
 [How to sideload your app](https://msdn.microsoft.com/en-us/microsoft-teams/sideload)
 
-
-
-#### Botkit.teamsbot()
-| Argument | Description
-|--- |---
-| clientId | The application' client id, provided by Bot Framework
-| clientSecret | The application's client secret, provided by Bot Framework
-
-This function creates a Teams-ready Botkit controller. The values for clientId and clientSecret must be acquired from [Bot Framework](http://dev.botframework.com).
-
-```javascript
-var controller = Botkit.teamsbot({
-    debug: true,
-    log: true,
-    clientId: process.env.clientId,
-    clientSecret: process.env.clientSecret
-});
-```
-
-#### controller.spawn()
-| Argument | Description
-|--- |---
-| options | An object defining options for this specific bot instance - MUST include a serviceUrl.
-
-This function returns a new instance of the bot. This is used internally by Botkit
-to respond to incoming events.
-
-When spawning a bot for Microsoft Teams, you must pass in a `serviceUrl` field as part of
-the options parameter.  The serviceUrl can be extracted from the incoming message payload at `message.serviceUrl`.
-
-For those curious about this parameter: the serviceUrl is used to construct API calls the bot makes to Microsoft's API endpoints.
-The endpoint URLs are actually defined dynamically in response to different kinds of incoming messages. This is because Microsoft Teams is just one of a
-network of Microsoft products that uses the Bot Framework API specification, each one with its own endpoint URLs.
-
-In the event that your bot needs to send outbound messages without first receiving an inbound event from teams,
-you should capture and store the serviceUrl value you receive from the `bot_channel_join` event, which indicates
-that a bot has been added to a new team.
-
-```
-var bot = controller.spawn({serviceUrl: my_team_info.serviceUrl});
-```
-
-#### Using the built-in webserver
-
-In order to receive messages and other events from Microsoft Teams, Botkit must
-expose multiple web endpoints.
-
-Botkit includes a simple built-in webserver based on Express that is great for
-getting started. With just a few lines of code, Botkit automatically configure
-the necessary web endpoints. There are very few options available for the built-in
-webserver, as it is intended to be used only for stand-alone bots.
-
-If you want your bot application to have additional web features (like [tabs](#using-tabs)),
-or if you need to add bot functionality to an existing Express website,
-or if you want to configure your own custom endpoints,
-we suggest using the [Express Webserver component](https://github.com/howdyai/botkit-starter-teams/blob/master/components/express_webserver.js)
-and [Incoming Webhook Route](https://github.com/howdyai/botkit-starter-teams/blob/master/components/routes/teams.js)
-from the Botkit Starter Kit as a guide for your custom implementation.
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-#### controller.createWebhookEndpoints()
-| Argument | Description
-|---  |---
-| webserver | An instance of the Express webserver
-
-This function configures the route `http://_your_server_/teams/receive`
-to receive incoming event data from Microsoft Teams.
-
-This url should be used when configuring your Bot Framework record.
-
-## Working with Microsoft Teams
-
-In addition to sending and receiving chat messages, Botkit bots can use all
-of the other features in the Microsoft Teams API. With these other features,
-Botkit bots can send rich attachments with interactive buttons, integrate into
-the message composer, and expose integrated tab applications that live inside
-the Teams window and share data with the bot.
-
-* [Events](#microsoft-teams-specific-events)
-* [API Methods](#api-methods)
-* [Attachments](#working-with-attachments-and-media)
-* [Buttons](#buttons)
-* [User Mentions](#user-mentions)
-* [Compose Extensions](#using-compose-extensions)
-* [Tabs](#using-tabs)
-
-### Microsoft Teams-specific Events
-
-Botkit receives and makes available all of the events supported by Microsoft Teams.
-
-The full list and payload schema of these events is [available from Microsoft](https://msdn.microsoft.com/en-us/microsoft-teams/botevents).
-
-These events undergo a normalization process for use inside Botkit,
-so that any type of event can be passed to `bot.reply()` in order for a normal
-message response to be sent. All incoming events will have _at least_ the following fields:
-
-```
-{
-  type: <type of event>,
-  user: <microsoft teams user ID>,
-  channel: <id for channel or 1:1 conversation>,
-  text: <text of message or primary payload value if present>,
-  raw_message: <the original event data>
-}
-```
-
-Botkit leaves all the native fields intact, so any fields that come in from Teams are still present in the original message.
-However, our recommendation for accessing any Teams-native fields is to use the `message.raw_message` sub-object
-which contains an unmodified version of the event data.
-
-#### Message Received Events
-| Event | Description
-|--- |---
-| direct_message | the bot received a 1:1 direct message from a user
-| direct_mention | the bot was addressed directly in a mult-user channel ("@bot hello!")
-| mention | the bot was mentioned by someone in a message ("hello everyone including @bot")
-
-#### User Activity Events:
-
-| Event | Description
-|--- |---
-| bot_channel_join | the bot has joined a channel
-| user_channel_join | a user has joined a channel
-| bot_channel_leave | the bot has left a channel
-| user_channel_leave | a user has left a channel
-
-#### Channel Events
-| Event | Description
-|--- |---
-| channelDeleted | a channel was deleted
-| channelRenamed | a channel was renamed
-| channelCreated | a new channel was created
-
-#### Teams Features
-| Event | Description
-|--- |---
-| invoke | a user clicked an `invoke` button [See Buttons](#buttons)
-| composeExtension | user submitted a query with the compose extension [See Compose Extensions](#using-compose-extensions)
-
-
-#### API Methods
+## API Methods
 
 The [Microsoft Teams API](https://msdn.microsoft.com/en-us/microsoft-teams/botapis) provides a number of features the bot developer can use to power a useful bot application that operates seamlessly in Teams.
 
@@ -423,7 +330,7 @@ This is used internally by Botkit inside functions like `startPrivateConversatio
 (to create the 1:1 channel between user and bot). It is not intended to be used directly by developers.
 
 
-#### Working with attachments and media
+### Working with attachments and media
 
 In addition to, or as an alternative to text, messages in Microsoft Teams can include one or more attachments.
 Attachments appear as interactive cards inside the Teams client, and can include elements such as images,
@@ -436,7 +343,7 @@ Botkit provides a few helper functions to make creating attachment objects easie
 
 ##### Attachment Helpers
 
-##### bot.createHero()
+#### bot.createHero()
 | Parameter | Description
 |--- |---
 | title OR object| string value for the title of the card, OR an object representing all the fields in the card
@@ -448,7 +355,7 @@ Botkit provides a few helper functions to make creating attachment objects easie
 
 (See usage notes below)
 
-##### bot.createThumbnail()
+#### bot.createThumbnail()
 | Parameter | Description
 |--- |---
 | title OR object| string value for the title of the card, OR an object representing all the fields in the card
@@ -464,42 +371,42 @@ quickly create attachment objects for inclusion in a message.
 The return value of these functions is an attachment object that can be directly added to the outgoing message object's `attachments` array.
 In addition, the returned attachment object has a few helper methods of its that allow developers to adjust the values:
 
-###### attachment.title()
+#### attachment.title()
 | Parameter | Description
 |--- |---
 | value | new value for the title field
 
-###### attachment.subtitle()
+#### attachment.subtitle()
 | Parameter | Description
 |--- |---
 | value | new value for the subtitle field
 
-###### attachment.text()
+#### attachment.text()
 | Parameter | Description
 |--- |---
 | value | new value for the text field
 
-###### attachment.image()
+#### attachment.image()
 | Parameter | Description
 |--- |---
 | url | url to image
 | alt | alt description for image
 
-###### attachment.button()
+#### attachment.button()
 | Parameter | Description
 |--- |---
 | type OR button object | type of button OR an button object {type: string, title: string, value: string}
 | title | string value for the button title
 | value | string for the object payload.
 
-###### attachment.tap()
+#### attachment.tap()
 | Parameter | Description
 |--- |---
 | type OR button object | new value for the title field
 | title | string value for the action title
 | value | string for the object payload.
 
-###### attachment.asString()
+#### attachment.asString()
 
 Returns the stringified version of the attachment object
 
@@ -781,7 +688,7 @@ var attachment = {
   }
 ```
 
-#### Handling Invoke Events
+### Handling Invoke Events
 
 Botkit translates button clicks into `invoke` events.  To respond to button click events, create one or more handlers for the invoke event.
 
@@ -828,7 +735,7 @@ controller.hears('mention me', function(bot, message) {
 ```
 
 
-#### Using Compose Extensions
+### Using Compose Extensions
 
 One of the unique features of Microsoft Teams is support for "[compose extensions](https://msdn.microsoft.com/en-us/microsoft-teams/composeextensions)" -
 custom UI elements that appear adjacent to the "compose" bar in the Teams client that allow users to
@@ -869,7 +776,7 @@ controller.on('composeExtension', function(bot, message) {
 ```
 
 
-#### Using Tabs
+### Using Tabs
 
 Tab applications provide the ability to display web content directly in the Teams UI.  There are a few different types of tab, and applications can contain multiple tabs. [Microsoft has extensive documentation about building tab applications](https://msdn.microsoft.com/en-us/microsoft-teams/tabs), but the short story is: your bot can include an integrated web app component that interacts with Teams in some neat ways. Microsoft provides an easy to use [Javascript library](https://msdn.microsoft.com/en-us/microsoft-teams/jslibrary) that
 is used to set tab configuration options, and provide information about the user, team, and channels in which the tab is installed.
@@ -959,4 +866,40 @@ controller.hears('save', 'direct_message', function(bot, message) {
     });
   });
 });
+```
+
+## Additional Controller methods
+
+#### controller.createWebhookEndpoints()
+| Argument | Description
+|---  |---
+| webserver | An instance of the Express webserver
+
+This function configures the route `http://_your_server_/teams/receive`
+to receive incoming event data from Microsoft Teams.
+
+This url should be used when configuring your Bot Framework record.
+
+
+#### controller.spawn()
+| Argument | Description
+|--- |---
+| options | An object defining options for this specific bot instance - MUST include a serviceUrl.
+
+This function returns a new instance of the bot. This is used internally by Botkit
+to respond to incoming events.
+
+When spawning a bot for Microsoft Teams, you must pass in a `serviceUrl` field as part of
+the options parameter.  The serviceUrl can be extracted from the incoming message payload at `message.serviceUrl`.
+
+For those curious about this parameter: the serviceUrl is used to construct API calls the bot makes to Microsoft's API endpoints.
+The endpoint URLs are actually defined dynamically in response to different kinds of incoming messages. This is because Microsoft Teams is just one of a
+network of Microsoft products that uses the Bot Framework API specification, each one with its own endpoint URLs.
+
+In the event that your bot needs to send outbound messages without first receiving an inbound event from teams,
+you should capture and store the serviceUrl value you receive from the `bot_channel_join` event, which indicates
+that a bot has been added to a new team.
+
+```
+var bot = controller.spawn({serviceUrl: my_team_info.serviceUrl});
 ```

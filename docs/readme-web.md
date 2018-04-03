@@ -22,13 +22,43 @@ a boilerplate application that includes all the components needed to operate you
 
 **Most developers should start with [the starter kit](https://github.com/howdyai/botkit-starter-web) rather than make direct use of the Botkit core library.**
 
-## Developing with Botkit for the Web
+# Developing with Botkit for the Web
 
-### Events
+## Create a Controller
+
+Use the Botkit Anywhere constructor method, [Botkit.anywhere()](#botkitanywhere).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+#### Botkit.anywhere()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a Botkit controller that works with Botkit Anywhere.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| replyWithTyping | Boolean | Send typing indicators automatically (default false)
+
+For example:
+
+```javascript
+var controller = Botkit.slackbot({
+    debug: false,
+    replyWithTyping: true,
+    studio_token: process.env.studio_token,
+});
+```
+
+## Event List
 
 When using [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web) and the built-in [web chat client](https://github.com/howdyai/botkit-starter-web/blob/master/docs/botkit_web_client.md), Botkit will fire a small number of native events.
 
-#### Built-in Events
+### Built-in Events
 
 | Event | Description
 |-- |--
@@ -37,7 +67,7 @@ When using [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web) and 
 | welcome_back | a returning user has established a new connection to the bot
 | reconnect | an ongoing user session has experienced a disconnect/reconnect
 
-#### Custom Events
+### Custom Events
 
 Developers may also fire custom events from the web client. Custom events triggered in the front-end client will arrive at the Botkit app based on their `type` field.
 
@@ -59,7 +89,7 @@ Botkit has a very liberal policy on adding additional fields to the message obje
 
 In addition, the Botkit Studio and the built-in web chat client feature support for quick replies and file attachments to be included in messages.
 
-#### Quick Replies
+## Quick Replies
 
 Quick replies are buttons that appear at the bottom of the message client, and offer suggested replies to the user.  Clicking a quick reply is essentially the same as the user typing the suggested reply and sending it as a message.
 
@@ -82,7 +112,7 @@ var reply = {
 ```
 
 
-#### File Attachments
+## File Attachments
 
 Files can be attached to Botkit Web messages by adding a `files` field that includes an array of objects, each with a `url` and an `image` field. The url field should contain a valid URL, and the image should be set to `true` if the file is an image.
 
@@ -98,12 +128,12 @@ var reply = {
 }
 ```
 
-## Functions Index
+## Additional Controller Methods
 
 Botkit on the web works much the same as it does on all the other platforms. Developers have full access to all of [Botkit's core features](core.md) -
 and a few extra ones that are specific to operating on the web!
 
-### controller.openSocketServer(webserver_instance)
+#### controller.openSocketServer(webserver_instance)
 
 This function takes an instance of an http server object - that is, the results of a call to `http.createServer()`.
 
@@ -111,7 +141,8 @@ It connects a `ws` powered websocket server to the web server, and allows the ap
 
 [A compatible webserver is provided in the starter kit](https://github.com/howdyai/botkit-starter-web/blob/master/components/express_webserver.js).
 
+## Additional Bot Instance Methods
 
-### bot.replyWithTyping(message, reply)
+#### bot.replyWithTyping(message, reply)
 
 This works just like the normal `bot.reply()`, but instead of sending the message immediately, sends a typing indicator first, then waits for a short period before sending the actual message.

@@ -3,7 +3,8 @@
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Facebook-specific Events](#facebook-specific-events)
+* [Create a Controller](#create-a-controller)
+* [Facebook-specific Events](#event-list)
 * [Working with Facebook Webhooks](#working-with-facebook-messenger)
 * [Using Structured Messages and Postbacks](#using-structured-messages-and-postbacks)
 * [Thread Settings](#thread-settings-api)
@@ -23,33 +24,19 @@ Table of Contents
 
 ## Getting Started
 
-1) Install Botkit [more info here](core.md#installation)
+1. [Install Botkit on your computer](/getstarted.html)
 
-2) Create a [Facebook App for Web](https://developers.facebook.com/quickstarts/?platform=web) and note down or [create a new Facebook Page](https://www.facebook.com/pages/create/).  Your Facebook page will be used for the app's identity.
+2. Create a Botkit powered Node app:
 
+  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
+  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-facebook)
+  * Or: Use the command line tool:
 
-3) [Get a page access token for your app](https://developers.facebook.com/docs/messenger-platform/guides/setup#page_access_token)
+  ```
+  botkit new --platform facebook
+  ```
 
-Copy this token, you'll need it!
-
-4) Define your own "verify token" - this is a string that you control that Facebook will use to verify your web hook endpoint.
-
-5) Run the example bot app, using the two tokens you just created. If you are _not_ running your bot at a public, SSL-enabled internet address, use the --lt option and note the URL it gives you.
-
-```
-page_token=<MY PAGE TOKEN> verify_token=<MY_VERIFY_TOKEN> node examples/facebook_bot.js [--lt [--ltsubdomain CUSTOM_SUBDOMAIN]]
-```
-
-6) [Set up a webhook endpoint for your app](https://developers.facebook.com/docs/messenger-platform/guides/setup#webhook_setup) that uses your public URL. Use the verify token you defined in step 4!
-
-* *Note* - You will need to provide Facebook a callback endpoint to receive requests from Facebook. By default Botkit will serve content from "https://YOURSERVER/facebook/receive". You can use a tool like [ngrok.io](http://ngrok.io) or [localtunnel.me](http://localtunnel.me) to expose your local development enviroment to the outside world for the purposes of testing your Messenger bot.
-
-7) Your bot should be online! Within Facebook, find your page, and click the "Message" button in the header.
-
-Try:
-  * who are you?
-  * call me Bob
-  * shutdown
+3. [Follow this guide to configuring the Facebook API](/docs/provisioning/facebook_messenger.md)
 
 
 ### Things to note
@@ -58,28 +45,65 @@ Since Facebook delivers messages via web hook, your application must be availabl
 
 When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org), a _free_ SSL Certificate Signing Authority which can be used to secure your website very quickly. It is fabulous and we love it.
 
-## Validate Requests - Secure your webhook!
-Facebook sends an X-HUB signature header with requests to your webhook. You can verify the requests are coming from Facebook by enabling `validate_requests: true` when creating your bot controller. This checks the sha1 signature of the incoming payload against your Facebook App Secret (which is seperate from your webhook's verify_token), preventing unauthorized access to your webhook. You must also pass your `app_secret` into your environment variables when running your bot.
 
-The Facebook App secret is available on the Overview page of your Facebook App's admin page. Click show to reveal it.
+## Create a controller
 
+To connect Botkit to Facebook, use the constructor method, [Botkit.facebookbot()](#botkitfacebookbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+#### Botkit.facebookbot()
+| Argument | Description
+|--- |---
+| config | an object containing configuration options
+
+Returns a new Botkit controller.
+
+The `config` argument is an object with these properties:
+
+| Name | Type | Description
+|--- |--- |---
+| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
+| debug | Boolean | Enable debug logging
+| access_token | string | Page access token from Facebook
+| verify_token| string | Verification token from Facebook
+| require_appsecret_proof | Boolean | [Enable checking for app secret](#app-secret-proof)
+| require_delivery | Boolean | [Require delivery confirmation of messages](#require-delivery-confirmation)
+
+For example:
+
+```javascript
+var Botkit = require('botkit');
+var controller = Botkit.facebookbot({
+        access_token: process.env.access_token,
+        verify_token: process.env.verify_token,
+})
 ```
-app_secret=abcdefg12345 page_token=123455abcd verify_token=VerIfY-tOkEn node examples/facebook_bot.js
-```
 
-## Facebook-specific Events
+## Event List
 
-Once connected to Facebook, bots receive a constant stream of events.
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
+
+In fact, Botkit will receive, normalize and emit any event that it receives from Facebook.
+This includes all of the events [listed here](https://developers.facebook.com/docs/messenger-platform/webhook-reference).
 
 Normal messages will be sent to your bot using the `message_received` event.  In addition, several other events may fire, depending on your implementation and the webhooks you subscribed to within your app's Facebook configuration.
 
+### Incoming Message Events
 | Event | Description
 |--- |---
 | message_received | a message was received by the bot
 | facebook_postback | user clicked a button in an attachment and triggered a webhook postback
+
+### Message Delivery Events
+| Event | Description
+|--- |---
 | message_delivered | a confirmation from Facebook that a message has been received
 | message_echo | if enabled in Facebook, an "echo" of any message sent by the bot
 | message_read | a confirmation from Facebook that a message has been read
+
+### Facebook Activity Events
+| Event | Description
+|--- |---
 | facebook_account_linking | a user has started the account linking
 | facebook_optin | a user has clicked the [Send-to-Messenger plugin](https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin)
 | facebook_referral | a user has clicked on a [m.me URL with a referral param](https://developers.facebook.com/docs/messenger-platform/referral-params)
@@ -88,13 +112,6 @@ Normal messages will be sent to your bot using the `message_received` event.  In
 | facebook_receive_thread_control | This callback will occur when thread ownership for a user has been passed to your application.
 | facebook_lose_thread_control | This callback will occur when thread ownership for a user has been taken away from your application.
 
-All incoming events will contain the fields `user` and `channel`, both of which represent the Facebook user's ID, and a `timestamp` field.
-
-`message_received` events will also contain either a `text` field or an `attachment` field.
-
-`facebook_postback` events will contain a `payload` field.
-
-More information about the data found in these fields can be found [here](https://developers.facebook.com/docs/messenger-platform/webhook-reference).
 
 ## Working with Facebook Messenger
 
@@ -149,6 +166,16 @@ controller.hears(['cookies'], 'message_received', function(bot, message) {
 });
 ```
 
+
+## Validate Requests - Secure your webhook!
+Facebook sends an X-HUB signature header with requests to your webhook. You can verify the requests are coming from Facebook by enabling `validate_requests: true` when creating your bot controller. This checks the sha1 signature of the incoming payload against your Facebook App Secret (which is seperate from your webhook's verify_token), preventing unauthorized access to your webhook. You must also pass your `app_secret` into your environment variables when running your bot.
+
+The Facebook App secret is available on the Overview page of your Facebook App's admin page. Click show to reveal it.
+
+```
+app_secret=abcdefg12345 page_token=123455abcd verify_token=VerIfY-tOkEn node examples/facebook_bot.js
+```
+
 ### Receive Postback Button Clicks as "Typed" Messages
 
 Facebook Messenger supports including "postback" buttons, which, when clicked,
@@ -188,21 +215,6 @@ var controller = Botkit.facebookbot({
         require_delivery: true,
 })
 ```
-
-#### controller.setupWebserver()
-| Argument | Description
-|---  |---
-| port | port for webserver
-| callback | callback function
-
-Setup an [Express webserver](http://expressjs.com/en/index.html) for
-use with `createWebhookEndpoints()`
-
-If you need more than a simple webserver to receive webhooks,
-you should by all means create your own Express webserver! Here is a [boilerplate demo](https://github.com/mvaragnat/botkit-messenger-express-demo).
-
-The callback function receives the Express object as a parameter,
-which may be used to add further web server routes.
 
 #### controller.createWebhookEndpoints()
 
@@ -412,7 +424,7 @@ Remove all domains
 
 Get a list of the whitelisted domains.
 
-### controller.api.messenger_profile.home_url()
+#### controller.api.messenger_profile.home_url()
 | Argument | Description
 |---  |---
 | payload | A home_url object with the properties `url`, `webview_height_ratio`, `in_test`
@@ -421,15 +433,15 @@ View the facebook documentation for details of the [home_url](https://developers
 
 *NB.* The value of the `url` property must be present in the domain_whitelist array
 
-### controller.api.messenger_profile.delete_home_url()
+#### controller.api.messenger_profile.delete_home_url()
 
 Remove the home_url setting
 
-### controller.api.messenger_profile.get_home_url()
+#### controller.api.messenger_profile.get_home_url()
 
 Get the home_url
 
-#### Using the The Messenger Profile API
+### Using the The Messenger Profile API
 
 ```js
 controller.api.messenger_profile.greeting('Hello! I\'m a Botkit bot!');
@@ -626,6 +638,17 @@ controller.api.handover.pass_thread_control('<RECIPIENT_PSID>', '<TARGET_PSID>',
 });
 ```
 
+### Request Thread Control
+
+The Request Thread Control API allows a Secondary Receiver app to notify the Primary Receiver that it wants control of the chat : 
+
+- To pass thread control:
+```javascript
+controller.api.handover.request_thread_control('<RECIPIENT_PSID>', 'String to pass to request the thread control', function (result) {
+   
+});
+```
+
 ## Messaging type
 
 You can identify the purpose of the message being sent to Facebook by adding `messaging_type: <MESSAGING_TYPE>` property when sending the message:
@@ -699,6 +722,22 @@ controller.api.broadcast.send('<CREATIVE_ID>', null, function (err, body) {
 });
 ```
 
+If you would like to add notification type and tag you can pass an object:
+
+```javascript
+var message = {
+    message_creative_id: '<CREATIVE_ID>',
+    notification_type: '<REGULAR | SILENT_PUSH | NO_PUSH>',
+    tag: '<MESSAGE_TAG>'
+}
+
+controller.api.broadcast.send(message, null, function (err, body) {
+    // Your awesome code here
+    console.log(body['broadcast_id']);
+    // And here
+});
+```
+
 ### Broadcast Metrics
 
 Once a broadcast has been delivered, you can find out the total number of people it reached by calling ```controller.api.broadcast.get_broadcast_metrics(...)```.
@@ -713,7 +752,7 @@ controller.api.broadcast.get_broadcast_metrics("<BROADCAST_ID>", function (err, 
 
 By default, the Broadcast API sends your message to all open conversations with your Messenger bot. To allow you broadcast to a subset of conversations, the Broadcast API supports 'custom labels', which can be associated with individual PSIDs.
 
-#### Creating a Label
+### Creating a Label
 
 To create a label:
 
@@ -723,7 +762,7 @@ controller.api.broadcast.create_label("<LABEL_NAME>", function (err, body) {
 });
 ```
 
-#### Associating a Label to a user
+### Associating a Label to a user
 
 To associate a label to a specific user:
 
@@ -733,7 +772,7 @@ controller.api.broadcast.add_user_to_label(message.user, "<LABEL_ID>", function 
 });
 ```
 
-#### Sending a Message with a Label
+### Sending a Message with a Label
 
 To send a broadcast message to the set of users associated with a label:
 
@@ -745,7 +784,7 @@ controller.api.broadcast.send('<BROADCAST_MESSAGE_ID>', '<CUSTOM_LABEL_ID>', fun
 });
 ```
 
-#### Removing a Label From a user
+### Removing a Label From a user
 
 To remove a label currently associated with a user:
 
@@ -755,7 +794,7 @@ controller.api.broadcast.remove_user_from_label(message.user, '<LABEL_ID>', func
 });
 ```
 
-#### Retrieving Labels Associated with a USER
+### Retrieving Labels Associated with a USER
 
 To retrieve the labels currently associated with a USER:
 
@@ -775,7 +814,7 @@ controller.api.broadcast.get_label_details('<LABEL_ID>', ['name'], function (err
 });
 ```
 
-#### Retrieving a List of All Labels
+### Retrieving a List of All Labels
 
 To retrieve the list of all the labels for the page:
 
@@ -785,7 +824,7 @@ controller.api.broadcast.get_all_labels(['name'], function (err, body) {
 });
 ```
 
-#### Deleting a Label
+### Deleting a Label
 
 To delete a label:
 

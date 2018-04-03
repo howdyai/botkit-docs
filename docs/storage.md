@@ -1,4 +1,4 @@
-## Storing Information
+# Storing Information
 
 Botkit has a built in storage system used to keep data on behalf of users and teams between sessions. Botkit uses this system automatically when storing information for Slack Button applications (see below).
 
@@ -30,7 +30,7 @@ controller.storage.teams.all(function(err, all_team_data) {...});
 Note that save must be passed an object with an id. It is recommended to use the team/user/channel id for this purpose.
 ```[user/channel/team]_data``` will always be an object while ```all_[user/channel/team]_data``` will always be a list of objects.
 
-### Writing your own storage module
+## Writing your own storage module
 
 If you want to use a database or do something else with your data,
 you can write your own storage module and pass it in.

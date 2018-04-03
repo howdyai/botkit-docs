@@ -114,7 +114,7 @@ The bottom line is, Botkit Studio does _not_ put itself between your users and y
 
 ## Function Index
 
-### controller.studio.run()
+#### controller.studio.run()
 | Argument | Description
 |---  |---
 | bot   | A bot instance
@@ -138,7 +138,7 @@ controller.studio.run(bot, 'hello', message.user, message.channel).then(function
 });
 ```
 
-### controller.studio.get()
+#### controller.studio.get()
 | Argument | Description
 |---  |---
 | bot   | A bot instance
@@ -163,7 +163,7 @@ controller.studio.get(bot, 'hello', message.user, message.channel).then(function
 ```
 
 
-### controller.studio.runTrigger()
+#### controller.studio.runTrigger()
 | Argument | Description
 |---  |---
 | bot   | A bot instance
@@ -200,7 +200,7 @@ controller.hears(['checkin'], 'direct_message', function(bot, message) {
 });
 ```
 
-#### A note about handling parameters to a trigger
+### A note about handling parameters to a trigger
 
 While Botkit does not currently provide any built-in mechanisms for extracting entities or parameters from the input text, that input text remains available in the `before` and `after` hooks, and can be used by developers to process this information.
 
@@ -223,7 +223,7 @@ controller.studio.before('help', function(convo, next) {
 ```
 
 
-### controller.studio.getScripts()
+#### controller.studio.getScripts()
 | Argument | Description
 |---  |---
 | bot   | A bot instance (required only when Botkit Studio token is associated with bot, not controller)
@@ -255,7 +255,7 @@ controller.studio.getScripts().then(function(list) {
 
 
 
-### controller.studio.before()
+#### controller.studio.before()
 | Argument | Description
 |---  |---
 | script_name   | The name of a script defined in Botkit Studio
@@ -278,7 +278,7 @@ controller.studio.before('tacos', function(convo, next) {
 ```
 
 
-### controller.studio.after()
+#### controller.studio.after()
 | Argument | Description
 |---  |---
 | script_name   | The name of a script defined in Botkit Studio
@@ -300,7 +300,7 @@ controller.studio.after('tacos', function(convo, next) {
 ```
 
 
-### controller.studio.validate()
+#### controller.studio.validate()
 | Argument | Description
 |---  |---
 | script_name   | The name of a script defined in Botkit Studio
@@ -331,7 +331,7 @@ controller.studio.validate('tacos', 'sauce', function(convo, next) {
 });
 ```
 
-### controller.studio.beforeThread()
+#### controller.studio.beforeThread()
 | Argument | Description
 |---  |---
 | script_name   | The name of a script defined in Botkit Studio

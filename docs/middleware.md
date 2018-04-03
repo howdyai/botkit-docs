@@ -1,4 +1,4 @@
-## Middleware
+# Middleware
 
 The functionality of Botkit can be extended using middleware
 functions. These functions can plugin to the core bot running processes at
@@ -7,7 +7,7 @@ the incoming or outgoing message.
 
 For information about existing middleware plugins, [see here](readme-middlewares.md)
 
-### Middleware Endpoints
+## Middleware Endpoints
 
 Botkit currently supports middleware insertion in the following places:
 

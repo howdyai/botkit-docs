@@ -6,7 +6,7 @@ The [Microsoft Bot Framework](https://botframework.com) makes it easy to create 
 Table of Contents
 
 * [Getting Started](#getting-started)
-* [Bot Framework Specific Events](#bot-framework-specific-events)
+* [Bot Framework Specific Events](#event-list)
 * [Working with the Bot Framework](#working-with-the-bot-framework)
 * [Sending Cards and Attachments](#sending-cards-and-attachments)
 * [Typing Indicator](#typing-indicator)
@@ -42,9 +42,24 @@ Since the Bot Framework delivers messages via web hook, your application must be
 
 When you are ready to go live, consider [LetsEncrypt.org](http://letsencrypt.org), a _free_ SSL Certificate Signing Authority which can be used to secure your website very quickly.
 
-## Bot Framework Specific Events
+## Create a controller
 
-Once connected to the Bot Framework, bots receive a constant stream of events.
+To connect Botkit to Bot Framework, use the constructor method, [Botkit.facebookbot()](#botkit-facebookbot).
+This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+
+#### Botkit.botframeworkbot()
+| Argument | Description
+|---  |---
+| settings | Options used to configure the bot.  Supports fields from [IChatConnectorSettings](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html).
+
+Creates a new instance of the bots controller.  The controller will create a new [ChatConnector](https://docs.botframework.com/en-us/node/builder/chat-reference/classes/_botbuilder_d_.chatconnector.html) so any options needed to configure the chat connector should be passed in via the `settings` argument.
+
+Generally speaking your bot needs to be configured with both an [appId](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html#appid) and [appPassword](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html#apppassword). You can leave these blank but then your bot can only be called by the [Bot Framework Emulator](https://docs.botframework.com/en-us/tools/bot-framework-emulator/#navtitle).
+
+
+## Event List
+
+In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
 Normal messages will be sent to your bot using the `message_received` event.  In addition, several other events may fire, depending on the channel your bot is configured to support.
 
@@ -105,14 +120,6 @@ controller.hears(['cookies'], 'message_received', function(bot, message) {
 });
 ```
 
-#### Botkit.botframeworkbot()
-| Argument | Description
-|---  |---
-| settings | Options used to configure the bot.  Supports fields from [IChatConnectorSettings](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html).
-
-Creates a new instance of the bots controller.  The controller will create a new [ChatConnector](https://docs.botframework.com/en-us/node/builder/chat-reference/classes/_botbuilder_d_.chatconnector.html) so any options needed to configure the chat connector should be passed in via the `settings` argument.
-
-Generally speaking your bot needs to be configured with both an [appId](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html#appid) and [appPassword](https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.ichatconnectorsettings.html#apppassword). You can leave these blank but then your bot can only be called by the [Bot Framework Emulator](https://docs.botframework.com/en-us/tools/bot-framework-emulator/#navtitle).
 
 #### controller.setupWebserver()
 | Argument | Description
