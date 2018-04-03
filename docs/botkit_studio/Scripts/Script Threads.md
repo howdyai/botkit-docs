@@ -1,0 +1,1 @@
+Scripts can have several threads depending on user input. Choose between threads to view or change the messages in each one. All threads must have a default. Once you add more threads, you will be able to rename, or delete the additional threads.

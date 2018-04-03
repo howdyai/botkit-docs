@@ -1,0 +1,1 @@
+Retention allows you to track users who continue to use your bot over a period selectable by day over day, week over week, or month over month. You can use the date picker and the period selector to select the range and period you want to track the percent change over the period.
