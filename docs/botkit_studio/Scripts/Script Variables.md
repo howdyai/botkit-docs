@@ -1,0 +1,1 @@
+Variables are values that can change, depending on external conditions or on information passed on during the conversation with a user.

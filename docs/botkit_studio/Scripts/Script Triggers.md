@@ -1,0 +1,1 @@
+Triggers are words used by users to initiate the script. One script can be triggered by any variety of words.
