@@ -1,5 +1,3 @@
-# This is the new home of the Botkit Studio docs
-
 ## Getting Started
 
 * What can bots do?
