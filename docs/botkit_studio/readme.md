@@ -49,14 +49,11 @@ We love bots, and want to make them easy and fun to build!
 
 ### [Supported Platforms]()
 * [Botkit Anywhere]()
-	* [About]()
 	* [Attachments]()
 * [Slack]()
 	* [Attachments]()
-
 * [Cisco Spark]()
 	* [Attachments]()
-
 * [Microsoft Teams]()
 	* [Attachments]()
 	* [Creating an App package]()
