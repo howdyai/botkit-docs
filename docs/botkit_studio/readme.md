@@ -12,7 +12,7 @@ We love bots, and want to make them easy and fun to build!
 * [Intro to Botkit Studio]()
 * [The Botkit Studio Data Flow]()
 
-### [Building a Bot
+### [Building a Bot]()
 * [What you will need]()
 * [Setting up Hosting]()
 	* [Using Glitch]()
@@ -48,24 +48,24 @@ We love bots, and want to make them easy and fun to build!
 * [Building Data Powered Conversations]()
 * [Register a Amazon .Bot Domain]()
 
-## Supported Platforms]()
+## [Supported Platforms]()
 * [About]()
 * [Using an unsupported platform]()
 * [Using Custom fields to create custom attachments]()
 
-### Botkit Anywhere]()
+### [Botkit Anywhere]()
 * [About]()
 * [Attachments]()
 
-### Slack]()
+### [Slack]()
 * [About]()
 * [Attachments]()
 
-### Cisco Spark]()
+### [Cisco Spark]()
 * [About]()
 * [Attachments]()
 
-### Microsoft Teams]()
+### [Microsoft Teams]()
 * [About]()
 * [Attachments]()
 * [Creating an App package]()
@@ -73,8 +73,8 @@ We love bots, and want to make them easy and fun to build!
 * [Creating a Bot Menu]()
 * [Compose Extensions]()
 
-## Using the Botkit Studio API]()
-## Manage your Team]()
+## [Using the Botkit Studio API]()
+## [Manage your Team]()
 * [Billing]()
 * [Manage your Team profile]()
 * [Manage your team's users]()
