@@ -34,7 +34,7 @@ module.exports = function(Botkit, config) {
              }
           }
           resp.channel = src.channel;
-          bot.send(message, cb);
+          bot.say(message, cb);
         }
 
         // this function defines the mechanism by which botkit looks for ongoing conversations
