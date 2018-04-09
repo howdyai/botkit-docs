@@ -1,76 +1,86 @@
-## Getting Started
+[Documentation Home](https://botkit.ai/docs)
 
-* What can bots do?
-* Intro to Botkit Studio
-* The Botkit Studio Data Flow
+# Botkit Studio
 
-### Building a Bot
-* What you will need
-* Setting up Hosting
-	* Using Glitch
-	* Using Heroku
-	* Self hosting your bot
-	* Troubleshooting 
-* Creating Scripts
-	* Triggers
-	* Messages
-	* Attachments
-	* Threads
-	* Variables
-	* Custom fields
-	* Script Info
-	* Code export
-* Measuring your bot's efficacy
-	* Message Console
-	* Metrics	
-		* About Metrics
-		* Dashboard
-		* Paths
-		* Retention
-		* Users
-		* Updating a legacy bot 
-* Manage your Bots
-* Importing and Exporting
-* Managing Integrations
-	* Botkit Studio API keys 
-	* Using LUIS NLP
+[Botkit Studio](https://botkit.ai/) is the leading developer tool for building chat bots, apps and custom integrations for major messaging platforms.
 
-#### Advanced Topics
-* Store Data for your users
-* Building Data Powered Conversations
-* Register a Amazon .Bot Domain
+We love bots, and want to make them easy and fun to build!
 
-## Supported Platforms
-* About
-* Using an unsupported platform
-* Using Custom fields to create custom attachments
+## Getting Started]()
 
-### Botkit Anywhere
-* About
-* Attachments
+* [What can bots do?]()
+* [Intro to Botkit Studio]()
+* [The Botkit Studio Data Flow]()
 
-### Slack
-* About
-* Attachments
+### [Building a Bot
+* [What you will need]()
+* [Setting up Hosting]()
+	* [Using Glitch]()
+	* [Using Heroku]()
+	* [Self hosting your bot]()
+	* [Troubleshooting ]()
+* [Creating Scripts]()
+	* [Triggers]()
+	* [Messages]()
+	* [Attachments]()
+	* [Threads]()
+	* [Variables]()
+	* [Custom fields]()
+	* [Script Info]()
+	* [Code export]()
+* [Measuring your bot's efficacy]()
+	* [Message Console]()
+	* [Metrics]()
+		* [About Metrics]()
+		* [Dashboard]()
+		* [Paths]()
+		* [Retention]()
+		* [Users]()
+		* [Updating a legacy bot]()
+* [Manage your Bots]()
+* [Importing and Exporting]()
+* [Managing Integrations]()
+	* [Botkit Studio API keys]() 
+	* [Using LUIS NLP]()
 
-### Cisco Spark
-* About
-* Attachments
+#### [Advanced Topics]()
+* [Store Data for your users]()
+* [Building Data Powered Conversations]()
+* [Register a Amazon .Bot Domain]()
 
-### Microsoft Teams
-* About
-* Attachments
-* Creating an App package
-* Creating Tabs
-* Creating a Bot Menu
-* Compose Extensions
+## Supported Platforms]()
+* [About]()
+* [Using an unsupported platform]()
+* [Using Custom fields to create custom attachments]()
 
-## Using the Botkit Studio API
-## Manage your Team
-* Billing
-* Manage your Team profile
-* Manage your team's users
-## Support
-* Help with your account
-* Community Resources
+### Botkit Anywhere]()
+* [About]()
+* [Attachments]()
+
+### Slack]()
+* [About]()
+* [Attachments]()
+
+### Cisco Spark]()
+* [About]()
+* [Attachments]()
+
+### Microsoft Teams]()
+* [About]()
+* [Attachments]()
+* [Creating an App package]()
+* [Creating Tabs]()
+* [Creating a Bot Menu]()
+* [Compose Extensions]()
+
+## Using the Botkit Studio API]()
+## Manage your Team]()
+* [Billing]()
+* [Manage your Team profile]()
+* [Manage your team's users]()
+## [Support]()
+* [Help with your account]()
+* [Community Resources]()
+* [Terms of Service]()
+* [Privacy Policy]()
 
