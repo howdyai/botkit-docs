@@ -31,7 +31,6 @@ We love bots, and want to make them easy and fun to build!
 * [Measuring your application]()
 	* [Message Console]()
 	* [Metrics]()
-		* [About Metrics]()
 		* [Dashboard]()
 		* [Paths]()
 		* [Retention]()
@@ -49,20 +48,16 @@ We love bots, and want to make them easy and fun to build!
 * [Register a Amazon .Bot Domain]()
 
 ### [Supported Platforms]()
-* [About]()
 * [Botkit Anywhere]()
 	* [About]()
 	* [Attachments]()
 * [Slack]()
-	* [About]()
 	* [Attachments]()
 
 * [Cisco Spark]()
-	* [About]()
 	* [Attachments]()
 
 * [Microsoft Teams]()
-	* [About]()
 	* [Attachments]()
 	* [Creating an App package]()
 	* [Creating Tabs]()
