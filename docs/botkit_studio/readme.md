@@ -6,13 +6,13 @@
 
 We love bots, and want to make them easy and fun to build!
 
-## Getting Started]()
+## [Getting Started]()
 
 * [What can bots do?]()
 * [Intro to Botkit Studio]()
-* [The Botkit Studio Data Flow]()
+* [Botkit Studio FAQ]()
 
-### [Building a Bot]()
+## [Building a Bot]()
 * [What you will need]()
 * [Setting up Hosting]()
 	* [Using Glitch]()
@@ -28,7 +28,7 @@ We love bots, and want to make them easy and fun to build!
 	* [Custom fields]()
 	* [Script Info]()
 	* [Code export]()
-* [Measuring your bot's efficacy]()
+* [Measuring your application]()
 	* [Message Console]()
 	* [Metrics]()
 		* [About Metrics]()
@@ -48,36 +48,42 @@ We love bots, and want to make them easy and fun to build!
 * [Building Data Powered Conversations]()
 * [Register a Amazon .Bot Domain]()
 
-## [Supported Platforms]()
+### [Supported Platforms]()
 * [About]()
+* [Botkit Anywhere]()
+	* [About]()
+	* [Attachments]()
+* [Slack]()
+	* [About]()
+	* [Attachments]()
+
+* [Cisco Spark]()
+	* [About]()
+	* [Attachments]()
+
+* [Microsoft Teams]()
+	* [About]()
+	* [Attachments]()
+	* [Creating an App package]()
+	* [Creating Tabs]()
+	* [Creating a Bot Menu]()
+	* [Compose Extensions]()
+
 * [Using an unsupported platform]()
 * [Using Custom fields to create custom attachments]()
 
-### [Botkit Anywhere]()
-* [About]()
-* [Attachments]()
 
-### [Slack]()
-* [About]()
-* [Attachments]()
+### [Using the Botkit Studio API]()
+* [The Botkit Studio SDK](https://github.com/howdyai/botkit-studio-sdk/blob/master/README.md)
+* [Botkit API]()
+* [Botkit Studio Function Index]()
+* [The Botkit Studio Data Flow]()
 
-### [Cisco Spark]()
-* [About]()
-* [Attachments]()
-
-### [Microsoft Teams]()
-* [About]()
-* [Attachments]()
-* [Creating an App package]()
-* [Creating Tabs]()
-* [Creating a Bot Menu]()
-* [Compose Extensions]()
-
-## [Using the Botkit Studio API]()
-## [Manage your Team]()
+### [Manage your Team]()
 * [Billing]()
 * [Manage your Team profile]()
 * [Manage your team's users]()
+
 ## [Support]()
 * [Help with your account]()
 * [Community Resources]()
