@@ -42,6 +42,11 @@ We love bots, and want to make them easy and fun to build!
 	* [Botkit Studio API keys](https://botkit.ai/docs/botkit_studio/) 
 	* [Using LUIS NLP](https://botkit.ai/docs/botkit_studio/)
 
+#### [Advanced Topics](https://botkit.ai/docs/botkit_studio/)
+* [Store Data for your users](https://botkit.ai/docs/botkit_studio/)
+* [Building Data Powered Conversations](https://botkit.ai/docs/botkit_studio/)
+* [Register a Amazon .Bot Domain](https://botkit.ai/docs/botkit_studio/)
+
 ### [Supported Platforms](https://botkit.ai/docs/botkit_studio/)
 * [Botkit Anywhere](https://botkit.ai/docs/botkit_studio/)
 	* [Attachments](https://botkit.ai/docs/botkit_studio/)
@@ -55,14 +60,9 @@ We love bots, and want to make them easy and fun to build!
 	* [Creating Tabs](https://botkit.ai/docs/botkit_studio/)
 	* [Creating a Bot Menu](https://botkit.ai/docs/botkit_studio/)
 	* [Compose Extensions](https://botkit.ai/docs/botkit_studio/)
+
 * [Using an unsupported platform](https://botkit.ai/docs/botkit_studio/)
-
-
-#### [Advanced Topics](https://botkit.ai/docs/botkit_studio/)
-* [Store Data for your users](https://botkit.ai/docs/botkit_studio/)
-* [Building Data Powered Conversations](https://botkit.ai/docs/botkit_studio/)
-* [Register a Amazon .Bot Domain](https://botkit.ai/docs/botkit_studio/)
-
+* [Using Custom fields to create custom attachments](https://botkit.ai/docs/botkit_studio/)
 
 
 ### [Using the Botkit Studio API](https://botkit.ai/docs/botkit_studio/)
