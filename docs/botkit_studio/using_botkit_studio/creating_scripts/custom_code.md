@@ -1,4 +1,4 @@
-[![Using Custom code](img/titlecard.jpg)](https://www.useloom.com/share/9d15953e7b2544fd9a3feba66c05dbf5 "How to add code to your Botkit Studio app")
+[![Using Custom code](img/how_code.png)](https://www.useloom.com/share/9d15953e7b2544fd9a3feba66c05dbf5 "How to add code to your Botkit Studio app")
 
 
 # Adding custom code to your Botkit application
