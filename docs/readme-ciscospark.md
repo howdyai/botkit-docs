@@ -1,10 +1,12 @@
-# Botkit and Cisco Spark
+# Botkit and Cisco Webex Teams
+
+*Note: Cisco Spark is [now Cisco Webex Teams](https://blogs.cisco.com/collaboration/webex-platform-convergence?_ga=2.75241682.1559193461.1524070554-1809816543.1524070554). Expects changes to this document as the transition continues, but for now you may use them interchangably*
 
 Table of Contents
 
 * [Getting Started](#getting-started)
 * [Create a Controller](#create-a-controller)
-* [Spark-specific Events](#event-list)
+* [Webex Teams-specific Events](#event-list)
 * [Message Formatting](#message-formatting)
 * [Attaching Files](#attaching-files)
 * [Receiving Files](#receiving-files)
@@ -25,24 +27,24 @@ Table of Contents
   botkit new --platform spark
   ```
 
-3. [Follow this guide to configuring the Cisco Spark API](/docs/provisioning/cisco-spark.md)
+3. [Follow this guide to configuring the Cisco Webex Teams API](/docs/provisioning/cisco-spark.md)
 
 
 
-## Working with Cisco Spark
+## Working with Cisco Webex Teams
 
-Botkit receives messages from Cisco Spark using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
+Botkit receives messages from Cisco Webex Teams using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
 
-To connect your bot to Cisco Spark, [get an access token here](https://developer.ciscospark.com/add-bot.html). In addition to the access token,
-Cisco Spark bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
+To connect your bot to Cisco Webex Teams, [get an access token here](https://developer.ciscospark.com/add-bot.html). In addition to the access token,
+Cisco Webex Teams bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
 
 Each time the bot application starts, Botkit will register a webhook subscription.
 Botkit will automatically manage your bot's webhook subscriptions, but if you plan on having multiple instances of your bot application with different URLs (such as a development instance and a production instance), use the `webhook_name` field with a different value for each instance.
 
-Bots in Cisco Spark are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
+Bots in Cisco Webex Teams are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
 This will configure your bot to respond only to messages from members of the specific organization, or whose email addresses match one of the specified domains.
 
-The full code for a simple Cisco Spark bot is below:
+The full code for a simple Cisco Webex Teams bot is below:
 
 ```javascript
 var Botkit = require('./lib/Botkit.js');
@@ -81,7 +83,7 @@ controller.on('direct_message', function(bot, message) {
 
 ## Create a Controller
 
-To connect Botkit to Cisco Spark, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
+To connect Botkit to Cisco Webex Teams, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.sparkbot()
@@ -90,9 +92,9 @@ This will create a Botkit controller with [all core features](core.md#botkit-con
 | studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
 | debug | Boolean | Enable debug logging
 | public_address | _required_ the root url of your application (https://mybot.com)
-| `ciscospark_access_token` | _required_ token provided by Cisco Spark for your bot
-| secret | _required_ secret for validating webhooks originate from Cisco Spark
-| webhook_name | _optional_ name for webhook configuration on Cisco Spark side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
+| `ciscospark_access_token` | _required_ token provided by Cisco Webex Teams for your bot
+| secret | _required_ secret for validating webhooks originate from Cisco Webex Teams
+| webhook_name | _optional_ name for webhook configuration on Cisco Webex Teams side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
 | `limit_to_org` | _optional_ organization id in which the bot should exist. If user from outside org sends message, it is ignored
 | `limit_to_domain` | _optional_ email domain (@howdy.ai) or array of domains [@howdy.ai, @botkit.ai] from which messages can be received
 
@@ -133,7 +135,7 @@ All events [listed here](https://developer.ciscospark.com/webhooks-explained.htm
 
 ## Message Formatting
 
-Cisco Spark supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Cisco Spark's markdown support.](https://developer.ciscospark.com/formatting-messages.html)
+Cisco Webex Teams supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Cisco Webex Teams's markdown support.](https://developer.ciscospark.com/formatting-messages.html)
 
 To specify a markdown version, add it to your message object:
 
@@ -212,7 +214,7 @@ controller.on('direct_message', function(bot, message) {
 
 ## Starting Direct Messages
 
-Cisco Spark's API provides several ways to send private messages to users -
+Cisco Webex Teams's API provides several ways to send private messages to users -
 by the user's email address, or by their user id. These may be used in the case where the
 user's email address is unknown or unavailable, or when the bot should respond to the `actor`
 instead of the `sender` of a message.
