@@ -31,20 +31,20 @@ Table of Contents
 
 
 
-## Working with Cisco Webex Teams
+## Working with Webex Teams
 
-Botkit receives messages from Cisco Webex Teams using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
+Botkit receives messages from Webex Teams using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
 
-To connect your bot to Cisco Webex Teams, [get an access token here](https://developer.ciscospark.com/add-bot.html). In addition to the access token,
-Cisco Webex Teams bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
+To connect your bot to Webex Teams, [get an access token here](https://developer.ciscospark.com/add-bot.html). In addition to the access token,
+Webex Teams bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
 
 Each time the bot application starts, Botkit will register a webhook subscription.
 Botkit will automatically manage your bot's webhook subscriptions, but if you plan on having multiple instances of your bot application with different URLs (such as a development instance and a production instance), use the `webhook_name` field with a different value for each instance.
 
-Bots in Cisco Webex Teams are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
+Bots in Webex Teams are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
 This will configure your bot to respond only to messages from members of the specific organization, or whose email addresses match one of the specified domains.
 
-The full code for a simple Cisco Webex Teams bot is below:
+The full code for a simple Webex Teams bot is below:
 
 ```javascript
 var Botkit = require('./lib/Botkit.js');
@@ -83,7 +83,7 @@ controller.on('direct_message', function(bot, message) {
 
 ## Create a Controller
 
-To connect Botkit to Cisco Webex Teams, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
+To connect Botkit to Webex Teams, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.sparkbot()
@@ -92,9 +92,9 @@ This will create a Botkit controller with [all core features](core.md#botkit-con
 | studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
 | debug | Boolean | Enable debug logging
 | public_address | _required_ the root url of your application (https://mybot.com)
-| `ciscospark_access_token` | _required_ token provided by Cisco Webex Teams for your bot
-| secret | _required_ secret for validating webhooks originate from Cisco Webex Teams
-| webhook_name | _optional_ name for webhook configuration on Cisco Webex Teams side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
+| `ciscospark_access_token` | _required_ token provided by Webex Teams for your bot
+| secret | _required_ secret for validating webhooks originate from Webex Teams
+| webhook_name | _optional_ name for webhook configuration on Webex Teams side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
 | `limit_to_org` | _optional_ organization id in which the bot should exist. If user from outside org sends message, it is ignored
 | `limit_to_domain` | _optional_ email domain (@howdy.ai) or array of domains [@howdy.ai, @botkit.ai] from which messages can be received
 
@@ -135,7 +135,7 @@ All events [listed here](https://developer.ciscospark.com/webhooks-explained.htm
 
 ## Message Formatting
 
-Cisco Webex Teams supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Cisco Webex Teams's markdown support.](https://developer.ciscospark.com/formatting-messages.html)
+Webex Teams supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Webex Teams's markdown support.](https://developer.ciscospark.com/formatting-messages.html)
 
 To specify a markdown version, add it to your message object:
 
@@ -214,7 +214,7 @@ controller.on('direct_message', function(bot, message) {
 
 ## Starting Direct Messages
 
-Cisco Webex Teams's API provides several ways to send private messages to users -
+Webex Teams's API provides several ways to send private messages to users -
 by the user's email address, or by their user id. These may be used in the case where the
 user's email address is unknown or unavailable, or when the bot should respond to the `actor`
 instead of the `sender` of a message.
