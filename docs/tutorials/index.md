@@ -4,13 +4,13 @@ For topics that are complex, or represent a feature in active development we lik
 We currently offer the following videos:
 
 ## Script Authoring
-* [How to build Q&A responses for your bot](Build_Q&A_Responses.md)
-* [Basic Conditional Branching - Building a Yes or No Question](Basic_Conditional_Branching.md)
+* [How to build Q&A responses for your bot](build_q&a_responses.md)
+* [Basic Conditional Branching - Building a Yes or No Question](basic_conditional_branching.md)
 
 ## Using Natural Language Processing 
 
-* [How to use Microsoft LUIS to Add AI to your Bot](Use_Microsoft_LUIS.md)
+* [How to use Microsoft LUIS to Add AI to your Bot](use_microsoft_luis.md)
 
 ## Advanced Topics
 * [How to add code to your Botkit Studio app
-](Adding_Code.md)
+](adding_code.md)
