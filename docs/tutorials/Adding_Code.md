@@ -1,3 +1,4 @@
+[< Tutorial home](index.md)
 # How to add code to your Botkit Studio app
 <iframe width="630" height="394" src="https://www.useloom.com/embed/9d15953e7b2544fd9a3feba66c05dbf5" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 

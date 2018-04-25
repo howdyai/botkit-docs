@@ -1,3 +1,4 @@
+[< Tutorial home](index.md)
 ## How to use Microsoft LUIS to Add AI to your Bot
 
 <iframe width="630" height="394" src="https://www.useloom.com/embed/e2f7bb876aa8480489006eb79bf603e1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
