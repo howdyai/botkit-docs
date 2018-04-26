@@ -1,5 +1,5 @@
 [< Tutorial home](index.md)
-## How to build Q&A responses for your bot
+## Make a bot that can answer common questions
 
 <iframe width="630" height="394" src="https://www.useloom.com/embed/fc5dfc03e155446d8240fa3ca3ee69a7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
