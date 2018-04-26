@@ -4,7 +4,7 @@ For topics that are complex, or represent a feature in active development we lik
 We currently offer the following videos:
 
 ## Script Authoring
-* [How to build Q&A responses for your bot](build_q&a_responses.md)
+* [How to build Q&A responses for your bot](how_to_make_question_answer_bot.md)
 * [Basic Conditional Branching - Building a Yes or No Question](basic_conditional_branching.md)
 
 ## Using Natural Language Processing 
