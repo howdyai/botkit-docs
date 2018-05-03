@@ -3,6 +3,9 @@ For topics that are complex, or represent a feature in active development we lik
 
 We currently offer the following videos:
 
+## Platform Integrations
+* [Deploy to Slack](deploy_slack.md)
+
 ## Script Authoring
 * [How to build Q&A responses for your bot](how_to_make_a_question_answer_bot.md)
 * [Basic Conditional Branching - Building a Yes or No Question](basic_conditional_branching.md)
