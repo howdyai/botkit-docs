@@ -7,7 +7,7 @@ In order to get everything set up, you will need to configure a new Slack App in
 This feature is still in very active development at Slack, and these steps are subject to change.
 
 ## Video Walkthrough
-<iframe width="630" height="394" src="https://www.useloom.com/embed/09878b1ecad74c7a89e205ad46ea336a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe width="760" height="475" src="https://www.useloom.com/embed/09878b1ecad74c7a89e205ad46ea336a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## 1. Create a new Slack App
 
