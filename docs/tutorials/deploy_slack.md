@@ -1,6 +1,6 @@
 [< Tutorial home](index.md)
 
-# Deploy a new Slack application with Botkit Studio
+# Deploy a new Slack app with Botkit Studio
 <iframe width="760" height="475" src="https://www.useloom.com/embed/09878b1ecad74c7a89e205ad46ea336a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Related Documentation
