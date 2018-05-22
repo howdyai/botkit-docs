@@ -82,7 +82,7 @@ In addition to the [core events that Botkit fires](core.md#receiving-messages-an
 
 In fact, Botkit will receive, normalize and emit any event that it receives from Slack.
 This includes all of the events [listed here](https://api.slack.com/events), as well as
-events based on the `subtype` field of incoming messages, [as listed here](https://api.slack.com/events/message)
+events based on the `subtype` field of incoming messages, [as listed here](https://api.slack.com/events/message#message_subtypes)
 
 ### Incoming Message Events
 | Event | Description
