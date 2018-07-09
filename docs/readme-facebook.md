@@ -441,6 +441,38 @@ Remove the home_url setting
 
 Get the home_url
 
+### controller.api.messenger_profile.payment_settings()
+| Argument | Description
+|---  |---
+| payload | A JSON object with the properties `privacy_url`, `public_key`, `testers`
+
+View [the facebook documentation](https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/payment-settings) for more details.
+
+### controller.api.messenger_profile.delete_payment_settings()
+
+Remove the payment_settings setting
+
+### controller.api.messenger_profile.get_payment_settings()
+
+Get the payment_settings property of your bot's Messenger Profile
+
++### controller.api.messenger_profile.payment_settings()
++| Argument | Description
++|---  |---
++| payload | A JSON object with the properties `privacy_url`, `public_key`, `testers`
++
++View [the facebook documentation](https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/payment-settings) for more details.
++
++### controller.api.messenger_profile.delete_payment_settings()
++
++Remove the payment_settings setting
++
++### controller.api.messenger_profile.get_payment_settings()
++
++Get the payment_settings property of your bot's Messenger Profile
++
+
+
 ### Using the The Messenger Profile API
 
 ```js
@@ -648,6 +680,36 @@ controller.api.handover.request_thread_control('<RECIPIENT_PSID>', 'String to pa
    
 });
 ```
+
+### Get Thread Owner
+
+Th Thread Owner API returns the app ID of the app the currently has thread control for a Page :
+
+- To get the app ID of the current thread owner :
+```javascript
+controller.api.handover.get_thread_owner('<RECIPIENT_PSID>', function (result) {
+   
+});
+```
+
+### Cancel a Scheduled Broadcast
+
+- To cancel a scheduled broadcast :
+```javascript
+controller.api.handover.cancel_scheduled_broadcast('<BROADCAST_ID>', function (result) {
+   
+});
+```
+
+### Get a Broadcast Status
+
+- To get a broadcast status :
+```javascript
+controller.api.handover.get_broadcast_status('<BROADCAST_ID>', ['scheduled_time', 'status'], function (result) {
+   
+});
+```
+
 
 ## Messaging type
 
