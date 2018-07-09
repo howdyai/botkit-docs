@@ -43,6 +43,7 @@ The `config` argument is an object with these properties:
 | studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
 | debug | Boolean | Enable debug logging
 | replyWithTyping | Boolean | Send typing indicators automatically (default false)
+| typingDelayFactor | Float | Adjust the speed of the typing delay
 
 For example:
 
@@ -51,6 +52,7 @@ var controller = Botkit.slackbot({
     debug: false,
     replyWithTyping: true,
     studio_token: process.env.studio_token,
+    typingDelayFactor: 1.3
 });
 ```
 
@@ -140,6 +142,17 @@ This function takes an instance of an http server object - that is, the results 
 It connects a `ws` powered websocket server to the web server, and allows the application to accept socket connections directly with the bot.
 
 [A compatible webserver is provided in the starter kit](https://github.com/howdyai/botkit-starter-web/blob/master/components/express_webserver.js).
+
+#### controller.setTypingDelayFactor(delayFactor);
+
+Adjust the speed of the typing delay by setting a factor. The typing delay determines the time that the bot takes, to reply to a message. By default, the factor is set to 1, using a predefined calculation for the typing delay, that takes the message length into account. In order to increase or decrease the typing delay, the factor can be changed. For example, the default typing delay can be doubled by setting the factor to 2.
+
+**For example:**
+
+```
+// double the time of the typing delay
+controller.setTypingDelayFactor(2);
+```
 
 ## Additional Bot Instance Methods
 
