@@ -23,6 +23,7 @@ module.exports = function(Botkit, config) {
         // the message object should be in the proper format already
         bot.send = function(message, cb) {
             console.log('SEND: ', message);
+            cb();
         }
 
         // this function takes an incoming message (from a user) and an outgoing message (reply from bot)
@@ -34,7 +35,7 @@ module.exports = function(Botkit, config) {
              }
           }
           resp.channel = src.channel;
-          bot.say(message, cb);
+          bot.say(resp, cb);
         }
 
         // this function defines the mechanism by which botkit looks for ongoing conversations
