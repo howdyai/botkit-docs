@@ -261,3 +261,6 @@ controller.on('bot_space_join', function(bot, message) {
 #### controller.resetWebhookSubscriptions()
 
 #### controller.handleWebhookPayload()
+
+# Join the Cisco Webex Teams Bokit developer channel.
+Cisco hosts a Botkit Developer team [over on their public webex team channel](https://eurl.io/#SyNZuomKx). You can pop in here if you have questions about developing for Webex teams.
