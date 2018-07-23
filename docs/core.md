@@ -91,7 +91,7 @@ controller.on('message_received', function(bot, message) {
 });
 ```
 
-### Middleware error Events
+### Middleware Error Events
 
 | Event | Description
 |-- |--
