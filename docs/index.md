@@ -18,13 +18,6 @@ Botkit offers everything you need to design, build and operate an app:
 
 [**New to Botkit?** Read our full guide to getting started with Botkit](/getstarted.html).
 
-
-### **Guided Process with Botkit Studio**
-
-Sign up for a free Botkit Studio account, and it will guide you through the process to create, configure and deploy your Botkit app!
-
-**[![Sign up for Botkit Studio](studio.png)](https://studio.botkit.ai/signup?code=readme)**
-
 ### **Remix on Glitch**
 
 Want to dive right in? [Remix one of our starter kits on Glitch](https://glitch.com/botkit). You'll start with a fully functioning app that you can edit and run from the browser!
