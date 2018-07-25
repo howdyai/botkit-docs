@@ -135,5 +135,4 @@ controller.middleware.send.use(function(bot, message, next) {
 # What's Next?
 
 * [Continue learning about Botkit's core features](core.md)
-* [See how Botkit Studio's content management system can power dynamic conversations](readme-studio.md)
 * [View set-up guides for all the major platforms](provisioning/)
