@@ -13,8 +13,7 @@ Table of Contents
 
 2. Create a Botkit powered Node app:
 
-  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
-  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-teams)
+  * [Remix the starter project on Glitch](https://glitch.com/~botkit-teams)
   * Or: Use the command line tool:
 
   ```
