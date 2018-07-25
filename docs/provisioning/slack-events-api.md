@@ -61,7 +61,7 @@ Once verified, click "Add Bot User Event", and using the dropdown that appears, 
 
 * `message.channels`
 * `message.groups`
-* `message.ims`
+* `message.im`
 *  `message.mpim`
 
 This configuration tells Slack to send your bot all messages that are sent in any channel or group in which your bot is present. Add other events as needed. 
