@@ -19,7 +19,7 @@ Table of Contents
 
 2. Create a Botkit powered Node app:
 
-  * [Remix the starter project on Glitch](https://glitch.com/~botkit-ciscospark)
+  * [Remix the starter project on Glitch](https://glitch.com/~botkit-cisco-webex-teams)
   * Or: Use the command line tool:
 
   ```
