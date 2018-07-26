@@ -16,7 +16,7 @@ Everything you need to build a Slack application or custom internal integration
 
 Everything you need to build a bot, compose extension or tab for Microsoft Teams
 
-## [Cisco Spark Starter Kit](https://github.com/howdyai/botkit-starter-ciscospark)
+## [Cisco Webex Teams Starter Kit](https://github.com/howdyai/botkit-starter-ciscospark)
 
 Everything you need to build a custom bot for Cisco Spark
 
