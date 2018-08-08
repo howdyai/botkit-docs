@@ -48,7 +48,7 @@ The `config` argument is an object with these properties:
 For example:
 
 ```javascript
-var controller = Botkit.slackbot({
+var controller = Botkit.anywhere({
     debug: false,
     replyWithTyping: true,
     studio_token: process.env.studio_token,
