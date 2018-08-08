@@ -32,6 +32,7 @@ These plugins help you measure the success of your bots, across a variety of mea
 |  Mongo | https://github.com/howdyai/botkit-storage-mongo | A Mongo storage module for Botkit |
 |  Redis | https://github.com/howdyai/botkit-storage-redis | A redis storage module for Botkit |
 |  Datastore | https://github.com/fabito/botkit-storage-datastore | A Google Cloud Datastore storage module for Botkit |
+|  Firestore | https://github.com/shishirsharma/botkit-storage-firestore | A Firestore storage module for Botkit. |
 |  Firebase | https://github.com/howdyai/botkit-storage-firebase | A Firebase storage module for Botkit. |
 |  Postgres | https://github.com/lixhq/botkit-storage-postgres | Postgres storage module for Botkit<br/> |
 |  CouchDB | https://github.com/mbarlock/botkit-storage-couchdb/ | A Couchdb storage module for botkit |
