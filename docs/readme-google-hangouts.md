@@ -85,7 +85,7 @@ Here's an example on how to handler incoming events :
 ```javascript
 controller.hears('hello', 'message_received', function (bot, message) { ... });
 controller.hears('hi', 'direct_message', function (bot, message) { ... });
-controller.on('bot_room_leave',, function (bot, message) { ... });
+controller.on('bot_room_leave', function (bot, message) { ... });
 ```
 ## Send simple text messages
 
