@@ -69,7 +69,6 @@ var controller = Botkit.googlehangoutsbot({
 
 In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some platform specific events.
 
-
 ### Incoming Events
 
 | Event | Description
@@ -88,7 +87,7 @@ controller.hears('hello', 'message_received', function (bot, message) { ... });
 controller.hears('hi', 'direct_message', function (bot, message) { ... });
 controller.on('bot_room_leave',, function (bot, message) { ... });
 ```
-#### Send simple text messages
+## Send simple text messages
 
 These messages are displayed like any other chat message. They can include simple character formatting.
 
@@ -142,7 +141,7 @@ To send a message into Hangouts Chat as a new thread:
 bot.replyAsNewThread(message, `Hello ! this is a new thread`);
 ````
 
-#### Send card messages
+## Send card messages
 
 These messages contain all the details that Hangouts Chat needs to render a card in the chat room. These details include any text, special formatting, widgets, and other details used in the card.
 
