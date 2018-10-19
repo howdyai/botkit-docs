@@ -23,7 +23,7 @@ Table of Contents
   * Or: Use the command line tool:
 
   ```
-  botkit new --platform spark
+  botkit new --platform webex
   ```
 
 3. [Follow this guide to configuring the Cisco Webex Teams API](/docs/provisioning/cisco-spark.md)
@@ -56,7 +56,6 @@ var controller = Botkit.sparkbot({
     secret: process.env.secret
 });
 
-
 var bot = controller.spawn({
 });
 
@@ -77,7 +76,6 @@ controller.on('direct_mention', function(bot, message) {
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
 });
-
 ```
 
 ## Create a Controller
