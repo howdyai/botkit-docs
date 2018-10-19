@@ -182,5 +182,4 @@ controller.hears('cards', 'message_received', function (bot, message) {
         }
     });
 });
-````
-
+```
