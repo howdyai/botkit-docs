@@ -1,17 +1,16 @@
-# Botkit and Cisco Webex Teams
-
-*Note: Cisco Spark is [now Cisco Webex Teams](https://blogs.cisco.com/collaboration/webex-platform-convergence?_ga=2.75241682.1559193461.1524070554-1809816543.1524070554). Versions of Botkit from 0.6.17 onward refer to [Webex](readme-webex.html).
+# Botkit and Webex Teams
 
 Table of Contents
 
 * [Getting Started](#getting-started)
 * [Create a Controller](#create-a-controller)
-* [Webex Teams-specific Events](#event-list)
+* [Webex-specific Events](#webex-specific-events)
 * [Message Formatting](#message-formatting)
 * [Attaching Files](#attaching-files)
 * [Receiving Files](#receiving-files)
 * [Starting Direct Messages](#starting-direct-messages)
 
+*Note*: Documentation for the legacy, pre-rebrand [Cisco Spark version of Botkit is here.](readme-ciscospark.html)
 
 ## Getting Started
 
@@ -28,41 +27,37 @@ Table of Contents
 
 3. [Follow this guide to configuring the Cisco Webex Teams API](/docs/provisioning/cisco-spark.md)
 
+## Working with Webex
 
+Botkit receives messages from the Cisco Webex cloud platform using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
 
-## Working with Webex Teams
-
-Botkit receives messages from Webex Teams using webhooks, and sends messages using their APIs. This means that your bot application must present a web server that is publicly addressable. Everything you need to get started is already included in Botkit.
-
-To connect your bot to Webex Teams, [get an access token here](https://developer.ciscospark.com/add-bot.html). In addition to the access token,
-Webex Teams bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
+To connect your bot to Webex, [get an access token here](https://developer.webex.com/add-bot.html). In addition to the access token,
+Webex bots require a user-defined `secret` which is used to validate incoming webhooks, as well as a `public_address` which is the URL at which the bot application can be accessed via the internet.
 
 Each time the bot application starts, Botkit will register a webhook subscription.
 Botkit will automatically manage your bot's webhook subscriptions, but if you plan on having multiple instances of your bot application with different URLs (such as a development instance and a production instance), use the `webhook_name` field with a different value for each instance.
 
-Bots in Webex Teams are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
+Bots in Webex are identified by their email address, and can be added to any space in any team or organization. If your bot should only be available to users within a specific organization, use the `limit_to_org` or `limit_to_domain` options.
 This will configure your bot to respond only to messages from members of the specific organization, or whose email addresses match one of the specified domains.
 
-The full code for a simple Webex Teams bot is below:
+The full code for a simple Webex bot is below:
 
-```javascript
-var Botkit = require('./lib/Botkit.js');
+~~~ javascript
+var Botkit = require('botkit');
 
-var controller = Botkit.sparkbot({
+var controller = Botkit.webexbot({
     debug: true,
     log: true,
     public_address: process.env.public_address,
-    ciscospark_access_token: process.env.access_token,
+    access_token: process.env.access_token,
     secret: process.env.secret
 });
 
-
-var bot = controller.spawn({
-});
+var bot = controller.spawn({});
 
 controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
     controller.createWebhookEndpoints(webserver, bot, function() {
-        console.log("SPARK: Webhooks set up!");
+        console.log("Webhooks set up!");
     });
 });
 
@@ -77,55 +72,47 @@ controller.on('direct_mention', function(bot, message) {
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
 });
-
-```
+~~~
 
 ## Create a Controller
 
-To connect Botkit to Webex Teams, use the Spark constructor method, [Botkit.sparkbot()](#botkitsparkbot).
-This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
+When creating the Botkit controller, there are several platform-specific options available.
 
-#### Botkit.sparkbot()
+### Botkit.webexbot
 | Argument | Description
 |--- |---
-| studio_token | String | An API token from [Botkit Studio](#readme-studio.md)
-| debug | Boolean | Enable debug logging
 | public_address | _required_ the root url of your application (https://mybot.com)
-| `ciscospark_access_token` | _required_ token provided by Webex Teams for your bot
-| secret | _required_ secret for validating webhooks originate from Webex Teams
-| webhook_name | _optional_ name for webhook configuration on Webex Teams side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
+| `access_token` | _required_ token provided by Webex for your bot
+| secret | _required_ secret for validating webhooks originate from Webex
+| webhook_name | _optional_ name for webhook configuration on Webex side. Providing a name here allows for multiple bot instances to receive the same messages. Defaults to 'Botkit Firehose'
 | `limit_to_org` | _optional_ organization id in which the bot should exist. If user from outside org sends message, it is ignored
 | `limit_to_domain` | _optional_ email domain (@howdy.ai) or array of domains [@howdy.ai, @botkit.ai] from which messages can be received
 
-```javascript
-var controller = Botkit.sparkbot({
+~~~ javascript
+var controller = Botkit.webexbot({
     debug: true,
     log: true,
     public_address: 'https://mybot.ngrok.io',
-    ciscospark_access_token: process.env.access_token,
+    access_token: process.env.access_token,
     secret: 'randomstringofnumbersandcharacters12345',
     webhook_name: 'dev',
-    limit_to_org: 'my_spark_org_id',
+    limit_to_org: 'my_webex_org_id',
     limit_to_domain: ['@howdy.ai','@cisco.com'],
 });
-```
+~~~
 
-## Event List
 
-In addition to the [core events that Botkit fires](core.md#receiving-messages-and-events), this connector also fires some  platform specific events.
+## Webex Specific Events
 
-All events [listed here](https://developer.ciscospark.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
+ All events [listed here](https://developer.webex.com/webhooks-explained.html#resources-events) should be expected, in the format `resource`.`event` - for example, `rooms.created`.  
 
-### Incoming Message Events
+ In addition, the following custom Botkit-specific events are fired:
+
 | Event | Description
 |--- |---
 | direct_message | Bot has received a message as a DM
 | direct_mention | Bot has been mentioned in a public space
 | self_message | Bot has received a message it sent
-
-### User Activity Events:
-| Event | Description
-|--- |---
 | user_space_join | a user has joined a space in which the bot is present
 | bot_space_join | the bot has joined a new space
 | user_space_leave | a user has left a space in which the bot is present
@@ -134,13 +121,13 @@ All events [listed here](https://developer.ciscospark.com/webhooks-explained.htm
 
 ## Message Formatting
 
-Webex Teams supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Webex Teams's markdown support.](https://developer.ciscospark.com/formatting-messages.html)
+Webex supports both a `text` field and a `markdown` field for outbound messages. [Read here for details on Webex's markdown support.](https://developer.webex.com/formatting-messages.html)
 
 To specify a markdown version, add it to your message object:
 
-```javascript
+~~~ javascript
 bot.reply(message,{text: 'Hello', markdown: '*Hello!*'});
-```
+~~~
 
 ## Attaching Files
 
@@ -150,70 +137,70 @@ Files can be attached to outgoing messages in one of two ways.
 
 If the file you wish to attach is already available online, simply specify the URL in the `files` field of the outgoing message:
 
-```javascript
+~~~ javascript
 bot.reply(message,{text:'Here is your file!', files:['http://myserver.com/file.pdf']});
-```
+~~~
 
 *Send Local File*
 
 If the file you wish to attach is present only on the local server, attach it to the message as a readable stream:
 
-```javascript
+~~~ javascript
 var fs = require('fs');
 bot.reply(message,{text: 'I made this file for you.', files:[fs.createReadStream('./newfile.txt')]});
-```
+~~~
 
 ## Receiving files
 
-Your bot may receive messages with files attached. Attached files will appear in an array called `message.original_message.files`.
+Your bot may receive messages with files attached. Attached files will appear in an array called `message.data.files`.
 
 Botkit provides 2 methods for retrieving information about the file.
 
 ### bot.retrieveFileInfo(url, cb)
 | Parameter | Description
 |--- |---
-| url | url of file from message.original_message.files
+| url | url of file from message.data.files
 | cb | callback function in the form function(err, file_info)
 
 The callback function will receive an object with fields like `filename`, `content-type`, and `content-length`.
 
-```javascript
+~~~ javascript
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
-    if (message.original_message.files) {
-        bot.retrieveFileInfo(message.original_message.files[0], function(err, file_info) {
+    if (message.data.files) {
+        bot.retrieveFileInfo(message.data.files[0], function(err, file_info) {
             bot.reply(message,'I also got an attached file called ' + file_info.filename);
         });
     }
 });
-```
+~~~
 
 ### bot.retrieveFile(url, cb)
 | Parameter | Description
 |--- |---
-| url | url of file from message.original_message.files
+| url | url of file from message.data.files
 | cb | callback function in the form function(err, file_content)
 
 The callback function will receive the full content of the file.
 
-```javascript
+~~~ javascript
 controller.on('direct_message', function(bot, message) {
     bot.reply(message, 'I got your private message. You said, "' + message.text + '"');
-    if (message.original_message.files) {
-        bot.retrieveFileInfo(message.original_message.files[0], function(err, file_info) {
+    if (message.data.files) {
+        bot.retrieveFileInfo(message.data.files[0], function(err, file_info) {
             if (file_info['content-type'] == 'text/plain') {
-                bot.retrieveFile(message.original_message.files[0], function(err, file) {
+                bot.retrieveFile(message.data.files[0], function(err, file) {
                     bot.reply(message,'I got a text file with the following content: ' + file);
                 });
             }
         });
     }
 });
-```
+~~~
 
 ## Starting Direct Messages
 
-Webex Teams's API provides several ways to send private messages to users -
+Webex's API provides several ways to send private messages to users -
 by the user's email address, or by their user id. These may be used in the case where the
 user's email address is unknown or unavailable, or when the bot should respond to the `actor`
 instead of the `sender` of a message.
@@ -222,7 +209,7 @@ For example, a bot may use these methods when handling a `bot_space_join` event
 in order to send a message to the _user who invited the bot_ (the actor) instead of
 the bot itself (the sender).
 
-NOTE: Core functions like [bot.startPrivateConversation()](core.md#botstartprivateconversation) work as expected,
+NOTE: Core functions like [bot.startPrivateConversation()](readme.md#botstartprivateconversation) work as expected,
 and will create a direct message thread with the sender of the incoming_message.
 
 ### bot.startPrivateConversationWithPersonId()
@@ -234,9 +221,9 @@ and will create a direct message thread with the sender of the incoming_message.
 Use this function to send a direct message to a user by their personId, which
 can be found in message and event payloads at the following location:
 
-```javascript
+~~~ javascript
 var personId = message.original_message.actorId;
-```
+~~~
 
 ### bot.startPrivateConversationWithActor())
 | Parameter | Description
@@ -244,22 +231,50 @@ var personId = message.original_message.actorId;
 | incoming_message | a message or event that has an actorId defined in message.original_message.actorId
 | cb | callback function in the form function(err, file_content)
 
-```javascript
+~~~ javascript
 controller.on('bot_space_join', function(bot, message) {
   bot.startPrivateConversationWithActor(message, function(err, convo) {
     convo.say('The bot you invited has joined the channel.');
   });
 });
-```
+~~~
 
 
-# Additional Controller methods
+### Webex rebrand
 
-#### controller.createWebhookEndpoints()
+Back in April 2018, Cisco announced a [rebrand from Cisco Spark to Webex](https://developer.webex.com/blog/blog-details-9738.html).
+In May 2018, starting with version 0.6.17, Botkit reflected this rebrand by updated 'Spark' mentions from the framework API.
 
-#### controller.resetWebhookSubscriptions()
+**For backward compatibility purposes**, several references are now marked as deprecated, but still supported (except for Typescript code). Please migrate your code if your find references to:
+- Botkit.sparkbot() => Botkit.webexbot()
+- controller.config.ciscospark_access_token => controller.config.access_token: a warning shows up in the console if your code is still using this option.
 
-#### controller.handleWebhookPayload()
+**Breaking changes**
+- bot.type now equals 'webex' instead of 'ciscospark': there should not be any impact in your code.
+- the webhook HTTP endpoint automatically created and exposed by Botkit has been changed from '/ciscospark/receive' to '/webex/receive'. Note that this change can have an impact for the Webex Cloud platform to reach your bot if the traffic to your bot is routed by a reverse proxy. _To avoid any bot to break, the Botkit Webex connector will expose an HTTP endpoint with the deprecated '/ciscospark/receive' path if the 'ciscospark_access_token' configuration property is detected._
 
-# Join the Cisco Webex Teams Bokit developer channel.
-Cisco hosts a Botkit Developer team [over on their public webex team channel](https://eurl.io/#SyNZuomKx). You can pop in here if you have questions about developing for Webex teams.
+
+## Documentation
+
+* [Get Started](readme.md)
+* [Botkit Studio API](readme-studio.md)
+* [Function index](readme.md#developing-with-botkit)
+* [Starter Kits](readme-starterkits.md)
+* [Extending Botkit with Plugins and Middleware](middleware.md)
+  * [Message Pipeline](readme-pipeline.md)
+  * [List of current plugins](readme-middlewares.md)
+* [Storing Information](storage.md)
+* [Logging](logging.md)
+* Platforms
+  * [Web and Apps](readme-web.md)
+  * [Slack](readme-slack.md)
+  * [Webex](readme-webex.md)
+  * [Microsoft Teams](readme-teams.md)
+  * [Facebook Messenger](readme-facebook.md)
+  * [Twilio SMS](readme-twiliosms.md)
+  * [Twilio IPM](readme-twilioipm.md)
+  * [Microsoft Bot Framework](readme-botframework.md)
+* Contributing to Botkit
+  * [Contributing to Botkit Core](../CONTRIBUTING.md)
+  * [Building Middleware/plugins](howto/build_middleware.md)
+  * [Building platform connectors](howto/build_connector.md)
