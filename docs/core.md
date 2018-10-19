@@ -91,6 +91,21 @@ controller.on('message_received', function(bot, message) {
 });
 ```
 
+### Middleware Error Events
+
+| Event | Description
+|-- |--
+| receive_error | An error happend while processing the message in a recieve middleware.
+
+Here is an example of a handler for an error event:
+
+```javascript
+controller.on('receive_error', function(err, bot, message) {
+    bot.reply(message, `There was an error processing your request.
+      Please try again later. Error: ${err.toString()}`);
+  });
+```
+
 ### Conversation Lifecycle Events
 
 | Event | Description
