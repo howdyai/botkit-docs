@@ -13,8 +13,7 @@ Table of Contents
 
 2. Create a Botkit powered Node app:
 
-  * [Deploy a pre-configured app using Botkit Studio](https://studio.botkit.ai)
-  * Or: [Remix the starter project on Glitch](https://glitch.com/~botkit-slack)
+  * [Remix the starter project on Glitch](https://glitch.com/~botkit-hangouts)
   * Or: Use the command line tool:
 
   ```
@@ -76,25 +75,19 @@ In addition to the [core events that Botkit fires](core.md#receiving-messages-an
 | Event | Description
 |--- |---
 | message_received | The bot received a direct message from a user
-| room_join | This event indicates that your bot was added to a room
 | direct_message | This event indicates that your bot was added to a DM
-| room_leave | This event indicates that your bot was removed from a room
-| remove_conversation | This event indicates that your bot was removed from a DM
+| bot_room_join | This event indicates that your bot was added to a shared room
+| bot_room_leave | This event indicates that your bot was removed from a shared room
+| bot_dm_join | This event indicates that your bot was added to a 1:1
+| bot_dm_leave | This event indicates that your bot was removed from a 1:1
  
-Her's an example on how to handler incoming events :
+Here's an example on how to handler incoming events :
  
 ```javascript
 controller.hears('hello', 'message_received', function (bot, message) { ... });
 controller.hears('hi', 'direct_message', function (bot, message) { ... });
-controller.on('room_leave',, function (bot, message) { ... });
+controller.on('bot_room_leave',, function (bot, message) { ... });
 ```
- 
-
-### Send message
-
-The bot may send a message to the chat in response to the event. This message is a JSON object, whose contents depend on what kind of message it is:
-
-
 #### Send simple text messages
 
 These messages are displayed like any other chat message. They can include simple character formatting.
@@ -148,7 +141,6 @@ To send a message into Hangouts Chat as a new thread:
 ```javascript
 bot.replyAsNewThread(message, `Hello ! this is a new thread`);
 ````
-
 
 #### Send card messages
 
