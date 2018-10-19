@@ -23,7 +23,7 @@ Table of Contents
   * Or: Use the command line tool:
 
   ```
-  botkit new --platform webex
+  botkit new --platform spark
   ```
 
 3. [Follow this guide to configuring the Cisco Webex Teams API](/docs/provisioning/cisco-spark.md)
