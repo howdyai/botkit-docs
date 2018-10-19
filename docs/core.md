@@ -95,16 +95,28 @@ controller.on('message_received', function(bot, message) {
 
 | Event | Description
 |-- |--
-| receive_error | An error happend while processing the message in a recieve middleware.
+| ingest_error | An error happend while processing the message in an ingest middleware.
+| normalize_error | An error happend while processing the message in a normalize middleware.
+| categorize_error | An error happend while processing the message in a categorize middleware.
+| receive_error | An error happend while processing the message in a receive middleware.
 
 Here is an example of a handler for an error event:
 
 ```javascript
 controller.on('receive_error', function(err, bot, message) {
-    bot.reply(message, `There was an error processing your request.
-      Please try again later. Error: ${err.toString()}`);
-  });
+    bot.reply(message, `There was an error processing your request. Please try again later. Error: ${err.toString()}`);
+});
 ```
+
+You can also capture errors in _any_ middleware by handling the `pipeline_error` event:
+
+```javascript
+controller.on('receive_error', function(err, bot, message, pipeline_stage) {
+    bot.reply(message, `There was an error processing your request. Please try again later. Error: ${err.toString()}`);
+});
+```
+
+
 
 ### Conversation Lifecycle Events
 
