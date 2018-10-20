@@ -201,7 +201,7 @@ Categorization is the third phase of the message pipeline.
 After passing through the catgorize phase, the message object's `type` field
 should represent a the final event type that will be handled by Botkit.
 
-The most obvious example of a categorization action is identifying and transforming a message from a generic `message_received` event into more narrowly defined `direct_mention`, `direct_mention`, `mention` or `ambient` message event.
+The most obvious example of a categorization action is identifying and transforming a message from a generic `message_received` event into more narrowly defined `direct_message`, `direct_mention`, `mention` or `ambient` message event.
 
 In addition to changing the message `type` field, the `categorize` middleware may also
 change the value of the `message.text` field. For example, it should _remove direct mentions from the text_ so that developers do not have to compensate for its possible presence in the input text.
