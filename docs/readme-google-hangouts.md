@@ -79,6 +79,7 @@ In addition to the [core events that Botkit fires](core.md#receiving-messages-an
 | bot_room_leave | This event indicates that your bot was removed from a shared room
 | bot_dm_join | This event indicates that your bot was added to a 1:1
 | bot_dm_leave | This event indicates that your bot was removed from a 1:1
+| card_clicked | The bot received a card click
  
 Here's an example on how to handler incoming events :
  
@@ -86,6 +87,7 @@ Here's an example on how to handler incoming events :
 controller.hears('hello', 'message_received', function (bot, message) { ... });
 controller.hears('hi', 'direct_message', function (bot, message) { ... });
 controller.on('bot_room_leave', function (bot, message) { ... });
+controller.on('card_clicked', function (bot, message) { ... });
 ```
 ## Send simple text messages
 
