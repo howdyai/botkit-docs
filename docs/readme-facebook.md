@@ -20,6 +20,7 @@ Table of Contents
 * [Messaging type](#messaging-type)
 * [Broadcast Messages API](#broadcast-messages-api)
 * [Messaging Insights API](#messaging-insights-api)
+* [Personas API](#personas-api)
 * [Running Botkit with an Express server](#use-botkit-for-facebook-messenger-with-an-express-web-server)
 
 ## Getting Started
@@ -912,6 +913,49 @@ controller.api.insights.get_insights('page_messages_active_threads_unique', null
     console.log(err);
 });
 ```
+
+
+## Personas API
+
+The Facebook Personas API allows a business to introduce a virtual “persona” into the thread. 
+
+To create a new persona :
+```javascript
+controller.api.personas.create({
+    'name': 'Botkit',
+    'profile_picture_url': 'https://pbs.twimg.com/profile_images/803642201653858305/IAW1DBPw_400x400.png'
+})
+```
+To sending Messages as a persona :
+```javascript
+bot.reply(message, {
+    'text' : 'Hello from the new created persona',
+    'persona_id' : YOUR_PERSONA_ID
+});
+```
+You can also use ```.startTyping``` and ```.stopTyping``` from a persona to control indicators for typing in the conversation :
+```javascript
+bot.startTyping({
+    channel : message.channel,
+    persona_id : YOUR_PERSONA_ID
+});
+```
+
+To get an existing persona by id :
+```javascript
+controller.api.personas.get_persona(YOUR_PERSONA_ID)
+```
+
+To retrieving all available personas :
+```javascript
+controller.api.personas.get_all_personas()
+```
+
+To delete a persona by id :
+```javascript
+controller.api.personas.delete_persona(YOUR_PERSONA_ID)
+```
+
 
 ## Use BotKit for Facebook Messenger with an Express web server
 Instead of the web server generated with setupWebserver(), it is possible to use a different web server to receive webhooks, as well as serving web pages.
