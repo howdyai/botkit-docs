@@ -45,6 +45,20 @@ controller.hears('hello','message_received',function(bot,message) {
 
 });
 ```
+## Botkit Statistics Gathering
+
+Versions 0.4 through 0.6.19 of Botkit transmit anonymous usage statistics which were at one time used by the Botkit team at [Howdy](http://howdy.ai) to measure and analyze the Botkit community. This statistic gathering is no longer active, and the endpoint for collecting this information has been disabled. We recommend developers upgrade to the latest version of Botkit, or disable this functionality by specifying the `stats_optout` option described below.
+
+### Opt Out of Stats
+
+To opt out of the stats collection, pass in the `stats_optout` parameter when initializing Botkit,
+as seen in the example below:
+
+```javascript
+var controller = Botkit.anywhere({
+    stats_optout: true
+});
+```
 
 ## Receiving Messages and Events
 
@@ -468,29 +482,6 @@ This thread should be called `on_timeout`.
 convo.addMessage('Oh no! The time limit has expired.','on_timeout');
 convo.addMessage('TTYL.','on_timeout');
 ```
-
-## Botkit Statistics Gathering
-
-As of version 0.4, Botkit records anonymous usage statistics about Botkit bots in the wild.
-These statistics are used by the Botkit team at [Howdy](http://howdy.ai) to measure and
-analyze the Botkit community, and help to direct resources to the appropriate parts of the project.
-
-We take the privacy of Botkit developers and their users very seriously. Botkit does not collect,
-or transmit any message content, user data, or personally identifiable information to our statistics system.
-The information that is collected is anonymized inside Botkit and converted using one-way encryption
-into a hash before being transmitted.
-
-### Opt Out of Stats
-
-To opt out of the stats collection, pass in the `stats_optout` parameter when initializing Botkit,
-as seen in the example below:
-
-```javascript
-var controller = Botkit.anywhere({
-    stats_optout: true
-});
-```
-
 
 # Botkit Controller Object
 
