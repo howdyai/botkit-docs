@@ -49,6 +49,8 @@ controller.hears('hello','message_received',function(bot,message) {
 
 Versions 0.4 through 0.6.19 of Botkit transmit anonymous usage statistics which were at one time used by the Botkit team at [Howdy](http://howdy.ai) to measure and analyze the Botkit community. This statistic gathering is no longer active, and the endpoint for collecting this information has been disabled. We recommend developers upgrade to the latest version of Botkit, or disable this functionality by specifying the `stats_optout` option described below.
 
+Note: Version 0.6.20 and above no longer transmit this information.
+
 ### Opt Out of Stats
 
 To opt out of the stats collection, pass in the `stats_optout` parameter when initializing Botkit,
