@@ -36,7 +36,7 @@ If you want to use a database or do something else with your data,
 you can write your own storage module and pass it in.
 
 Make sure your module returns an object with all the methods. See [simple_storage.js](https://github.com/howdyai/botkit/blob/master/lib/storage/simple_storage.js) for an example of how it is done!
-Make sure your module passes the test in [storage_test.js](https://github.com/howdyai/botkit/blob/master/lib/storage/storage_test.js).
+Make sure your module passes the test in [storage_test.js](https://github.com/howdyai/botkit/blob/master/tests/unit/storage.test.js).
 
 Then, use it when you create your bot:
 ```javascript
