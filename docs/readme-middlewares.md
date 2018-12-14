@@ -12,6 +12,12 @@ Storage middleware can be used for storing attributes about a user or channel or
 ### [Statistics, Metrics, and CRM](#statistics-metrics-and-crm-1)
 These plugins help you measure the success of your bots, across a variety of measurable methods.
 
+## Botkit Extensions
+Name | Project PAge | Info |
+|  ------ | ------ | ------ |
+| Botkit CMS | https://github.com/howdyai/botkit-cms | Description 
+An open tool for designing, building and managing interactive dialog systems |
+
 
 ## Natural Language Processing
 
@@ -43,9 +49,6 @@ These plugins help you measure the success of your bots, across a variety of mea
 
 |  Name | Project Page | Info |
 |  ------ | ------ | ------ |
-|  Botimize | https://github.com/botimize/botimize-botkit-middleware | Optimize your bot for happier customers, scientifically.|
-|  Botkit Studio Metrics | https://github.com/howdyai/botkit-studio-metrics | This module enables the advanced analytics and extended metrics available in [Botkit Studio](http://www.botkit.ai). |
-|  Botmetrics | https://github.com/botmetrics/botkit-middleware-botmetrics | Botmetrics is an analytics and engagement platform for chatbots. |
 |  Chatbase | https://github.com/asopinka/chatbase-botkit | A middleware package for Botkit that easily logs your convos in Chatbase|
 |  Dashbot Facebook | https://www.dashbot.io/sdk/slack/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
 |  Dashbot Slack | https://www.dashbot.io/sdk/facebook/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
