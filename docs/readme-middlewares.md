@@ -12,7 +12,7 @@ Storage middleware can be used for storing attributes about a user or channel or
 ### [Statistics, Metrics, and CRM](#statistics-metrics-and-crm-1)
 These plugins help you measure the success of your bots, across a variety of measurable methods.
 
-## Botkit Extensions
+## Official Botkit Extensions
 Name | Project PAge | Info |
 |  ------ | ------ | ------ |
 | Botkit CMS | https://github.com/howdyai/botkit-cms | An open tool for designing, building and managing interactive dialog systems |
@@ -29,6 +29,11 @@ Name | Project PAge | Info |
 |  Recast.ai | https://github.com/ouadie-lahdioui/botkit-middleware-recastai | You can use the Recast.AI API to analyse your text or your audio file, and extract useful information from it, to personalize your IoT, classify your data or create bots.<br/><br/> |
 |  Wit.ai | https://github.com/howdyai/botkit-middleware-witai | Wit.ai provides a service that uses machine learning to help developers handle natural language input. The Wit API receives input from the user, and translates it into one or more "intents" which map to known actions or choices. The power of Wit is that it can continually be trained to understand more and more responses without changing the underlying bot code!<br/><br/> |
 |  Rasa | https://github.com/howdyai/botkit-rasa | This plugin provides Botkit developers a way to use the rasa NLU open source, self hosted natural language API.<br/><br/><br/> |
+
+## Utilities
+|  Name | Project Page | Info |
+|  ------ | ------ | ------ |
+| Janis | https://github.com/Janis-ai/npm-janis | Janis is an AI management toolkit that enables teams working in Slack to collaborate on AI training, monitor bots for problems, and quickly resolve and prevent business-impacting incidents. | 
 |  Facebook | https://github.com/pinkku/botkit-middleware-facebookuser | This plugin allows you to collect Facebook Messenger user info to populate a Botkit message<br/><br/><br/> |
 
 ## Storage Modules
