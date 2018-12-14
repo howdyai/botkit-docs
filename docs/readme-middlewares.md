@@ -49,8 +49,8 @@ Name | Project PAge | Info |
 |  Name | Project Page | Info |
 |  ------ | ------ | ------ |
 |  Chatbase | https://github.com/asopinka/chatbase-botkit | A middleware package for Botkit that easily logs your convos in Chatbase|
-|  Dashbot Facebook | https://www.dashbot.io/sdk/slack/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
-|  Dashbot Slack | https://www.dashbot.io/sdk/facebook/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
+|  Dashbot Slack | https://www.dashbot.io/sdk/slack/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
+|  Dashbot Facebook | https://www.dashbot.io/sdk/facebook/botkit | Increase user engagement, acquisition, and monetization through actionable bots analytics. |
 |  Keen | https://github.com/keen/keen-botkit | This middleware allows you to to understand how many messages are going through your system, run cohorts to measure retention, set up funnels to measure task completion, and any key metric unique to your bot. More information about the Keen platform can be found on their website |
 |  Mixpanel | https://github.com/shishirsharma/botkit-mixpanel |This module enables the basic Mixpanel analytics. With this module installed and enabled, your Botkit application will automatically send a copy of any message your bot receives to Mixpanel's analytics API, as well as user profile information. |
 
