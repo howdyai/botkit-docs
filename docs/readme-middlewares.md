@@ -15,8 +15,7 @@ These plugins help you measure the success of your bots, across a variety of mea
 ## Botkit Extensions
 Name | Project PAge | Info |
 |  ------ | ------ | ------ |
-| Botkit CMS | https://github.com/howdyai/botkit-cms | Description 
-An open tool for designing, building and managing interactive dialog systems |
+| Botkit CMS | https://github.com/howdyai/botkit-cms | An open tool for designing, building and managing interactive dialog systems |
 
 
 ## Natural Language Processing
