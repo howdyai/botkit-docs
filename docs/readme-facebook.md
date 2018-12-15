@@ -917,7 +917,7 @@ controller.api.insights.get_insights('page_messages_active_threads_unique', null
 
 ## Personas API
 
-The Facebook Personas API allows a business to introduce a virtual “persona” into the thread. 
+The [Facebook Personas API](https://developers.facebook.com/docs/messenger-platform/send-messages/personas/) allows a business to introduce a virtual "persona" into the thread. 
 
 To create a new persona :
 ```javascript
