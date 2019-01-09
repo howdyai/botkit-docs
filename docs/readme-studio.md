@@ -1,6 +1,8 @@
 # Building with Botkit Studio
 
-[Botkit Studio](https://studio.botkit.ai) is a hosted development tool that enhances and expands the capabilities of Botkit. While developers may use Botkit without Studio, a Studio account will substantially ease the development and deployment of a Bot, help to avoid common coding pitfalls,
+**Please note: Botkit Studio will cease operation on Feb 14, 2019. The features below are now available through [Botkit CMS](https://github.com/howdyai/botkit-cms)**
+
+[Botkit Studio](https://studio.botkit.ai) was a hosted development tool that enhances and expands the capabilities of Botkit. While developers may use Botkit without Studio, a Studio account will substantially ease the development and deployment of a Bot, help to avoid common coding pitfalls,
 a valuable management interface for the bot's dialog content and configuration. Botkit Studio is a product of [Howdy.ai](http://howdy.ai), the creators of Botkit.
 
 This document covers the Botkit Studio SDK details only. [Start here](core.md) if you want to learn about to develop with Botkit.
@@ -161,6 +163,17 @@ controller.studio.get(bot, 'hello', message.user, message.channel).then(function
     convo.activate();
 });
 ```
+
+
+#### controller.studio.getById()
+| Argument | Description
+|---  |---
+| bot   | A bot instance
+| id | The id of a script defined in Botkit Studio
+| user | the user id of the user having the conversation
+| channel | the channel id where the conversation is occurring
+
+`controller.studio.getById()` returns a script identified by its ID rather than name.  Otherwise it works in the same manner as `controller.studio.get()`
 
 
 #### controller.studio.runTrigger()
