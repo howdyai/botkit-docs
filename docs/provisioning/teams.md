@@ -1,18 +1,9 @@
 # Configure Botkit and Microsoft Teams
 Building a bot with Botkit and the Microsoft Teams API gives you access to all of the best tools and options available to create a feature-rich app for Teams.
 
-We've created the following guide to help you configure your Microsoft Teams bot. In order to get the best deploy experience possible, we recommend starting with [Botkit Studio](https://studio.botkit.ai/), our feature-rich tool for building bots!
+We've created the following guide to help you configure your Microsoft Teams bot. 
 
-## Step 1 - Starting with Botkit Studio
-Botkit Studio is a hosted development environment for building bots with the Botkit core library. Developers using Botkit Studio get the full capabilities of Botkit, plus a full guided setup on creating a bot for Microsoft Teams.
-
-**[![Sign up for Botkit Studio](https://github.com/howdyai/botkit/blob/master/docs/studio.png)](https://studio.botkit.ai/signup?code=readme)**
-
-Botkit Studio provides dedicated tools to create your bot's [App Package](https://botkit.groovehq.com/knowledge_base/topics/create-an-app-package-for-microsoft-teams) for [sideloading](https://msdn.microsoft.com/en-us/microsoft-teams/sideload) and submission to the Office Store. While Botkit Studio is not required, it is strongly recommended as the best way to stand up a bot using Botkit.
-
-For more information about Botkit Studio, including our starter kits for other platforms, please read the [Botkit readme on GitHub](https://github.com/howdyai/botkit#start-with-botkit-studio).
-
-## Step 2 Register your bot with Bot Framework
+## Step 1 Register your bot with Bot Framework
 Microsoft Teams first requires you to register with their "Bot Framework" before you can add a bot to your Teams team. This is a multi-step process:
 
 ### Create an account / Log in
@@ -67,7 +58,7 @@ Once logged in to that page:
 * Click Save.
 
 ### Create your Application Manifest
-To add a development bot on a team, you will need to prepare an [App Package](https://msdn.microsoft.com/en-us/microsoft-teams/createpackage). Botkit Studio provides [easy tools to create your App Package](https://botkit.groovehq.com/knowledge_base/topics/create-an-app-package-for-microsoft-teams), but you can also build this manifest manually if you've chosen to not use Studio.
+To add a development bot on a team, you will need to prepare an [App Package](https://msdn.microsoft.com/en-us/microsoft-teams/createpackage).
 
 ### Sideload your Bot to Microsoft Teams
 After creating your app package, you can [load it easily into your development team](https://msdn.microsoft.com/en-us/microsoft-teams/sideload#load-your-package-into-a-team).
@@ -84,4 +75,3 @@ If you have questions or suggestions, please take a look at our [community suppo
 ## Additional resources
 * [Botkit Microsoft Teams readme](/docs/readme-teams.md)
 * [Microsoft's Bot Framework](https://dev.botframework.com/)
-* [Sign up for Botkit Studio](https://studio.botkit.ai/signup)
