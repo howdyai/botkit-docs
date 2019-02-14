@@ -12,7 +12,7 @@ For advanced users looking to run their own code, you will need to [install Botk
 
 Follow the instructions to create a new bot in the [Cisco Webex Teams Developer Portal](https://developer.ciscospark.com/add-bot.html).
 
-![Add a bot](IMG/cisco_add.png)
+![Screenshot of the 'Add a bot' flow in Webex developer portal](IMG/cisco_add.png)
 
 Take note of the bot username, you'll need it later.
 
@@ -35,7 +35,6 @@ Cisco will provide you an `access token` that is specific to your bot. Write thi
  * `access_token` = Your token from Webex Teams (**required**)
  * `secret` = User-defined string to validate payloads  (**required**)
  * `public_address`=  URL of your bot server (**required**)
- * `studio_token`= [Botkit Studio](https://studio.botkit.ai)  API token (optional)
 
 You should now be able to search your Webex Teams for the bot username you defined, and add it to your team!
 
