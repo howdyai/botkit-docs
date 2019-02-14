@@ -15,7 +15,7 @@ The functionality provided in the connector is actually very simple, and require
 Everything you need to build your bot is included in [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web),
 a boilerplate application that includes all the components needed to operate your bot, as well as sample code and extra features.
 
-* All the features of Botkit Core and Botkit Studio
+* All the features of Botkit Core
 * A built-in chat server that can handle thousands of simultaneous conversations
 * A customizable front-end chat client built with HTML, CSS, and Javascript
 * A webserver for serving the application to users and hosting your bot's business logic
@@ -73,8 +73,6 @@ When using [Botkit Anywhere](https://github.com/howdyai/botkit-starter-web) and 
 
 Developers may also fire custom events from the web client. Custom events triggered in the front-end client will arrive at the Botkit app based on their `type` field.
 
-For example, [the remoteTriggers skill included in Botkit Anywhere](https://github.com/howdyai/botkit-starter-web/blob/master/skills/remoteTriggers.js) uses a custom event type to request that the bot load and execute a script from Botkit Studio's content management API.
-
 Custom events like this can be used to build new methods for your user to interact with the bot, such as buttons or other interactive elements.
 
 ### Message Objects
@@ -89,7 +87,7 @@ The message objects used by Botkit Web are essentially "pure" Botkit messages, c
 
 Botkit has a very liberal policy on adding additional fields to the message object, so depending on the implementation details of the front-end client, other fields may be present!
 
-In addition, the Botkit Studio and the built-in web chat client feature support for quick replies and file attachments to be included in messages.
+In addition, the built-in web chat client feature support for quick replies and file attachments to be included in messages.
 
 ## Quick Replies
 

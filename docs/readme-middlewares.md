@@ -22,7 +22,7 @@ Name | Project PAge | Info |
 
   Name | Project Page | Info |
 |  ------ | ------ | ------ |
-|  Microsoft Luis | https://github.com/Stevenic/botkit-middleware-luis | The Luis middleware with Botkit causes every message sent to your bot to be first sent through Luis.ai's NLP services for processing. This middleware has deep integration with [Botkit Studio](https://botkit.groovehq.com/knowledge_base/topics/microsoft-luis)<br/><br/> |
+|  Microsoft Luis | https://github.com/Stevenic/botkit-middleware-luis | The Luis middleware with Botkit causes every message sent to your bot to be first sent through Luis.ai's NLP services for processing. <br/><br/> |
 |  Amazon Lex | https://github.com/jonchurch/botkit-middleware-lex | This middleware allows you to send user input to AWS Lex. This gives you access to intent mapping, data slots, NLP, and other capabilities of the Lex service. You can use this middleware to extend your bots capabilities, add an interaction that lives in Lex to an existing bot, or to run a Lex bot with Botkit as the connector. |
 |  Google Dialogflow | https://github.com/jschnurr/botkit-middleware-dialogflow | This middleware plugin for Botkit allows you to utilize Dialogflow (formerly Api.ai), a natural language classifier service directly into the Botkit corebot.<br/><br/> |
 |  IBM Watson | https://github.com/watson-developer-cloud/botkit-middleware | This middleware plugin for Botkit allows developers to easily integrate a Watson Conversation workspace with multiple social channels like Slack, Facebook, and Twilio. Customers can have simultaneous, independent conversations with a single workspace through different channels.<br/><br/> |

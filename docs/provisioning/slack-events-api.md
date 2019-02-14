@@ -18,9 +18,7 @@ You will receive a `clientId` and a `clientSecret`. You need these values - copy
 
 ## 2. Turn on your Botkit app
 
-Botkit Studio provides the easiest path to creating a new bot for Slack. This method will provide a guided path to hosting, along with other useful tools for creating and managing your bot. If you're already using [Botkit Studio](https://studio.botkit.ai/), this is happening in the background! 
-
-For advanced users looking to run their own code, you will need to [install Botkit](https://github.com/howdyai/botkit-starter-slack) and run it before your bot can be configured with Slack.
+You will need to [install Botkit](../readme-slack.md#getting-started) and run it before your bot can be configured with Slack.
 
 Once you've collected your `clientId` and `clientSecret` tokens from Slack, you can start your Botkit app. You will need to have a bot service online and reachable over the web to complete the following steps and finish setting up your bot.
 

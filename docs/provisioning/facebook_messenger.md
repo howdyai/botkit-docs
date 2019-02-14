@@ -44,7 +44,6 @@ Run your application with your environment variables set:
 
 * `page_token` - Your Page Access Token (**required**)
 * `verify_token` - Your Verify Token (**required**)
-* `studio_token` - Your [Botkit Studio](https://studio.botkit.ai/signup) Token (optional)
 
 If your application has been configured correctly, you will be able to talk to your bot through the page you specified in Step 3. Congratulations!
 
