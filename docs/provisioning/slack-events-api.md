@@ -6,9 +6,6 @@ In order to get everything set up, you will need to configure a new Slack App in
 
 This feature is still in very active development at Slack, and these steps are subject to change.
 
-## Video Walkthrough
-<iframe width="760" height="475" src="https://www.useloom.com/embed/09878b1ecad74c7a89e205ad46ea336a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
 ## 1. Create a new Slack App
 
 Go to [http://api.slack.com/apps](http://api.slack.com/apps) and create a new application record.
@@ -83,4 +80,3 @@ Meanwhile, your bot should appear inside your Slack team. You should receive a f
 ## Additional resources 
 * [Botkit Slack readme](../readme-slack.md) 
 * [Slack's official documention for Events API](https://api.slack.com/events-api)
-* [Sign up for Botkit Studio](https://studio.botkit.ai/signup) 
