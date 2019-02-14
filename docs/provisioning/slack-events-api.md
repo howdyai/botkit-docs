@@ -14,7 +14,7 @@ Go to [http://api.slack.com/apps](http://api.slack.com/apps) and create a new ap
 
 You will receive a `clientId` and a `clientSecret`. You need these values - copy them into a temporary text file for use in the following steps.
 
-![Create your app](IMG/slack_client_secret.png)	
+![A screenshot of the "Create your app" modal on Slack's API portal](IMG/slack_client_secret.png)	
 
 ## 2. Turn on your Botkit app
 
@@ -28,7 +28,7 @@ Once you've collected your `clientId` and `clientSecret` tokens from Slack, you 
 
 Botkit and Slack use the OAuth authentication system to grant bots access to connect to, read from, and send messages to Slack teams.
 
-![Setup Oauth](IMG/slack_oauth.png)
+![A screenshot of the "Setup Oauth" tab on Slack's portal](IMG/slack_oauth.png)
 
 Click on the "OAuth & Permissions" tab in your Slack's app setting, and under Redirect URLs, add: `https://my-bot-url/oauth`, and save your progress.
 
@@ -36,7 +36,7 @@ Click on the "OAuth & Permissions" tab in your Slack's app setting, and under Re
 
 Click on the "Bot Users" tab and specify a name for your bot. This is the name that will be used by default when your application creates a new bot on a user's team. 
 
-![Setup Oauth](IMG/slack-botuser.png)
+![A screenshot of the "Bot User" screen on Slack's portal](IMG/slack-botuser.png)
 
 In addition to a name, enable the option for "Always Show My Bot Online." This will ensure your Bot appears online to your team.
 
@@ -44,7 +44,7 @@ In addition to a name, enable the option for "Always Show My Bot Online." This w
 
 "Interactive Components" is Slack's fancy way of saying "buttons, or dialogs, or menus." In order to enable these, under Request URL, add `https://YOURURL/slack/receive`, then click save.
 
-![Setup Interactive images](IMG/slack-im.png)
+![A screeshot showing how to setup interactive components](IMG/slack-im.png)
 
 ## 6. Set up Event Subscriptions
 
@@ -52,7 +52,7 @@ To start receiving messages, you will need to enable Event Subscriptions. Finall
 
 Next you will need to add your Request URL, like this: `https://YOURURL/slack/receive`. When you finish typing, Slack will verify that this endpoint is properly configured. You must be running your Botkit application at the URL specified for this to work.
 
-![Verify your endpoints](IMG/Slack-eventsenable.png)
+![A screenshot showing how to set up webhook endpoints](IMG/Slack-eventsenable.png)
 
 Once verified, click "Add Bot User Event", and using the dropdown that appears, select all of the `message.*` events: 
 
@@ -63,7 +63,7 @@ Once verified, click "Add Bot User Event", and using the dropdown that appears, 
 
 This configuration tells Slack to send your bot all messages that are sent in any channel or group in which your bot is present. Add other events as needed. 
 
-![Add some subscriptions](IMG/slack_botevents.png)
+![A screenshot showing how to add message subscriptions](IMG/slack_botevents.png)
 
 Your bot is now ready to receive messages!
 
