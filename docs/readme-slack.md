@@ -312,7 +312,7 @@ If your interactive message contains a button, when the user clicks the button i
 
 |Message Type|Event Name
 |---  |---
-|block_action|block_action
+|block_actions|block_actions
 |interactive_message|interactive_message_callback
 
 When an event is received, your bot can either reply with a new message, or use the special `bot.replyInteractive` function which will result in the original message in Slack being _replaced_ by the reply. Using `replyInteractive`, bots can present dynamic interfaces inside a single message.
