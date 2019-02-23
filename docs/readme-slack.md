@@ -297,9 +297,8 @@ The preferred way of composing interactive messages is using Slack's Block Kit. 
 Interactive messages using blocks can be sent via any of Botkit's built in functions by passing in the appropriate "blocks" as part of the message.  Here is an example:
 
 ```javascript
-const blocks = [{...}]; // insert valid JSON following Block Kit specs
 const content = {
-    blocks,
+    blocks: [{...}]; // insert valid JSON following Block Kit specs
 };
 
 bot.reply(message, content);
