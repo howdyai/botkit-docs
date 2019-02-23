@@ -336,6 +336,8 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
 ```
 
 ### Send an interactive message
+
+#### Using Attachments
 ```javascript
 controller.hears('interactive', 'direct_message', function(bot, message) {
 
@@ -367,6 +369,7 @@ controller.hears('interactive', 'direct_message', function(bot, message) {
 
 ### Receive an interactive message callback
 
+#### Reply with Attachments
 ```javascript
 // receive an interactive message, and reply with a message that will replace the original
 controller.on('interactive_message_callback', function(bot, message) {
@@ -410,6 +413,7 @@ controller.on('interactive_message_callback', function(bot, message) {
 
 ### Using Interactive Messages in Conversations
 
+#### With Attachments
 It is possible to use interactive messages in conversations, with the `convo.ask` function.
 
 When used in conjunction with `convo.ask`, Botkit will treat the button's `value` field as if were a message typed by the user.
