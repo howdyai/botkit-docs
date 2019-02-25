@@ -289,13 +289,33 @@ bot.api.channels.list({},function(err,response) {
 
 ## Interactive Messages
 
-Slack applications can use "interactive messages" to include buttons, menus and other interactive elements inside attachments. [Read the official Slack documentation here](https://api.slack.com/docs/message-buttons)
+Slack applications can use "interactive messages" to include buttons, menus and other interactive elements to improve the user's experience.
 
-Interactive messages can be sent via any of Botkit's built in functions by passing in
-the appropriate attachment as part of the message. When users click the buttons in Slack,
-Botkit triggers an `interactive_message_callback` event.
+### via Blocks
+The preferred way of composing interactive messages is using Slack's Block Kit.  [Read the official Slack documentation here](https://api.slack.com/messaging/composing/layouts). Slack provides a UI to help create your interactive messages. Check out [Block Kit Builder](https://api.slack.com/tools/block-kit-builder).
 
-When an `interactive_message_callback` is received, your bot can either reply with a new message, or use the special `bot.replyInteractive` function which will result in the original message in Slack being _replaced_ by the reply. Using `replyInteractive`, bots can present dynamic interfaces inside a single message.
+Interactive messages using blocks can be sent via any of Botkit's built in functions by passing in the appropriate "blocks" as part of the message.  Here is an example:
+
+```javascript
+const content = {
+    blocks: [{...}]; // insert valid JSON following Block Kit specs
+};
+
+bot.reply(message, content);
+```
+
+### via Attachments
+Attachments are still supported by Slack, but the preferred way is to use Block Kit. [Read the official Slack documentation here](https://api.slack.com/docs/message-buttons)
+
+### Handling Button Tigger
+If your interactive message contains a button, when the user clicks the button in Slack, Botkit triggers an event based on the message type.
+
+|Message Type|Event Name
+|---  |---
+|block_actions|block_actions
+|interactive_message|interactive_message_callback
+
+When an event is received, your bot can either reply with a new message, or use the special `bot.replyInteractive` function which will result in the original message in Slack being _replaced_ by the reply. Using `replyInteractive`, bots can present dynamic interfaces inside a single message.
 
 In order to use interactive messages, your bot will have to be [registered as a Slack application](https://api.slack.com/apps), and will have to use the Slack button authentication system.
 To receive callbacks, register a callback url as part of applications configuration. Botkit's built in support for the Slack Button system supports interactive message callbacks at the url `https://_your_server_/slack/receive` Note that Slack requires this url to be secured with https.
@@ -316,6 +336,8 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
 ```
 
 ### Send an interactive message
+
+#### Using Attachments
 ```javascript
 controller.hears('interactive', 'direct_message', function(bot, message) {
 
@@ -347,6 +369,7 @@ controller.hears('interactive', 'direct_message', function(bot, message) {
 
 ### Receive an interactive message callback
 
+#### Reply with Attachments
 ```javascript
 // receive an interactive message, and reply with a message that will replace the original
 controller.on('interactive_message_callback', function(bot, message) {
@@ -390,6 +413,7 @@ controller.on('interactive_message_callback', function(bot, message) {
 
 ### Using Interactive Messages in Conversations
 
+#### With Attachments
 It is possible to use interactive messages in conversations, with the `convo.ask` function.
 
 When used in conjunction with `convo.ask`, Botkit will treat the button's `value` field as if were a message typed by the user.
