@@ -133,9 +133,23 @@ var reply = {
 Botkit on the web works much the same as it does on all the other platforms. Developers have full access to all of [Botkit's core features](core.md) -
 and a few extra ones that are specific to operating on the web!
 
-#### controller.openSocketServer(webserver_instance)
+#### controller.openSocketServer(webserver_instance, websocket_server_options)
 
 This function takes an instance of an http server object - that is, the results of a call to `http.createServer()`.
+
+The second parameter is an object for additional options to pass to the constructor of the websocket server.  [Additional options for the websocket server found here.](https://github.com/websockets/ws/blob/HEAD/doc/ws.md)
+
+Example - Add client tracking to websocker server:
+
+```js
+var server = http.createServer();
+
+var wsOptions = {
+  clientTracking: true
+}
+
+controller.openSocketServer(server, wsOptions);
+```
 
 It connects a `ws` powered websocket server to the web server, and allows the application to accept socket connections directly with the bot.
 
