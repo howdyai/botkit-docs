@@ -137,7 +137,7 @@ and a few extra ones that are specific to operating on the web!
 
 This function takes an instance of an http server object - that is, the results of a call to `http.createServer()`.
 
-The second parameter is an object for additional options to pass to the constructor of the websocket server.  [Additional options for the websocket server found here.](https://github.com/websockets/ws/blob/HEAD/doc/ws.md)
+The second parameter is an object for additional options to pass to the constructor of the websocket server.  [Additional options for the websocket server found here.](https://www.npmjs.com/package/ws#api-docs)
 
 Example - Add client tracking to websocker server:
 
