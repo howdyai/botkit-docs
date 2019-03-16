@@ -34,7 +34,8 @@ Name | Project PAge | Info |
 |  Name | Project Page | Info |
 |  ------ | ------ | ------ |
 | Janis | https://github.com/Janis-ai/npm-janis | Janis is an AI management toolkit that enables teams working in Slack to collaborate on AI training, monitor bots for problems, and quickly resolve and prevent business-impacting incidents. | 
-|  Facebook | https://github.com/pinkku/botkit-middleware-facebookuser | This plugin allows you to collect Facebook Messenger user info to populate a Botkit message<br/><br/><br/> |
+|  Facebook | https://github.com/pinkku/botkit-middleware-facebookuser | This plugin allows you to collect Facebook Messenger user info to populate a Botkit message |
+|  Typing indicator | https://github.com/MarcL/botkit-middleware-typing | This plugin allows you to send the typing indicator for all messages, including Botkit conversations. |
 
 ## Storage Modules
 |  Name | Project Page | Info |
