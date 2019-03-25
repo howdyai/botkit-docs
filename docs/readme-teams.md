@@ -25,7 +25,7 @@ Table of Contents
 
 ## Create a Controller
 
-To connect Botkit to Teams, use the  constructor method, [Botkit.slackbot()](#botkitteamsbot).
+To connect Botkit to Teams, use the  constructor method, [Botkit.teamsbot()](#botkitteamsbot).
 This will create a Botkit controller with [all core features](core.md#botkit-controller-object) as well as [some additional methods](#additional-controller-methods).
 
 #### Botkit.teamsbot()
