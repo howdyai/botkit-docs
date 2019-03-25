@@ -28,7 +28,7 @@ Twilio will send `POST` request to this address every time a user sends an SMS t
 
 The second preference ("Primary handler fails") is your backup plan. The URI Twilio should `POST` to in case your primary handler is unavailable. You can leave this field in blank for now but keep in mind this is useful for error handling (e.g. to notify users that your bot is unavailable).
 
-4) Run the example Twilio SMS bot included in Botkit's repository ([`twilio_sms_bot.js`](../examples/twilio_sms_bot.js)). Copy and paste the example bot's code into a new JavaScript file (e.g. `twilio_sms_bot.js`) in your current working directory and run the following command on your terminal:
+4) Run the example Twilio SMS bot included in Botkit's repository ([twilio_sms_bot.js](../examples/twilio_sms_bot.js)). Copy and paste the example bot's code into a new JavaScript file (e.g. `twilio_sms_bot.js`) in your current working directory and run the following command on your terminal:
 
 ```bash
 $ TWILIO_ACCOUNT_SID=<YOUR_ACCOUNT_SID> TWILIO_AUTH_TOKEN=<YOUR_AUTH_TOKEN> TWILIO_NUMBER=<YOUR_NUMBER> node twilio_sms_bot.js
