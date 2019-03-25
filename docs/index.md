@@ -14,7 +14,7 @@ Botkit offers everything you need to design, build and operate an app:
 - Analytics and CRM tools
 - Tons of plugins and middlewares
 
-# Install Botkit
+## Install Botkit
 
 [**New to Botkit?** Read our full guide to getting started with Botkit](/getstarted.html).
 
@@ -56,7 +56,7 @@ controller.hears('hello','direct_message', function(bot, message) {
 });
 ```
 
-# Build Your Bot
+## Build Your Bot
 
 Botkit is programming library, along with a suite of supporting tools and plugins, that provides bot builders a platform independent, language-like interface for building a chatbot or messaging app for any platform. It handles all the nitty gritty technical details, allowing you to focus on building COOL FEATURES for your bot.
 
@@ -132,7 +132,7 @@ controller.middleware.send.use(function(bot, message, next) {
 });
 ```
 
-# What's Next?
+## What's Next?
 
 * [Continue learning about Botkit's core features](core.md)
 * [View set-up guides for all the major platforms](provisioning/)
