@@ -132,6 +132,7 @@ controller.middleware.send.use(function(bot, message, next) {
 });
 ```
 
+
 ## What's Next?
 
 * [Continue learning about Botkit's core features](core.md)
