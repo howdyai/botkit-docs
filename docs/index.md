@@ -1,6 +1,8 @@
 # Botkit: Building Blocks for Building Bots
 
-[![npm version badge](https://img.shields.io/npm/v/botkit.svg)](https://www.npmjs.com/package/botkit "View most recent version on npm") [![Dependency status badge](https://img.shields.io/david/howdyai/botkit.svg)](https://david-dm.org/howdyai/botkit "View status of dependencies") [![MIT License badge](https://img.shields.io/npm/l/botkit.svg)](https://spdx.org/licenses/MIT "View MIT License") 
+<a href="https://www.npmjs.com/package/botkit" title="View most recent version on npm"><img src="https://img.shields.io/npm/v/botkit.svg" aria-hidden="true" alt="npm version badge"></a>
+<a href="https://david-dm.org/howdyai/botkit" title="View status of dependencies"><img src="https://img.shields.io/david/howdyai/botkit.svg" alt="Dependency status badge" aria-hidden="true"></a>
+<a href="https://spdx.org/licenses/MIT" title="View MIT License"><img src="https://img.shields.io/npm/l/botkit.svg" alt="MIT License Badge" aria-hidden="true"></a>
 
 --------------------------------------------------------------------------------
 
