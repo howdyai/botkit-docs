@@ -28,7 +28,7 @@ Botkit and Slack use the OAuth authentication system to grant bots access to con
 
 ![A screenshot of the "Setup Oauth" tab on Slack's portal](IMG/slack_oauth.png)
 
-Click on the "OAuth & Permissions" tab in your Slack's app setting, and under Redirect URLs, add: `https://my-bot-url/oauth`, and save your progress.
+Click on the "OAuth & Permissions" tab in your Slack's app setting, and under Redirect URLs, add: `https://my-bot-url/install/auth`, and save your progress.
 
 ## 4. Add a Bot User
 
@@ -40,7 +40,7 @@ In addition to a name, enable the option for "Always Show My Bot Online." This w
 
 ## 5. Set up Interactive Components
 
-"Interactive Components" is Slack's fancy way of saying "buttons, or dialogs, or menus." In order to enable these, under Request URL, add `https://YOURURL/slack/receive`, then click save.
+"Interactive Components" is Slack's fancy way of saying "buttons, or dialogs, or menus." In order to enable these, under Request URL, add `https://YOURURL/api/messages`, then click save.
 
 ![A screeshot showing how to setup interactive components](IMG/slack-im.png)
 
@@ -48,7 +48,7 @@ In addition to a name, enable the option for "Always Show My Bot Online." This w
 
 To start receiving messages, you will need to enable Event Subscriptions. Finally, scroll to the top of the page and switch "Enable Events" to "on". 
 
-Next you will need to add your Request URL, like this: `https://YOURURL/slack/receive`. When you finish typing, Slack will verify that this endpoint is properly configured. You must be running your Botkit application at the URL specified for this to work.
+Next you will need to add your Request URL, like this: `https://YOURURL/api/messages`. When you finish typing, Slack will verify that this endpoint is properly configured. You must be running your Botkit application at the URL specified for this to work.
 
 ![A screenshot showing how to set up webhook endpoints](IMG/Slack-eventsenable.png)
 
