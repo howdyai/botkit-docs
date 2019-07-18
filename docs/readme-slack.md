@@ -18,15 +18,17 @@ Table of Contents
 
 ## Getting Started
 
-1. [Install Botkit on your computer](/getstarted.html)
+1. [Install Botkit on your computer](https://botkit.ai/getstarted.html)
 
 2. Create a Botkit powered Node app:
   * [Remix the starter project on Glitch](https://glitch.com/~botkit-slack)
   * Or: Use the command line tool:
 
-  ```
-  botkit new --platform slack
-  ```
+      ```
+      mkdir mybot
+      cd mybot
+      yo botkit
+      ```
 
 3. [Follow this guide to configuring the Slack API](/docs/provisioning/slack-events-api.md)
 
