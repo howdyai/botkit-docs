@@ -11,6 +11,6 @@ To help Botkit developers, we are pulling out detailed provisioning documents fo
 
 ### [Facebook Messenger](facebook_messenger.md)
 
-### [Cisco Spark](cisco-spark.md)
+### [Cisco Webex Teams](cisco-spark.md)
 
 ### [SMS from Twilio](twilio-sms.md)
