@@ -66,6 +66,7 @@ The `config` argument is an object with these properties:
 | disable_startup_messages | Boolean | Disable start up messages, like: `"Initializing Botkit vXXX"`
 | clientSigningSecret        | String | Value of signing secret from Slack used to confirm source of incoming messages
 | clientVerificationToken | String | [Deprecated](https://api.slack.com/docs/verifying-requests-from-slack#about) Value of verification token from Slack used to confirm source of incoming messages
+| oauthVersion  | String | Which version of Slack's oauth protocol to use, `v1` or `v2`. Defaults to `v1`.
 For example:
 
 ```javascript
