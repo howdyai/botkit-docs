@@ -338,7 +338,7 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
 ```
 
 
-### Send an interactive message uing Attachments
+### Send an interactive message using Attachments
 ```javascript
 controller.hears('interactive', 'direct_message', function(bot, message) {
 
